@@ -78,7 +78,7 @@ app_showcase <- function(drop=NULL){
       "Tree stand age projections"
     )
   )
-  do.call(.app_img_links, c(args, drop=drop))
+  do.call(.app_img_links, c(args, drop=list(drop)))
 }
 
 #' Add contact information widget to app.
