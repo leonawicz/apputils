@@ -1,3 +1,12 @@
+#' Grab gist urls.
+#'
+#' @param id shorthand character id refering to entry in gist_url dictionary.
+#'
+#' @return a character string.
+#' @export
+#'
+#' @examples
+#' #not run
 gist_url <- function(id){
   switch(id,
     css="https://gist.githubusercontent.com/leonawicz/24ed656f63d4a889ad7043bc5436a641/raw/050538f0c78616ac53a03ebebe9c256d33f9053f/shiny_app_styles.css",
@@ -19,7 +28,7 @@ gist_url <- function(id){
     </a>')) # contextual, must remove a closing div with mutliple inline calls
 }
 
-app_img_links <- function(app_url, img_url, title, subtitle, drop=NULL, height=200, min.width=300, max.width=400, col.width=4){
+.app_img_links <- function(app_url, img_url, title, subtitle, drop=NULL, height=200, min.width=300, max.width=400, col.width=4){
   apps <- basename(app_url)
   if(!is.null(drop) && !all(drop %in% apps)) stop("Cannot drop apps that are not in the master list.")
   idx <- if(is.null(drop)) seq_along(apps) else seq_along(app_url)[match(drop, apps)]
@@ -29,6 +38,15 @@ app_img_links <- function(app_url, img_url, title, subtitle, drop=NULL, height=2
   shiny::fluidRow(x, style="padding: 10px;")
 }
 
+#' Genrate app showcase content
+#'
+#' @param drop character vector of any apps to exclude from showcase.
+#'
+#' @return a shiny fluidRow containing organized and stylized app image links for reference.
+#' @export
+#'
+#' @examples
+#' #not run
 app_showcase <- function(drop=NULL){
   args <- list(
     app_url=c(
@@ -60,9 +78,16 @@ app_showcase <- function(drop=NULL){
       "Tree stand age projections"
     )
   )
-  do.call(app_img_links, c(args, drop=drop))
+  do.call(.app_img_links, c(args, drop=drop))
 }
 
+#' Add contact information widget to app.
+#'
+#' @return a shiny taglist.
+#' @export
+#'
+#' @examples
+#' #not run
 contactinfo <- function(){
   shiny::tagList(
     shiny::h2("Contact information"),
