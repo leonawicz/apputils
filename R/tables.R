@@ -1,3 +1,15 @@
+#' COlor table rows according to ggplot coloring by groups.
+#'
+#' @param data a special data frame.
+#' @param variable a column name in the data specifying the factor used for plot colors.
+#' @param colorvec a vector of colors.
+#' @param alpha_append NULL or a two digit numeric or character to append to hex colors.
+#'
+#' @return a DT::styleEqual call.
+#' @export
+#'
+#' @examples
+#' #not run
 tableRowColors <- function(data, variable, colorvec, alpha_append=NULL){
   if(!"included_" %in% names(data))
     stop("This function requires a special data table (DT package) containing an 'included_' column.")
