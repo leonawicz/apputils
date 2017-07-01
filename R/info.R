@@ -19,9 +19,65 @@ gist_url <- function(id){
     </a>')) # contextual, must remove a closing div with mutliple inline calls
 }
 
-app_img_links <- function(app_url, img_url, title, subtitle, height=200, min.width=300, max.width=400, col.width=4){
-  x <- purrr::map(seq_along(app_url),
+app_img_links <- function(app_url, img_url, title, subtitle, drop=NULL, height=200, min.width=300, max.width=400, col.width=4){
+  apps <- basename(app_url)
+  if(!is.null(drop) && !all(drop %in% apps)) stop("Cannot drop apps that are not in the master list.")
+  idx <- if(is.null(drop)) seq_along(apps) else seq_along(app_url)[match(drop, apps)]
+  x <- purrr::map(idx,
                   ~shiny::column(col.width, .app_img_link(app_url[.x], img_url[.x], title[.x], subtitle[.x], height),
                           style=paste0("min-width: ", min.width, "px; max-width: ", max.width, "px; padding:5px;")))
   shiny::fluidRow(x, style="padding: 10px;")
+}
+
+app_showcase <- function(drop=NULL){
+  args <- list(
+    app_url=c(
+      "http://shiny.snap.uaf.edu/climdist",
+      "https://uasnap.shinyapps.io/jfsp-v10",
+      "https://uasnap.shinyapps.io/ar5eval",
+      "https://uasnap.shinyapps.io/cc4liteFinal",
+      "https://uasnap.shinyapps.io/ex_leaflet",
+      "https://uasnap.shinyapps.io/nwtapp",
+      "http://shiny.snap.uaf.edu/standage"
+    ),
+    img_url=c(
+      "https://raw.githubusercontent.com/leonawicz/jfsp/master/_jfsp_small.png",
+      "https://raw.githubusercontent.com/leonawicz/ar5eval/master/_ar5eval_small.png",
+      "https://github.com/ua-snap/shiny-apps/raw/master/_images/small/cc4liteFinal.jpg",
+      "https://github.com/ua-snap/shiny-apps/raw/master/_images/small/ex_leaflet.jpg",
+      "https://github.com/ua-snap/shiny-apps/raw/master/_images/small/nwtapp.jpg",
+      "https://raw.githubusercontent.com/leonawicz/agedist/master/_agedist_small.png",
+      "https://raw.githubusercontent.com/leonawicz/dash/master/images/_climdist_small.png"
+    ),
+    title=c(
+      "CMIP5 Regional Climate", "Alaska Wildfire Projections", "Climate Model Analysis",
+      "Communities & Climate", "Interactive Documents", "Northwest Territories",
+      "Alaska Vegetation Changes"
+    ),
+    subtitle=c(
+      "Full distributions", "ALFRESCO model output", "CMIP5 GCM evaluation",
+      "Alaska & western Canada", "Leaflet + Shiny observers", "Climate projections",
+      "Tree stand age projections"
+    )
+  )
+  do.call(app_img_links, c(args, drop=drop))
+}
+
+contactinfo <- function(){
+  shiny::tagList(
+    shiny::h2("Contact information"),
+    shiny::HTML('
+         <div style="clear: left;"><img src="https://www.gravatar.com/avatar/5ab20ebc3829054f8af7b1ea4a317269?s=128"
+         alt="" style="float: left; margin-right:5px" /></div>
+         <p>Matthew Leonawicz<br/>
+         Statistician | useR<br/>
+         <a href="http://leonawicz.github.io" target="_blank">Github.io</a> |
+         <a href="http://blog.snap.uaf.edu" target="_blank">Blog</a> |
+         <a href="https://twitter.com/leonawicz" target="_blank">Twitter</a> |
+         <a href="http://www.linkedin.com/in/leonawicz" target="_blank">Linkedin</a> <br/>
+         <a href="http://www.snap.uaf.edu/", target="_blank">Scenarios Network for Alaska and Arctic Planning</a>
+         </p>'
+    ),
+    shiny::p("For questions about this application, please email mfleonawicz@alaska.edu")
+  )
 }
