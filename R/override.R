@@ -1,3 +1,15 @@
+#' Size of text in overridden shiny dashboard value box function eidget output.
+#'
+#' @param x text.
+#' @param value size.
+#' @param margin numeric, html margin size in pixels.
+#' @param default.value value to repeat if necessary.
+#'
+#' @return a shiny taglist.
+#' @export
+#'
+#' @examples
+#' #not run
 pTextSize <- function(x, value, margin=NULL, default.value=100){
   if(length(x) > 1) value <- c(value, rep(default.value, length(x) - 1))
   style <- paste0("font-size: ", value, "%;")
@@ -8,10 +20,23 @@ pTextSize <- function(x, value, margin=NULL, default.value=100){
   x
 }
 
-# These functions override functions in the shiny and shinydashboard packages
-# to provide the ability to display image file icons in value boxes.
-
-# override shinydashboard function
+#' Override shinydashboard valueBox function
+#'
+#' This and the apputils::icon functions override functions in the shiny and shinydashboard packages
+#' to provide the ability to display image file icons in value boxes.
+#'
+#' @param value value.
+#' @param subtitle subtitle.
+#' @param icon icon may be a local image file url.
+#' @param color character.
+#' @param width column width.
+#' @param href link.
+#'
+#' @return a valueBox.
+#' @export
+#'
+#' @examples
+#' #not run
 valueBox <- function (value, subtitle, icon = NULL, color = "aqua", width = 4, href = NULL){
   shinydashboard:::validateColor(color)
   if (!is.null(icon))
@@ -29,7 +54,20 @@ valueBox <- function (value, subtitle, icon = NULL, color = "aqua", width = 4, h
     paste0("col-sm-", width), boxContent)
 }
 
-# override shiny function
+#' Override shiny icon function
+#'
+#' This and the apputils::valueBox functions override functions in the shiny and shinydashboard packages
+#' to provide the ability to display image file icons in value boxes.
+#'
+#' @param name character. If \code{lib="local"}, \code{name} must be a named list with \code{src} element.
+#' @param class character.
+#' @param lib library, may be 'local'.
+#'
+#' @return an icon tag.
+#' @export
+#'
+#' @examples
+#' #not run
 icon <- function (name, class = NULL, lib = "font-awesome"){
   if(lib=="local"){
     if(is.null(name$src))
