@@ -1,6 +1,7 @@
-grab_gist <- function(id){
+gist_url <- function(id){
   switch(id,
-         css="https://gist.githubusercontent.com/leonawicz/24ed656f63d4a889ad7043bc5436a641/raw/050538f0c78616ac53a03ebebe9c256d33f9053f/shiny_app_styles.css"
+    css="https://gist.githubusercontent.com/leonawicz/24ed656f63d4a889ad7043bc5436a641/raw/050538f0c78616ac53a03ebebe9c256d33f9053f/shiny_app_styles.css",
+    showcase="https://gist.githubusercontent.com/leonawicz/fb34c7d835e546c3790e7d0d6aa8bdeb/raw/f53040823f222df76d26e2828f4dcfe6da022ad3/shiny_app_showcase.R"
   )
 }
 
