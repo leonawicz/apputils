@@ -50,19 +50,29 @@ samplesize_factor <- function(x, cru){
   n.rcps * n.models
 }
 
-plottheme <- ggplot2::theme(
-  panel.grid.major=ggplot2::element_line(size=0.5, color="grey"),
-  plot.title=ggplot2::element_text(hjust=0.5),
-  axis.line=ggplot2::element_line(size=.7, color="black"),
-  axis.ticks.length=ggplot2::unit(0.35,"cm"),
-  legend.position="bottom",
-  legend.justification="right",
-  legend.title=ggplot2::element_blank(),
-  legend.text=ggplot2::element_text(size=14),
-  text=ggplot2::element_text(size=18),
-  panel.spacing.x=ggplot2::unit(0.25,"cm"),
-  plot.margin=ggplot2::unit(c(0.5, 1, 0.5, 0.5),"cm"),
-  strip.text=ggplot2::element_text(size=14))
+#' Get ggplot theme.
+#'
+#' @return a theme.
+#' @export
+#'
+#' @examples
+#' #not run
+get_plottheme <- function(){
+  ggplot2::theme(
+    panel.grid.major=ggplot2::element_line(size=0.5, color="grey"),
+    plot.title=ggplot2::element_text(hjust=0.5),
+    axis.line=ggplot2::element_line(size=.7, color="black"),
+    axis.ticks.length=ggplot2::unit(0.35,"cm"),
+    legend.position="bottom",
+    legend.justification="right",
+    legend.title=ggplot2::element_blank(),
+    legend.text=ggplot2::element_text(size=14),
+    text=ggplot2::element_text(size=18),
+    panel.spacing.x=ggplot2::unit(0.25,"cm"),
+    plot.margin=ggplot2::unit(c(0.5, 1, 0.5, 0.5),"cm"),
+    strip.text=ggplot2::element_text(size=14)
+  )
+}
 
 #' Create breaks for ggplot.
 #'
