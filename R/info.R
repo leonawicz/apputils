@@ -117,10 +117,10 @@ contactinfo <- function(){
 #' In this case, each question is a character string and each answer is either a simple HTML paragraph
 #' or a taglist of multiple HTML components if the answer contains more complex content (e.g., images and links).
 #'
-#' A key difference with the \code{open} argument that can be passed to in a list to \code{bscollapse.args}
+#' A key difference with the \code{open} argument that can be passed in a list to \code{bscollapse.args}
 #' is that it must simply match a single \emph{dictionary entry} \code{id}, not a collapse panel question title or id (e.g., \code{open="apps"}).
 #'
-#' THe current FAQ dictionary IDs and the questions they refer to includes:
+#' THe current FAQ dictionary IDs and the questions they refer to include:
 #' \describe{
 #'   \item{distributions}{Why use probability distributions?}
 #'   \item{gcm}{What is a GCM?}
