@@ -1,7 +1,7 @@
 Package: apputils
 Type: Package
 Title: Supporting Functions And Objects For Shiny Apps
-Version: 0.2.0
+Version: 0.3.0
 Author: Matthew Leonawicz
 Maintainer: Matthew Leonawicz <mfleonawicz@alaska.edu>
 Description: Common utilty functions, settings and references used across multiple Shiny apps.
@@ -14,5 +14,6 @@ Imports: dplyr,
     DT,
     htmltools,
     ggplot2,
-    purrr
+    purrr,
+    shinyBS
 RoxygenNote: 6.0.1
