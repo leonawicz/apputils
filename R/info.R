@@ -83,25 +83,34 @@ app_showcase <- function(drop=NULL){
 
 #' Add contact information widget to app.
 #'
+#' @param logos named list. Currently accepted names must be \code{uaf} or \code{snap}. List elements are image urls for \code{src}.
+#'
 #' @return a shiny taglist.
 #' @export
 #'
 #' @examples
 #' #not run
-contactinfo <- function(){
+contactinfo <- function(logos=NULL){
+  if(!is.null(logos) && all(names(logos) %in% c("uaf", "snap"))){
+    x0 <- if("uaf" %in% names(logos))
+      paste0('<a href="http://www.uaf.edu/"><img src="', logos$uaf, '" style="float:right;height:170px;;margin:5px;" target="_blank"></a>') else c()
+    if("snap" %in% names(logos))
+      x0 <- c(x0, paste0('<a href="https://www.snap.uaf.edu/"><img src="', logos$snap, '" style="float:right;height:170px;margin:5px;" target="_blank"></a>'))
+  } else x0 <- ""
   shiny::tagList(
+    shiny::HTML(x0),
     shiny::h2("Contact information"),
-    shiny::HTML('
-         <div style="clear: left;"><img src="https://www.gravatar.com/avatar/5ab20ebc3829054f8af7b1ea4a317269?s=128"
-         alt="" style="float: left; margin-right:5px" /></div>
-         <p>Matthew Leonawicz<br/>
-         Statistician | useR<br/>
-         <a href="http://leonawicz.github.io" target="_blank">Github.io</a> |
-         <a href="http://blog.snap.uaf.edu" target="_blank">Blog</a> |
-         <a href="https://twitter.com/leonawicz" target="_blank">Twitter</a> |
-         <a href="http://www.linkedin.com/in/leonawicz" target="_blank">Linkedin</a> <br/>
-         <a href="http://www.snap.uaf.edu/", target="_blank">Scenarios Network for Alaska and Arctic Planning</a>
-         </p>'
+    shiny::HTML(
+      '<div style="clear: left;"><img src="https://www.gravatar.com/avatar/5ab20ebc3829054f8af7b1ea4a317269?s=128"
+       alt="" style="float: left; margin-right:5px" /></div>
+       <p>Matthew Leonawicz<br/>
+       Statistician | useR<br/>
+       <a href="http://leonawicz.github.io" target="_blank">Github.io</a> |
+       <a href="http://blog.snap.uaf.edu" target="_blank">Blog</a> |
+       <a href="https://twitter.com/leonawicz" target="_blank">Twitter</a> |
+       <a href="http://www.linkedin.com/in/leonawicz" target="_blank">Linkedin</a> <br/>
+       <a href="http://www.snap.uaf.edu/", target="_blank">Scenarios Network for Alaska and Arctic Planning</a>
+       </p>'
     ),
     shiny::p("For questions about this application, please email mfleonawicz@alaska.edu")
   )

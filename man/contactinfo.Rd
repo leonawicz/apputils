@@ -4,7 +4,10 @@
 \alias{contactinfo}
 \title{Add contact information widget to app.}
 \usage{
-contactinfo()
+contactinfo(logos = NULL)
+}
+\arguments{
+\item{logos}{named list. Currently accepted names must be \code{uaf} or \code{snap}. List elements are image urls for \code{src}.}
 }
 \value{
 a shiny taglist.
