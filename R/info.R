@@ -83,7 +83,7 @@ app_showcase <- function(drop=NULL){
 
 #' Add contact information widget to app.
 #'
-#' @param logos named list. Currently accepted names must be \code{uaf} or \code{snap}. List elements are image urls for \code{src}.
+#' @param logos named list. Currently accepted names must be \code{uaf}, \code{iarc} or \code{snap}. List elements are image urls for \code{src}.
 #'
 #' @return a shiny taglist.
 #' @export
@@ -91,11 +91,14 @@ app_showcase <- function(drop=NULL){
 #' @examples
 #' #not run
 contactinfo <- function(logos=NULL){
-  if(!is.null(logos) && all(names(logos) %in% c("uaf", "snap"))){
+  if(!is.null(logos) && all(names(logos) %in% c("uaf", "iarc", "snap"))){
+    close_tag <- '" style="float:right;height:170px;;margin:5px;" target="_blank"></a>'
     x0 <- if("uaf" %in% names(logos))
-      paste0('<a href="http://www.uaf.edu/"><img src="', logos$uaf, '" style="float:right;height:170px;;margin:5px;" target="_blank"></a>') else c()
+      paste0('<a href="http://www.uaf.edu/"><img src="', logos$uaf, close_tag) else c()
+    if("iarc" %in% names(logos))
+      x0 <- c(x0, paste0('<a href="https://web.iarc.uaf.edu/"><img src="', logos$iarc, close_tag))
     if("snap" %in% names(logos))
-      x0 <- c(x0, paste0('<a href="https://www.snap.uaf.edu/"><img src="', logos$snap, '" style="float:right;height:170px;margin:5px;" target="_blank"></a>'))
+      x0 <- c(x0, paste0('<a href="https://www.snap.uaf.edu/"><img src="', logos$snap, close_tag))
   } else x0 <- ""
   shiny::tagList(
     shiny::HTML(x0),
