@@ -7,7 +7,7 @@
 contactinfo(logos = NULL)
 }
 \arguments{
-\item{logos}{named list. Currently accepted names must be \code{uaf} or \code{snap}. List elements are image urls for \code{src}.}
+\item{logos}{named list. Currently accepted names must be \code{uaf}, \code{iarc} or \code{snap}. List elements are image urls for \code{src}.}
 }
 \value{
 a shiny taglist.
