@@ -119,6 +119,49 @@ contactinfo <- function(logos=NULL){
   )
 }
 
+#' App launch information
+#'
+#' Show information about an app during launch such as a 'welcome/what to do' toast message.
+#'
+#' The list \code{toast.args} has the following defaults: \code{timeOut=10000}, \code{position="top-center"}, \code{closeButton=TRUE}
+#' and \code{preventDuplicates=TRUE}. If another list is provided, but does not include some of these four arguments, they will
+#' be retained as defaults. Note that this function depends heavily on associated custom CSS. For example, if your message body is
+#' very large, it will not fit in the toast box unless additional css overrides are included in your app for size and position.
+#' Use with care and see this following \href{https://gist.github.com/leonawicz/24ed656f63d4a889ad7043bc5436a641}{GitHub gist} for details.
+#'
+#' @param title character.
+#' @param message plain character string or, typically, one wrapping an html snippet.
+#' @param logo the \code{src} character string for an image.
+#' @param type whether to return a \code{"toast"} message using \code{shinytoastr} (default) or plain \code{"html"} as a character string.
+#' @param toast.type if \code{type="toast"}, the toast background color is set by specifying one of \code{"info"} (default),
+#' \code{"success"}, \code{"warning"} or \code{"error"}.
+#' @param heading.size character, wrap the title in html heading tags, defaults to \code{"h2"}.
+#' @param toast.args a list of additional arguments (after \code{title} and \code{message}) to pass to \code{shinytoastr::toast_*}.
+#'
+#' @return a \code{shiny::toastr::toast_*} object by default. Alternatively, a character string of html.
+#' @export
+#'
+#' @examples
+#' #not run
+appintro <- function(title, message, logo=NULL, type="toast", toast.type="info", heading.size="h2",
+                     toast.args=list(timeOut=10000, position="top-center", closeButton=TRUE, preventDuplicates=TRUE)){
+  title <- as.character(do.call(heading.size, list(title)))
+  if(!is.null(logo)){
+    close_tag <- "' style='float:right; width:200px; padding-left:20px; padding-bottom:20px;'/>"
+    title <- paste0(title, "\n<img src='", logo, close_tag, "\n")
+  }
+  if(type=="html") return(paste0(title, message, collapse="\n"))
+  if(!toast.type %in% c("info", "success", "warning", "error"))
+    stop("Invalid toast type. Must be info, success, warning or error.")
+  make_toast <- paste0("toastr_", toast.type)
+  if(is.null(toast.args$timeOut)) toast.args$timeOut <- 10000
+  if(is.null(toast.args$position)) toast.args$position <- "top-center"
+  if(is.null(toast.args$closeButton)) toast.args$closeButton <- TRUE
+  if(is.null(toast.args$preventDuplicates)) toast.args$preventDuplicates <- TRUE
+  do.call(make_toast, c(message=message, title=title, toast.args))
+}
+
+
 #' Generate a Frequently Asked Questions (FAQ) widget.
 #'
 #' Generate a widget that displays FAQs in an information/about section of an app.
