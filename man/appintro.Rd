@@ -4,9 +4,10 @@
 \alias{appintro}
 \title{App launch information}
 \usage{
-appintro(title, message, logo = NULL, type = "toast", toast.type = "info",
-  heading.size = "h2", toast.args = list(timeOut = 10000, position =
-  "top-center", closeButton = TRUE, preventDuplicates = TRUE))
+appintro(title, message, logo = NULL, logo.position = "title",
+  type = "toast", toast.type = "info", heading.size = "h2",
+  toast.args = list(timeOut = 10000, position = "top-center", closeButton =
+  TRUE, preventDuplicates = TRUE))
 }
 \arguments{
 \item{title}{character.}
@@ -14,6 +15,9 @@ appintro(title, message, logo = NULL, type = "toast", toast.type = "info",
 \item{message}{plain character string or, typically, one wrapping an html snippet.}
 
 \item{logo}{the \code{src} character string for an image.}
+
+\item{logo.position}{character, \code{"title"} or \code{"message"}.
+The logo is comes after and is floated to the right of either the title or the message body.}
 
 \item{type}{whether to return a \code{"toast"} message using \code{shinytoastr} (default) or plain \code{"html"} as a character string.}
 

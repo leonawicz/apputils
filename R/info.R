@@ -132,6 +132,8 @@ contactinfo <- function(logos=NULL){
 #' @param title character.
 #' @param message plain character string or, typically, one wrapping an html snippet.
 #' @param logo the \code{src} character string for an image.
+#' @param logo.position character, \code{"title"} or \code{"message"}.
+#' The logo is comes after and is floated to the right of either the title or the message body.
 #' @param type whether to return a \code{"toast"} message using \code{shinytoastr} (default) or plain \code{"html"} as a character string.
 #' @param toast.type if \code{type="toast"}, the toast background color is set by specifying one of \code{"info"} (default),
 #' \code{"success"}, \code{"warning"} or \code{"error"}.
@@ -143,12 +145,16 @@ contactinfo <- function(logos=NULL){
 #'
 #' @examples
 #' #not run
-appintro <- function(title, message, logo=NULL, type="toast", toast.type="info", heading.size="h2",
+appintro <- function(title, message, logo=NULL, logo.position="title", type="toast", toast.type="info", heading.size="h2",
                      toast.args=list(timeOut=10000, position="top-center", closeButton=TRUE, preventDuplicates=TRUE)){
   title <- as.character(do.call(heading.size, list(title)))
   if(!is.null(logo)){
     close_tag <- "' style='float:right; width:200px; padding-left:20px; padding-bottom:20px;'/>"
-    title <- paste0(title, "\n<img src='", logo, close_tag, "\n")
+    if(logo.position=="title"){
+      title <- paste0(title, "\n<img src='", logo, close_tag, "\n")
+    } else {
+      message <- paste0(message, "\n<img src='", logo, close_tag)
+    }
   }
   if(type=="html") return(paste0(title, message, collapse="\n"))
   if(!toast.type %in% c("info", "success", "warning", "error"))
