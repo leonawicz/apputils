@@ -123,8 +123,9 @@ contactinfo <- function(logos=NULL){
 #'
 #' Show information about an app during launch such as a 'welcome/what to do' toast message.
 #'
-#' The list \code{toast.args} has the following defaults: \code{timeOut=10000}, \code{position="top-center"}, \code{closeButton=TRUE}
-#' and \code{preventDuplicates=TRUE}. If another list is provided, but does not include some of these four arguments, they will
+#' The list \code{toast.args} has the following defaults: \code{timeOut=10000}, \code{extendedTimeOut=timeOut}, \code{position="top-center"},
+#' \code{closeButton=TRUE} and \code{preventDuplicates=TRUE}.
+#' If another list is provided, but does not include some of these five arguments, they will
 #' be retained as defaults. Note that this function depends heavily on associated custom CSS. For example, if your message body is
 #' very large, it will not fit in the toast box unless additional css overrides are included in your app for size and position.
 #' Use with care and see this following \href{https://gist.github.com/leonawicz/24ed656f63d4a889ad7043bc5436a641}{GitHub gist} for details.
@@ -146,12 +147,12 @@ contactinfo <- function(logos=NULL){
 #' @examples
 #' #not run
 appintro <- function(title, message, logo=NULL, logo.position="title", type="toast", toast.type="info", heading.size="h2",
-                     toast.args=list(timeOut=10000, position="top-center", closeButton=TRUE, preventDuplicates=TRUE)){
+                     toast.args=list(timeOut=10000, extendedTimeOut=10000, position="top-center", closeButton=TRUE, preventDuplicates=TRUE)){
   title <- as.character(do.call(heading.size, list(title)))
   if(!is.null(logo)){
-    close_tag <- "' style='float:right; width:200px; padding-left:20px; padding-bottom:20px;'/>"
+    close_tag <- "' style='float:right; width:200px; padding:15px;'/>"
     if(logo.position=="title"){
-      title <- paste0(title, "\n<img src='", logo, close_tag, "\n")
+      title <- paste0("<img src='", logo, close_tag, "\n", title, "\n")
     } else {
       message <- paste0(message, "\n<img src='", logo, close_tag)
     }
@@ -161,12 +162,12 @@ appintro <- function(title, message, logo=NULL, logo.position="title", type="toa
     stop("Invalid toast type. Must be info, success, warning or error.")
   make_toast <- paste0("toastr_", toast.type)
   if(is.null(toast.args$timeOut)) toast.args$timeOut <- 10000
+  if(is.null(toast.args$extendedTimeOut)) toast.args$extendedTimeOut <- toast.args$timeOut
   if(is.null(toast.args$position)) toast.args$position <- "top-center"
   if(is.null(toast.args$closeButton)) toast.args$closeButton <- TRUE
   if(is.null(toast.args$preventDuplicates)) toast.args$preventDuplicates <- TRUE
   do.call(make_toast, c(message=message, title=title, toast.args))
 }
-
 
 #' Generate a Frequently Asked Questions (FAQ) widget.
 #'

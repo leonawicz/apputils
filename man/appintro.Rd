@@ -6,8 +6,8 @@
 \usage{
 appintro(title, message, logo = NULL, logo.position = "title",
   type = "toast", toast.type = "info", heading.size = "h2",
-  toast.args = list(timeOut = 10000, position = "top-center", closeButton =
-  TRUE, preventDuplicates = TRUE))
+  toast.args = list(timeOut = 10000, extendedTimeOut = 10000, position =
+  "top-center", closeButton = TRUE, preventDuplicates = TRUE))
 }
 \arguments{
 \item{title}{character.}
@@ -35,8 +35,9 @@ a \code{shiny::toastr::toast_*} object by default. Alternatively, a character st
 Show information about an app during launch such as a 'welcome/what to do' toast message.
 }
 \details{
-The list \code{toast.args} has the following defaults: \code{timeOut=10000}, \code{position="top-center"}, \code{closeButton=TRUE}
-and \code{preventDuplicates=TRUE}. If another list is provided, but does not include some of these four arguments, they will
+The list \code{toast.args} has the following defaults: \code{timeOut=10000}, \code{extendedTimeOut=timeOut}, \code{position="top-center"},
+\code{closeButton=TRUE} and \code{preventDuplicates=TRUE}.
+If another list is provided, but does not include some of these five arguments, they will
 be retained as defaults. Note that this function depends heavily on associated custom CSS. For example, if your message body is
 very large, it will not fit in the toast box unless additional css overrides are included in your app for size and position.
 Use with care and see this following \href{https://gist.github.com/leonawicz/24ed656f63d4a889ad7043bc5436a641}{GitHub gist} for details.
