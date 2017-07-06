@@ -150,7 +150,7 @@ appintro <- function(title, message, logo=NULL, logo.position="title", type="toa
                      toast.args=list(timeOut=10000, extendedTimeOut=10000, position="top-center", closeButton=TRUE, preventDuplicates=TRUE)){
   title <- as.character(do.call(heading.size, list(title)))
   if(!is.null(logo)){
-    close_tag <- "' style='float:right; width:200px; padding:15px;'/>"
+    close_tag <- "' style='float:right; width:200px; padding-left:15px;'/>"
     if(logo.position=="title"){
       title <- paste0("<img src='", logo, close_tag, "\n", title, "\n")
     } else {
