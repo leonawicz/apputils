@@ -209,7 +209,7 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
   faqlist <- list(
     distributions=list("Why use probability distributions?",
       shiny::tagList(
-        shiny::p("Any statistic of interest can be calculate from the probability distribution of a random available.
+        shiny::p("Any statistic of interest can be calculated from the probability distribution of a random available.
           For example, by making complete distributions available for the four random variables in this app,
           the app computes the mean, median, IQR, standard deviation, minimum and maximum across space for a geographic region.
           Other statistics not shown in the app such as various distributions quantiles are equally accessible.", style="text-align:justify"),
@@ -240,7 +240,7 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
         We consider 3 RCPs here (4.5, 6.0, and 8.5). RCP 4.5 represents an aggressive reduction
         in the emission of greenhouse gases like CO2 and methane.
         RCP 8.5 represents significant increases in the population and a continuation of the use of energy sources
-        that emit large quantities of green house gases.
+        that emit large quantities of greenhouse gases.
         RCP 6.0 lies somewhere in between.", style="text-align:justify")
     ),
     fmz=list("What are fire management zones?",
@@ -299,7 +299,7 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
           and the text in a fact sheet mutates accordingly as well.", style="text-align:justify")
       )
     ),
-    factsheet_availability=list("Why are fact shees not always available?",
+    factsheet_availability=list("Why are fact sheets not always available?",
       shiny::tagList(
         shiny::p("Fact sheets are available when sufficient data are selected.
           At least 30 years of observations are required.
@@ -312,13 +312,13 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
         shiny::p("Dynamic reports are powerful, but imperfect.
           There may be extreme edge cases where a generated report includes text that does not make sense.
           For example, these fact sheets tend to focus on summarizing change through time.
-          If a user selected only one year of data, while trivial plots would still be incorpated into a fact sheet,
+          If a user selected only one year of data, while trivial plots would still be incorporated into a fact sheet,
           document text pertaining to such temporal changes would not make any sense and the resulting report would be clearly defective.
           This is separate from other more general considerations regarding ensuring that fact sheets
           contain summaries based on relatively robust data sets.", style="text-align:justify"),
         shiny::p("Such a problem can be avoided with sensible data selection by the user in conjunction with the existing broader data selection requirements.
           Dynamic report generation generally attempts to strikes a balance between flexibility and rigidity.
-          Flexibility allows a report to adapt to changing inputs, but it is impossible to anticipate all potential idiosyncracies in the input data.
+          Flexibility allows a report to adapt to changing inputs, but it is impossible to anticipate all potential idiosyncrasies in the input data.
           Some document text may have to remain relatively fixed even if the user tries to incorporate more extreme inputs.
           Nevertheless, the available fact sheets represent a highly convenient, customizable resource when app content is properly prepared by the user.",
           style="text-align:justify")
