@@ -31,14 +31,15 @@ pTextSize <- function(x, value, margin=NULL, default.value=100){
 #' @param color character.
 #' @param width column width.
 #' @param href link.
+#' @param validate.color bypass \code{shinydashboard:::validateColor}.
 #'
 #' @return a valueBox.
 #' @export
 #'
 #' @examples
 #' #not run
-valueBox <- function (value, subtitle, icon = NULL, color = "aqua", width = 4, href = NULL){
-  shinydashboard:::validateColor(color)
+valueBox <- function (value, subtitle, icon = NULL, color = "aqua", width = 4, href = NULL, validate.color=FALSE){
+  if(validate.color) shinydashboard:::validateColor(color)
   if (!is.null(icon))
     shinydashboard:::tagAssert(icon, type = icon$name)
   if(!is.null(icon)){
@@ -94,4 +95,47 @@ icon <- function (name, class = NULL, lib = "font-awesome"){
                                                                       "4.6.3", c(href = "shared/font-awesome"), stylesheet = "css/font-awesome.min.css")
   }
   iconTag
+}
+
+#' Genrate CSS for different colored value boxes.
+#'
+#' Generate CSS for background color and text color of value boxes based on hex color input.
+#'
+#' Colors must be in hex color format with hashtag, e.g., \code{"#FFFFFF"}.
+#' This function generates CSS to be added to a Shiny app.
+#' New value box elements are named by appending the hex color to \code{.bg-} without the \code{#}.
+#' When using the \code{valueBox} override function in \code{apputils},
+#' make sure to specify a hex color "name" that is a character string without the \code{#}, e.g., "FFFFFF".
+#' The only available colors that will work with \code{valueBox} in an app are those that have their CSS generated and loaded in the app as well.
+#'
+#' @param bg character, hex color of value box background.
+#' @param col character, hex color of value box text.
+#'
+#' @return a character string wrapped in \code{shiny::HTML}.
+#' @export
+#'
+#' @examples
+#' #not run
+valueBoxColorsCSS <- function(bg, col){
+  x <- gsub("#", "", bg)
+  HTML(paste0(".bg-", x, " { background-color: #", x, " !important; color: ", col, " !important; }", collapse="\n"))
+}
+
+#' Generate CSS for a value box color palette.
+#'
+#' Obtain a CSS snippet defining value box colors for a full color palette from a named list of available palettes.
+#'
+#' The only available palette at this time is \code{"tolpal"}, which covers all colors available using the \code{tolpal} function.
+#' See \code(valueBoxColorsCSS) for more information.
+#'
+#' @param pal
+#'
+#' @return a CSS snippet defining value boxes of different colors.
+#' @export
+#'
+#' @examples
+#' #not run
+valueBoxPalette <- function(pal){
+  if(!pal %in% "tolpal") stop("Invalid palette name.")
+  switch(pal, tolpal=valueBoxColorsCSS(unique(unlist(map(1:12, ~tolpal(.x))))))
 }

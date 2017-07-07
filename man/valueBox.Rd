@@ -5,7 +5,7 @@
 \title{Override shinydashboard valueBox function}
 \usage{
 valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL)
+  href = NULL, validate.color = FALSE)
 }
 \arguments{
 \item{value}{value.}
@@ -19,6 +19,8 @@ valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4,
 \item{width}{column width.}
 
 \item{href}{link.}
+
+\item{validate.color}{bypass \code{shinydashboard:::validateColor}.}
 }
 \value{
 a valueBox.
