@@ -116,7 +116,7 @@ icon <- function (name, class = NULL, lib = "font-awesome"){
 #'
 #' @examples
 #' #not run
-valueBoxColorsCSS <- function(bg, col){
+valueBoxColorsCSS <- function(bg="#333333", col="#FFFFFF"){
   x <- gsub("#", "", bg)
   HTML(paste0(".bg-", x, " { background-color: #", x, " !important; color: ", col, " !important; }", collapse="\n"))
 }

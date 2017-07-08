@@ -4,7 +4,7 @@
 \alias{valueBoxColorsCSS}
 \title{Genrate CSS for different colored value boxes.}
 \usage{
-valueBoxColorsCSS(bg, col)
+valueBoxColorsCSS(bg = "#333333", col = "#FFFFFF")
 }
 \arguments{
 \item{bg}{character, hex color of value box background.}
