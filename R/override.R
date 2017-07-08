@@ -55,6 +55,48 @@ valueBox <- function (value, subtitle, icon = NULL, color = "aqua", width = 4, h
     paste0("col-sm-", width), boxContent)
 }
 
+#' Override shinydashboard infoBox function
+#'
+#' This and the apputils::icon functions override functions in the shiny and shinydashboard packages
+#' to provide the ability to display image file icons in info boxes.
+#'
+#' @param title title.
+#' @param value value.
+#' @param subtitle subtitle.
+#' @param icon icon may be a local image file url.
+#' @param color character.
+#' @param width column width.
+#' @param href link.
+#' @param fill logical, full color info box.
+#' @param validate.color bypass \code{shinydashboard:::validateColor}.
+#'
+#' @return an infoBox.
+#' @export
+#'
+#' @examples
+#' #not run
+infoBox <- function(title, value = NULL, subtitle = NULL, icon = NULL, color = "aqua", width = 4,
+                    href = NULL, fill = FALSE, validate.color=FALSE){
+  if(validate.color) shinydashboard:::validateColor(color)
+  if (!is.null(icon))
+    shinydashboard:::tagAssert(icon, type = icon$name)
+  if(!is.null(icon)){
+    if(!icon$name %in% c("i", "img")) stop("'icon$name' must be 'i' or 'img'.")
+    iconClass <- if(icon$name=="i") "icon-large" else "img"
+  }
+  colorClass <- paste0("bg-", color)
+  boxContent <- div(class = "info-box", class = if (fill)
+    colorClass, span(class = "info-box-icon", class = if (!fill)
+      colorClass, icon), div(class = "info-box-content", span(class = "info-box-text",
+                                                              title), if (!is.null(value))
+                                                                span(class = "info-box-number", value), if (!is.null(subtitle))
+                                                                  p(subtitle)))
+  if (!is.null(href))
+    boxContent <- a(href = href, boxContent)
+  div(class = if (!is.null(width))
+    paste0("col-sm-", width), boxContent)
+}
+
 #' Override shiny icon function
 #'
 #' This and the apputils::valueBox functions override functions in the shiny and shinydashboard packages

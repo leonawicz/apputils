@@ -4,13 +4,16 @@
 \alias{stat_boxes}
 \title{Generate a set of stat boxes.}
 \usage{
-stat_boxes(x, type = "annual", rnd = 0, clrs = c("light-blue", "blue"),
-  dec, main_title = "<h4>Aggregate period statistics</h4>", ...)
+stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
+  clrs = c("light-blue", "blue"), dec,
+  main_title = "<h4>Aggregate period statistics</h4>", ...)
 }
 \arguments{
 \item{x}{a data frame.}
 
 \item{type}{character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.}
+
+\item{style}{character, \code{"valueBox"} (default) or \code{"infoBox"}.}
 
 \item{rnd}{decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.}
 
@@ -20,7 +23,7 @@ stat_boxes(x, type = "annual", rnd = 0, clrs = c("light-blue", "blue"),
 
 \item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
 
-\item{...}{additional arguments passed to valueBox. See details.}
+\item{...}{additional arguments passed to valueBox or infoBox. See details.}
 }
 \value{
 a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
@@ -34,6 +37,7 @@ Colors must be provided in hex format, e.g., \code{#FFFFFF} or a valid Shiny Das
 This function is typically called by \code{stat_boxes_group} but may be called directly when groups of stat boxes are not needed.
 \code{...} arguments may include \code{src}, a character vector of paths to six local image files to be used as valueBox icons.
 Standard icons for annual and decadal stat box sets are used by default. \code{w} for icon width, if not provided, defaults to \code{"90px"}.
+\code{height} applies to the overall box height in pixels (\code{"110px"} default), not the icon.
 }
 \examples{
 #not run

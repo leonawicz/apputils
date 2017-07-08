@@ -7,26 +7,29 @@
 #' This function is typically called by \code{stat_boxes_group} but may be called directly when groups of stat boxes are not needed.
 #' \code{...} arguments may include \code{src}, a character vector of paths to six local image files to be used as valueBox icons.
 #' Standard icons for annual and decadal stat box sets are used by default. \code{w} for icon width, if not provided, defaults to \code{"90px"}.
+#' \code{height} applies to the overall box height in pixels (\code{"110px"} default), not the icon.
 #'
 #' @param x a data frame.
 #' @param type character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.
+#' @param style character, \code{"valueBox"} (default) or \code{"infoBox"}.
 #' @param rnd decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.
 #' @param clrs character, background colors of stat boxes. See details.
 #' @param dec character, the sorted unique values of \code{x$Decade}. Typically provided by calling function. See \code{stat_boxes_group}.
 #' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
-#' @param ... additional arguments passed to valueBox. See details.
+#' @param ... additional arguments passed to valueBox or infoBox. See details.
 #'
 #' @return a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
 #' @export
 #'
 #' @examples
 #' #not run
-stat_boxes <- function(x, type="annual", rnd=0, clrs=c("light-blue", "blue"), dec,
+stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-blue", "blue"), dec,
                        main_title="<h4>Aggregate period statistics</h4>", ...){
   if(!type %in% c("annual", "decadal")) stop("type must be 'annual' or 'decadal'.")
   if(!length(clrs) %in% c(1,2,6)) stop("Invalid color vector.")
   if(length(clrs)==2) clrs <- clrs[c(1,1,2,1,2,2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
   if(is.null(list(...)$w)) w <- "90px"
+  if(is.null(list(...)$height)) height <- "110px"
   if(type=="annual"){
     if(is.null(list(...)$src))
       src <- paste0("stat_icon_",
@@ -49,18 +52,18 @@ stat_boxes <- function(x, type="annual", rnd=0, clrs=c("light-blue", "blue"), de
 
     val <- purrr::map2(statval, c(rep(75, 4), 75, 75), ~pTextSize(.x, .y))
     text <- purrr::map2(statlab, rep(150, 6), ~pTextSize(.x, .y, margin=0))
-    y <- list(
-      mean=apputils::valueBox(val[[1]], text[[1]], icon=apputils::icon(list(src=src[1], width=w), lib="local"), color=clrs[1], width=NULL),
-      min=apputils::valueBox(val[[2]], text[[2]], icon=apputils::icon(list(src=src[2], width=w), lib="local"), color=clrs[2], width=NULL),
-      max=apputils::valueBox(val[[3]], text[[3]], icon=apputils::icon(list(src=src[3], width=w), lib="local"), color=clrs[3], width=NULL),
-      med=apputils::valueBox(val[[4]], text[[4]], icon=apputils::icon(list(src=src[4], width=w), lib="local"), color=clrs[4], width=NULL),
-      iqr=apputils::valueBox(val[[5]], text[[5]], icon=apputils::icon(list(src=src[5], width=w), lib="local"), color=clrs[5], width=NULL),
-      sd=apputils::valueBox(val[[6]], text[[6]], icon=apputils::icon(list(src=src[6], width=w), lib="local"), color=clrs[6], width=NULL)
-    )
+    if(style=="valueBox"){
+      y <- purrr::map(seq_along(text), ~valueBox(val[[.x]], text[[.x]],
+        apputils::icon(list(src=src[.x], width=w), lib="local"), clrs[.x], width=NULL))
+    } else {
+      y <- purrr::map(seq_along(text), ~valueBox(text[[.x]], val[[.x]], NULL,
+        apputils::icon(list(src=src[.x], width=w), lib="local"), clrs[.x], width=NULL))
+    }
+    names(y) <- c("mean", "min", "max", "med", "iqr", "sd")
     x <- shiny::tagList(
       shiny::HTML(main_title),
       shiny::fluidRow(
-        shiny::tags$head(shiny::tags$style(shiny::HTML(".small-box {height: 110px}"))),
+        shiny::tags$head(shiny::tags$style(shiny::HTML(paste0(".small-box {height: ", height, "}")))),
         shiny::column(2, y$mean), shiny::column(2, y$sd), shiny::column(2, y$med),
         shiny::column(2, y$iqr), shiny::column(2, y$min), shiny::column(2, y$max)
       )
@@ -80,11 +83,13 @@ stat_boxes <- function(x, type="annual", rnd=0, clrs=c("light-blue", "blue"), de
 #'
 #' \code{...} arguments may include \code{src}, a character vector of paths to six local image files to be used as valueBox icons.
 #' Standard icons for annual and decadal stat box sets are used by default. \code{w} for icon width, if not provided, defaults to \code{"90px"}.
+#' \code{height} applies to the overall box height in pixels (\code{"110px"} default), not the icon.
 #'
 #' @param x a  master data frame, which may or may not be split into multiple groups, depending on \code{clrby}.
 #' @param clrby character, column name of \code{x} to color groups of stat box sets by. May be \code{NULL}.
 #' @param clrs.default list of color vectors, one vector for each group.
 #' @param type character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.
+#' @param style character, \code{"valueBox"} (default) or \code{"infoBox"}.
 #' @param rnd decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.
 #' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
 #' @param prevent logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).
@@ -95,9 +100,11 @@ stat_boxes <- function(x, type="annual", rnd=0, clrs=c("light-blue", "blue"), de
 #'
 #' @examples
 #' #not run
-stat_boxes_group <- function(x, clrby, clrs.default=list(c("light-blue", "blue")), type="annual", rnd=0,
+stat_boxes_group <- function(x, clrby, clrs.default=list(c("light-blue", "blue")), type="annual", style="valueBox", rnd=0,
   main_title="<h4>Aggregate period statistics</h4>", prevent, ...){
-
+  if(!style %in% c("valueBox", "infoBox")) stop("Invalid style argument.")
+  if(length(style)==1) style <- rep(style, 6)
+  if(length(style) != 6) stop("style argument must be vector of length one or six.")
   dec <- as.character(sort(unique(x$Decade)))
   if(length(dec) > 1) dec <- paste(dec[1], dec[length(dec)], sep=" - ")
   if(prevent || nrow(x)==0) return()
@@ -117,7 +124,7 @@ stat_boxes_group <- function(x, clrby, clrs.default=list(c("light-blue", "blue")
     subtitles <- paste0("<h5>", names(x), "</h5>")
     subtitles[1] <- paste0(main_title, subtitles[1])
   }
-  purrr::map(seq_along(x), ~stat_boxes(x[[.x]], type=type, rnd=rnd,
+  purrr::map(seq_along(x), ~stat_boxes(x[[.x]], type=type, style=style[.x], rnd=rnd,
                                        clrs=gsub("#", "", clrs[[.x]]),
                                        dec=dec, main_title=subtitles[[.x]], ...))
 }

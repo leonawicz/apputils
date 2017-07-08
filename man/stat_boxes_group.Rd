@@ -5,7 +5,7 @@
 \title{Generate a group of stat boxes sets.}
 \usage{
 stat_boxes_group(x, clrby, clrs.default = list(c("light-blue", "blue")),
-  type = "annual", rnd = 0,
+  type = "annual", style = "valueBox", rnd = 0,
   main_title = "<h4>Aggregate period statistics</h4>", prevent, ...)
 }
 \arguments{
@@ -16,6 +16,8 @@ stat_boxes_group(x, clrby, clrs.default = list(c("light-blue", "blue")),
 \item{clrs.default}{list of color vectors, one vector for each group.}
 
 \item{type}{character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.}
+
+\item{style}{character, \code{"valueBox"} (default) or \code{"infoBox"}.}
 
 \item{rnd}{decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.}
 
@@ -34,6 +36,7 @@ Generate a group of multiple sets of six related stat boxes that summarize the d
 \details{
 \code{...} arguments may include \code{src}, a character vector of paths to six local image files to be used as valueBox icons.
 Standard icons for annual and decadal stat box sets are used by default. \code{w} for icon width, if not provided, defaults to \code{"90px"}.
+\code{height} applies to the overall box height in pixels (\code{"110px"} default), not the icon.
 }
 \examples{
 #not run
