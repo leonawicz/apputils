@@ -4,7 +4,12 @@
 \alias{use_apputils}
 \title{Initialize apputils}
 \usage{
-use_apputils()
+use_apputils(use_rintrojs = FALSE, use_shinytoastr = FALSE)
+}
+\arguments{
+\item{use_rintrojs}{logical, also loads \code{rintrojs} package UI components via \code{introjsUI}.}
+
+\item{use_shinytoastr}{logical, also loads \code{shinytoastr} package UI components via \code{useToastr}.}
 }
 \value{
 HTML tags placed in the head of the app UI HTML file.
@@ -13,8 +18,9 @@ HTML tags placed in the head of the app UI HTML file.
 Call this function once near the top of the Shiny UI definition.
 }
 \details{
-Calling \code{use_apputils} loads package css into the head of a shiny app.
+Calling \code{use_apputils} loads package css into the head of a Shiny app.
+Optionally calls \code{introjsUI()} and/or \code{useToastr()}, in which case the Shiny app must have these packages loaded.
 }
 \examples{
-# See usage.
+#not run
 }
