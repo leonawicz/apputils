@@ -16,11 +16,11 @@
 use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
   shiny::addResourcePath("resources", system.file("resources", package = "apputils"))
   x <- shiny::tags$head(shiny::tags$link(rel = 'stylesheet', type = 'text/css', href = 'resources/apputils.css'))
-  if(!use_rintrojs & !use_shinytoaster) return(x)
-  if(use_rintrojs & use_shinytoaster)
+  if(!use_rintrojs & !use_shinytoastr) return(x)
+  if(use_rintrojs & use_shinytoastr)
     return(shiny::tagList(x, shinytoastr::useToastr(), rintrojs::introjsUI()))
   if(use_rintrojs)
     return(shiny::tagList(x, rintrojs::introjsUI()))
-  if(use_shinytoaster)
+  if(use_shinytoastr)
     return(shiny::tagList(x, shinytoastr::useToastr()))
 }
