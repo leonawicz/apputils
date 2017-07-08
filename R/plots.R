@@ -217,3 +217,23 @@ mouseLog <- function(x, ns, width){
                "Mouse feedback: plot 2", shiny::verbatimTextOutput(ns("info2"))
   ) else NULL
 }
+
+#' Kilo and Mega labels for rescaled data.
+#'
+#' Kilo (K) and Mega (M) labels for rescaled plot axes and stat boxes.
+#'
+#' When data are rescaled, labels in plot axes and other places can be replaced with a shorthand form.
+#'
+#' @param x numeric value.
+#'
+#' @return \code{x} as a character string, potentially in the form of a smaller value with a \code{K} or \code{M} suffix.
+#' @export
+#'
+#' @examples
+#' #not run
+kilo_mega <- function(x){
+  if(abs(x) < 1e4) paste0(x) else
+    if(abs(x) < 1e5) paste0(round(x/1000, 1), "K") else
+      if(abs(x) < 1e6) paste0(round(x/1000), "K") else
+        paste0(round(x/1e6, 2), "M")
+}

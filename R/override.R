@@ -126,9 +126,9 @@ valueBoxColorsCSS <- function(bg, col){
 #' Obtain a CSS snippet defining value box colors for a full color palette from a named list of available palettes.
 #'
 #' The only available palette at this time is \code{"tolpal"}, which covers all colors available using the \code{tolpal} function.
-#' See \code(valueBoxColorsCSS) for more information.
+#' See \code{valueBoxColorsCSS} for more information.
 #'
-#' @param pal
+#' @param pal character, a named color palette. See details for options.
 #'
 #' @return a CSS snippet defining value boxes of different colors.
 #' @export

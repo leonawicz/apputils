@@ -7,7 +7,7 @@
 valueBoxPalette(pal)
 }
 \arguments{
-\item{pal}{}
+\item{pal}{character, a named color palette. See details for options.}
 }
 \value{
 a CSS snippet defining value boxes of different colors.
@@ -17,7 +17,7 @@ Obtain a CSS snippet defining value box colors for a full color palette from a n
 }
 \details{
 The only available palette at this time is \code{"tolpal"}, which covers all colors available using the \code{tolpal} function.
-See \code(valueBoxColorsCSS) for more information.
+See \code{valueBoxColorsCSS} for more information.
 }
 \examples{
 #not run
