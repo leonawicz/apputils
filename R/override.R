@@ -118,7 +118,7 @@ icon <- function (name, class = NULL, lib = "font-awesome"){
 #' #not run
 valueBoxColorsCSS <- function(bg="#333333", col="#FFFFFF"){
   x <- gsub("#", "", bg)
-  HTML(paste0(".bg-", x, " { background-color: #", x, " !important; color: ", col, " !important; }", collapse="\n"))
+  shiny::HTML(paste0(".bg-", x, " { background-color: #", x, " !important; color: ", col, " !important; }", collapse="\n"))
 }
 
 #' Generate CSS for a value box color palette.
@@ -137,5 +137,5 @@ valueBoxColorsCSS <- function(bg="#333333", col="#FFFFFF"){
 #' #not run
 valueBoxPalette <- function(pal){
   if(!pal %in% "tolpal") stop("Invalid palette name.")
-  switch(pal, tolpal=valueBoxColorsCSS(unique(unlist(map(1:12, ~tolpal(.x))))))
+  switch(pal, tolpal=valueBoxColorsCSS(unique(unlist(purrr::map(1:12, ~tolpal(.x))))))
 }
