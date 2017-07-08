@@ -10,6 +10,5 @@
 #' @examples
 #' # See usage.
 use_apputils <- function() {
-  addResourcePath(prefix = 'apputils', directoryPath = system.file('apputils', package='apputils'))
-  tags$head(tags$link(rel = 'stylesheet', type = 'text/css', href = 'apputils/apputils.css'))
+  shiny::tags$head(shiny::tags$link(rel = 'stylesheet', type = 'text/css', href = 'apputils.css'))
 }
