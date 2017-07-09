@@ -6,7 +6,8 @@
 \usage{
 stat_boxes_group(x, clrby, clrs.default = list(c("light-blue", "blue")),
   type = "annual", style = "valueBox", rnd = 0,
-  main_title = "<h4>Aggregate period statistics</h4>", prevent, ...)
+  main_title = "<h4>Aggregate period statistics</h4>", height = "110px",
+  width.icon = "90px", text.size = 75, value.size = 150, prevent)
 }
 \arguments{
 \item{x}{a  master data frame, which may or may not be split into multiple groups, depending on \code{clrby}.}
@@ -23,9 +24,15 @@ stat_boxes_group(x, clrby, clrs.default = list(c("light-blue", "blue")),
 
 \item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
 
-\item{prevent}{logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).}
+\item{height}{character, stat box height. defaults to \code{"110px"}.}
 
-\item{...}{additional arguments passed to \code{stat_boxes}. See details.}
+\item{width.icon}{character, icon image width, defaults to \code{"90px"}.}
+
+\item{text.size}{numeric, scaling for text size, defaults to \code{75}. See details.}
+
+\item{value.size}{numeric, scaling for value size, defaults to \code{150}. See details.}
+
+\item{prevent}{logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).}
 }
 \value{
 a group list of tag lists containing stat box sets.
@@ -34,9 +41,11 @@ a group list of tag lists containing stat box sets.
 Generate a group of multiple sets of six related stat boxes that summarize the distribution of values from a multiple data frames.
 }
 \details{
-\code{...} arguments may include \code{src}, a character vector of paths to six local image files to be used as valueBox icons.
-Standard icons for annual and decadal stat box sets are used by default. \code{w} for icon width, if not provided, defaults to \code{"90px"}.
-\code{height} applies to the overall box height in pixels (\code{"110px"} default), not the icon.
+\code{text.size} and \code{value.size} are length-six or length-one (repeated) vectors. Defaults are better suited to
+\code{type="valueBox"} than \code{type="infoBox"}. See \code{stat_boxes} directly for more information on internal function.
+If there is a need to have more complete control over customizing content of value or info boxes, use \code{valueBox}
+or \code{infoBox} directly. \code{stat_boxes} and \code{stat_boxes_group} are two levels of wrapper functions that are intended to
+produce specific content for summarizing values in a data frame, pooled or by group, repsectively.
 }
 \examples{
 #not run

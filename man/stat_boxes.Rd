@@ -6,7 +6,8 @@
 \usage{
 stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
   clrs = c("light-blue", "blue"), dec,
-  main_title = "<h4>Aggregate period statistics</h4>", ...)
+  main_title = "<h4>Aggregate period statistics</h4>", height = "110px",
+  width.icon = "90px", text.size = 75, value.size = 150)
 }
 \arguments{
 \item{x}{a data frame.}
@@ -23,7 +24,13 @@ stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
 
 \item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
 
-\item{...}{additional arguments passed to valueBox or infoBox. See details.}
+\item{height}{character, stat box height. defaults to \code{"110px"}.}
+
+\item{width.icon}{character, icon image width, defaults to \code{"90px"}.}
+
+\item{text.size}{numeric, scaling for text size, defaults to \code{75}. See details.}
+
+\item{value.size}{numeric, scaling for value size, defaults to \code{150}. See details.}
 }
 \value{
 a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
@@ -35,9 +42,8 @@ Generate a set of six related stat boxes that summarize the distribution of valu
 \code{clrs} must be length-one (will be repeated six times), -two (alternating colors), or -six (all colors individually specified).
 Colors must be provided in hex format, e.g., \code{#FFFFFF} or a valid Shiny Dashboard color.
 This function is typically called by \code{stat_boxes_group} but may be called directly when groups of stat boxes are not needed.
-\code{...} arguments may include \code{src}, a character vector of paths to six local image files to be used as valueBox icons.
-Standard icons for annual and decadal stat box sets are used by default. \code{w} for icon width, if not provided, defaults to \code{"90px"}.
-\code{height} applies to the overall box height in pixels (\code{"110px"} default), not the icon.
+\code{text.size} and \code{value.size} are length-six or length-one (repeated) vectors. Defaults are better suited to
+\code{type="valueBox"} than \code{type="infoBox"}. Stat box icons are fixed images and come with the \code{apputils} package.
 }
 \examples{
 #not run
