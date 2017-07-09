@@ -69,7 +69,6 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
     )
     return(x)
   } else {
-    #if(preventPlot() || nrow(x)==0) return()
     dots <- paste0("mean(Val)")
     pr <- !x$Var[1] %in% c("tas", "tasmin", "tasmax")
     x <- dplyr::group_by(x, Decade) %>% dplyr::summarise_(.dots=list(Decadal_mean=dots)) %>%
