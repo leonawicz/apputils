@@ -385,3 +385,42 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
 tour_changeClass <- function(step, from, to){
   .stepcb(.stepEquals(step), c(.rmClass(from), .goClass(to)))
 }
+
+#' Read paragraphs from file
+#'
+#' Read paragrpahs from a text file based on markdown format.
+#'
+#' The text file does not need to be a \code{.md} file. The function merely relies on the assumption that
+#' paragraphs are separated by an empty line, based on markdown formatting. This allows for typing up
+#' paragraphs in a plain text file using this convenient formatting, to be read into R wherever paragraphs of
+#' text are needed in an app.
+#'
+#' Common uses include returning a vector of strings to be used as text for each tour step description
+#' in an introjs tour (\code{ptag=FALSE} and \code{collapse=FALSE}, the default)
+#' or a collapsed string of html text (\code{ptag=TRUE} and \code{collapse=TRUE}) for an app description.
+#'
+#' @param file character, file to read text from.
+#' @param ptag logical, wrap paragraphs in html paragraph tag an include full justifcation.
+#' @param collapse logical, collapse vector of paragraphs into a single element.
+#'
+#' @return a vector of character strings.
+#' @export
+#'
+#' @examples
+#' #not run
+read_md_paragraphs <- function(file, ptag=FALSE, collapse=FALSE){
+  x <- readLines(file) %>% unlist
+  idx <- which(x=="")
+  l <- length(idx) + 1
+  text <- vector("list", l)
+  if(l > 1){
+    idx <- unique(c(0, idx))
+    for(i in 1:l){
+      text[[i]] <- if(i < l) x[(idx[i]+1):(idx[i+1]-1)] else x[(idx[i] +1):length(x)]
+    }
+  } else text <- list(x)
+  text <- purrr::map_chr(text, ~paste(.x, collapse=" "))
+  if(ptag) text <- purrr::map_chr(text, ~paste0("<p style='text-align: justify;'>", .x, "</p>"))
+  if(collapse) text <- paste(text, collapse="\n")
+  text
+}
