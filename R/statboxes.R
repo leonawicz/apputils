@@ -126,14 +126,6 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
       y <- purrr::map(seq_along(text), ~infoBox(text[[.x]], val[[.x]], NULL,
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
     }
-    y <- list(
-      mn=valueBox(val[[1]], text[[1]], icon=icon(list(src="stat_icon_normal_min_white.png", width="90px"), lib="local"), color=clrs[1], width=NULL),
-      mx=valueBox(val[[2]], text[[2]], icon=icon(list(src="stat_icon_normal_max_white.png", width="90px"), lib="local"), color=clrs[2], width=NULL),
-      dn=valueBox(val[[3]], text[[3]], icon=icon(list(src=src.dnup[1], width="90px"), lib="local"), color=clrs[3], width=NULL),
-      up=valueBox(val[[4]], text[[4]], icon=icon(list(src=src.dnup[2], width="90px"), lib="local"), color=clrs[4], width=NULL),
-      totdif=valueBox(val[[5]], text[[5]], icon=icon(list(src=src.totals[1], width="90px"), lib="local"), color=clrs[5], width=NULL),
-      totpct=valueBox(val[[6]], text[[6]], icon=icon(list(src=src.totals[2], width="90px"), lib="local"), color=clrs[6], width=NULL)
-    )
     names(y) <- c("mn", "mx", "dn", "up", "totdif", "totpct")
     x <- shiny::tagList(
       shiny::HTML(main_title),
