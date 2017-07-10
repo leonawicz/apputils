@@ -81,6 +81,32 @@ app_showcase <- function(drop=NULL){
   do.call(.app_img_links, c(args, drop=list(drop)))
 }
 
+#' Genrate a recommended app citation.
+#'
+#' Generate a sub section for an app's information page to provide a recommended citation.
+#'
+#' All character strings appear as is. For example, enter \code{author="First Last, Last, F. , Last, F"} if that is how
+#' three authors should appear in the citation. Note that terminal periods (\code{.}) are implicit.
+#'
+#' @param author character string, appears as is.
+#' @param year year of publication.
+#' @param title citation title.
+#' @param publisher the publisher.
+#' @param url the url of the application.
+#' @param heading the heading of the citation section, defauls to \code{"Recommended citation"}.
+#' @param heading.size character, the heading tag, defaults to \code{"h3"}.
+#'
+#' @return a character string wrapped in \code{shiny::HTML}.
+#' @export
+#'
+#' @examples
+#' #not run
+app_citation <- function(author, year, title, publisher, url, heading="Recommended citation", heading.size="h3"){
+  shiny::HTML(paste0("<", heading.size, ">", heading, "</", heading.size, ">\n",
+              "<p style='text-align: justify;'>", author, ". ", year, ". ", title, ". ", publisher, ". ", url, ".\n"
+  ))
+}
+
 #' Add contact information widget to app.
 #'
 #' @param logos named list. Currently accepted names must be \code{uaf}, \code{iarc} or \code{snap}. List elements are image urls for \code{src}.
