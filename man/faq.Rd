@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.R
 \name{faq}
 \alias{faq}
-\title{Generate a Frequently Asked Questions (FAQ) widget.}
+\title{Generate a Frequently Asked Questions (FAQ) widget}
 \usage{
 faq(id, format = "bscollapse", bscollapse.args = list(id = "faq", open =
   NULL, multiple = FALSE), showcase.args = list(drop = NULL))

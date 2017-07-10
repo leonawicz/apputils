@@ -169,7 +169,7 @@ appintro <- function(title, message, logo=NULL, logo.position="title", type="toa
   do.call(make_toast, c(message=message, title=title, toast.args))
 }
 
-#' Generate a Frequently Asked Questions (FAQ) widget.
+#' Generate a Frequently Asked Questions (FAQ) widget
 #'
 #' Generate a widget that displays FAQs in an information/about section of an app.
 #'
@@ -340,4 +340,48 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
     return(do.call(shinyBS::bsCollapse,
                    as.list(c(bscollapse.args, purrr::map(faqlist, ~shinyBS::bsCollapsePanel(.x[[1]], .x[[2]], style="info"))))))
   stop("invalid FAQ format.")
+}
+
+# rintrojs calback function helpers
+.stepEquals <- function(i) paste0("this._currentStep==", i-1, collapse=" || ")
+
+.dv <- function(x, quote=TRUE){
+  x <- paste0("a[data-value=\"", x, "\"]")
+  if(quote) x <- paste0("'", x, "'")
+  x
+}
+
+.rmClass <- function(x) paste0(paste0(
+  "$(", .dv(x), ").removeClass('active');", collapse="\n"), "\n")
+
+.goClass <- function(x){
+  if(length(x) > 1) stop("Only add and trigger one class at a time.")
+  paste0("$(", .dv(x), ").addClass('active');\n$(", .dv(x), ").trigger('click');\n")
+}
+
+.stepcb <- function(condition, action){
+  paste0("if (", condition, ") {", paste0(action, collapse="\n"), "}")
+}
+
+#' Generate a JS callback string for rintrojs tour
+#'
+#' This function generates an JS callback character string to change remove an active class
+#' and add and trigger a new class in its place.
+#'
+#' This function is useful on rintrojs tours in order to, for example, ensure that the active tab panel
+#' changes acordingly depending on tour content that is required to be visible during particular steps.
+#' Note that only one active class should be added at a time. Call twice to add two active classes for a common step.
+#'
+#'
+#' @param step numeric, a vector of steps to apply the change to.
+#' @param from character, a vector of the the active classes to be removed.
+#' @param to character, a single class to add as active and trigger with a click.
+#'
+#' @return a character string.
+#' @export
+#'
+#' @examples
+#' #not run
+tour_changeClass <- function(step, from, to){
+  .stepcb(.stepEquals(step), c(.rmClass(from), .goClass(to)))
 }
