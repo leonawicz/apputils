@@ -32,7 +32,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
   if(!length(clrs) %in% c(1,2,6)) stop("Invalid color vector.")
   if(length(clrs)==2) clrs <- clrs[c(1,1,2,1,2,2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
   if(type=="annual"){
-    src <- paste0("stat_icon_",
+    src <- paste0("resources/images/stat_icon_",
                   c("normal_mean", "normal_min", "normal_max", "normal_median", "boxplot_iqr", "normal_sd"),
                   "_white.png")
     x <- dplyr::ungroup(x) %>% dplyr::summarise_(.dots=list(
