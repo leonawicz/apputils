@@ -36,7 +36,7 @@ build_mapset <- function(shp, regions, ids, mapset, mapsets, default="", default
     on.exit(prog$close())
     prog$set(message="Generating map", value=0)
   }
-  is_default <- input$mapset==default
+  is_default <- mapset==default
   if(!is.list(xyz) && length(xyz)==3 && is.numeric(xyz)){
     xyz <- rep(as.list(xyz), length(mapsets))
     names(xyz) <- mapsets
