@@ -116,7 +116,9 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
     )
     val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
     text <- purrr::map2(statlab, text.size, ~pTextSize(.x, .y, margin=0))
-    src <- c("stat_icon_normal_min_white.png", "stat_icon_normal_max_white.png", src.dnup[1], src.dnup[2], src.totals[1], src.totals[2])
+    src <- paste0("resources/images/",
+                  c("stat_icon_normal_min_white.png", "stat_icon_normal_max_white.png",
+                    src.dnup[1], src.dnup[2], src.totals[1], src.totals[2]))
     if(style=="valueBox"){
       y <- purrr::map(seq_along(text), ~valueBox(val[[.x]], text[[.x]],
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
