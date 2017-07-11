@@ -4,12 +4,12 @@
 \alias{samplesize_factor}
 \title{Divide sample size by a factor based on the number of RCP-GCM combinations.}
 \usage{
-samplesize_factor(x, cru)
+samplesize_factor(x, baseline)
 }
 \arguments{
 \item{x}{special data frame.}
 
-\item{cru}{character, name of CRU data set.}
+\item{baseline}{character, name of baseline data set.}
 }
 \value{
 a number.
