@@ -1,7 +1,7 @@
 Package: apputils
 Type: Package
 Title: Supporting Functions And Objects For Shiny Apps
-Version: 0.4.3
+Version: 0.4.4
 Author: Matthew Leonawicz
 Maintainer: Matthew Leonawicz <mfleonawicz@alaska.edu>
 Description: Common utilty functions, settings and references used across multiple Shiny apps.
