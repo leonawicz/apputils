@@ -14,7 +14,7 @@ pTextSize <- function(x, value, margin=NULL, default.value=100){
   if(length(x) > 1) value <- c(value, rep(default.value, length(x) - 1))
   style <- paste0("font-size: ", value, "%;")
   if(!is.null(margin)) style <- paste0(style, " margin: ", margin, "px;")
-  x <- purrr::map2(x, style, ~tags$p(.x, style=.y))
+  x <- purrr::map2(x, style, ~shiny::tags$p(.x, style=.y))
   if(length(x)==1) return(x[[1]])
   class(x) <- c("shiny.tag.list", "list")
   x
@@ -85,15 +85,15 @@ infoBox <- function(title, value = NULL, subtitle = NULL, icon = NULL, color = "
     iconClass <- if(icon$name=="i") "icon-large" else "img"
   }
   colorClass <- paste0("bg-", color)
-  boxContent <- div(class = "info-box", class = if (fill)
-    colorClass, span(class = "info-box-icon", class = if (!fill)
-      colorClass, icon), div(class = "info-box-content", span(class = "info-box-text",
+  boxContent <- shiny::div(class = "info-box", class = if (fill)
+    colorClass, shiny::span(class = "info-box-icon", class = if (!fill)
+      colorClass, icon), shiny::div(class = "info-box-content", shiny::span(class = "info-box-text",
                                                               title), if (!is.null(value))
-                                                                span(class = "info-box-number", value), if (!is.null(subtitle))
-                                                                  p(subtitle)))
+                                                                shiny::span(class = "info-box-number", value), if (!is.null(subtitle))
+                                                                  shiny::p(subtitle)))
   if (!is.null(href))
-    boxContent <- a(href = href, boxContent)
-  div(class = if (!is.null(width))
+    boxContent <- shiny::a(href = href, boxContent)
+  shiny::div(class = if (!is.null(width))
     paste0("col-sm-", width), boxContent)
 }
 

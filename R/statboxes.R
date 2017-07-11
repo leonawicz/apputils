@@ -78,12 +78,12 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
     idx.mx <- which.max(x[[v]])
     idx.dn <- if(nrow(x)==1) NA else seq(which.min(diff(x[[v]])), length.out=2)
     idx.up <- if(nrow(x)==1) NA else seq(which.max(diff(x[[v]])), length.out=2)
-    tot <- tail(x[[v]], 1) - x[[v]][1]
+    tot <- utils::tail(x[[v]], 1) - x[[v]][1]
     tot2 <- if(pr){
       ifelse(tot < 1 & tot > 0, 1, ifelse(tot < 0 & tot > -1, -1, round(tot)))
     } else round(tot, rnd)
     x <<- x
-    pct <- if(!pr) NA else paste0(round(100*(tail(x[[v]], 1) / x[[v]][1] - 1)), "%")
+    pct <- if(!pr) NA else paste0(round(100*(utils::tail(x[[v]], 1) / x[[v]][1] - 1)), "%")
 
     statval <- list(
       mn=kilo_mega(round(x[[v]][idx.mn], rnd)),

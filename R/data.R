@@ -2,9 +2,9 @@
   m <- margin
   if(!is.null(m) && !"" %in% m){
     m <- sort(m)
-    m.lev <- map(m, ~levels(d_sub()[[.x]]))
-    if(!is.null(drop)) m.lev <- map(m.lev, ~.x[!.x %in% drop])
-    m <- m[which(map_lgl(m.lev, ~length(.x) > 1))]
+    m.lev <- purrr::map(m, ~levels(data[[.x]]))
+    if(!is.null(drop)) m.lev <- purrr::map(m.lev, ~.x[!.x %in% drop])
+    m <- m[which(purrr::map_lgl(m.lev, ~length(.x) > 1))]
     if(!length(m)) m <- NULL
   }
   m
@@ -136,7 +136,7 @@ dist_data <- function(data, variable, margin=NULL, seed=NULL, metric, year.range
       data <- dplyr::mutate(data, RCP=factor(ifelse(Year < rcp.min.yr, lev.rcps[1], lev.rcps[2]), unique(lev.rcps)))
     }
     n.factor <- if(limit.sample) samplesize_factor(data, baseline_model) else 1
-    data <- bind_rows(data.base, data) %>% split(.$Year) %>% purrr::map(~rvtable::rvtable(.x))
+    data <- dplyr::bind_rows(data.base, data) %>% split(.$Year) %>% purrr::map(~rvtable::rvtable(.x))
   }
   if(progress){
     step <- 0
