@@ -197,8 +197,8 @@ brushed_data <- function(data, x, brush, type="annual"){
   if(is.null(brush) & is.null(x)) return(data)
   if(type=="annual"){
     if(is.null(brush) & !is.null(x)){
-      y <- filter(data, Year >= x[1] & Year <= x[2])
-    } else y <- brushedPoints(data, brush)
+      y <- dplyr::filter(data, Year >= x[1] & Year <= x[2])
+    } else y <- shiny::brushedPoints(data, brush)
     if(nrow(y)==0) y <- data
   } else {
     dec <- data$Decade

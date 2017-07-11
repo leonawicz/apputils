@@ -1,3 +1,5 @@
+globalVariables(c(".", "%>%", "Model", "RCP", "Year", "Var", "Val", "Decade", "Decadal_mean"))
+
 #' Initialize apputils
 #'
 #' Call this function once near the top of the Shiny UI definition.
