@@ -76,8 +76,8 @@ are responsible for updating map polygon layers.
 # Observe polygon selectInput.
 # Add or remove selected polygons leaflet map polygons.
 observeEvent(input$regions, {
-  update_mapset("selectInput", rv$shp, input$mapset, mapset_reg_id(),
-                input$regions, rv$regions, locs, locs2, default_mapset)
+  update_mapset("selectInput", shp, mapset, ids,
+    input$regions, all_regions, all_locs)
 }, ignoreNULL=FALSE)
 
 # Observe leaflet map shape click.
