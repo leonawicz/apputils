@@ -171,3 +171,41 @@ dist_data <- function(data, variable, margin=NULL, seed=NULL, metric, year.range
   }
   data
 }
+
+#' Filter data frame based on plot brush
+#'
+#' This function filters data frame rows to a subset corresponding to observations included in the brushed region of a plot.
+#'
+#' This implementation is for brushing restricted to the x-axis and to two types of data frames.
+#' The annual type handles continous x-axis data and expects a data frame with a\code{Year} column that is x-variable.
+#' The decadal type handles categorical x-axis data and expects a \code{Decade} column that is the x-variable.
+#' \code{x} and \code{brush} are commonly reactive values in \code{server.R}, storing the observed click and brush coordinates in \code{input},
+#' rather than the \code{input} objects directly.
+#'
+#' @param data data frame.
+#' @param x x coordinates. See details.
+#' @param brush brushed coordinates. See details.
+#' @param type character, \code{"annual"} or \code{"decadal"}.
+#'
+#' @return a data frame.
+#' @export
+#'
+#' @examples
+#' #not run
+brushed_data <- function(data, x, brush, type="annual"){
+  if(!type %in% c("annual", "decadal")) stop("type must be 'annual' or 'decadal'.")
+  if(is.null(brush) & is.null(x)) return(data)
+  if(type=="annual"){
+    if(is.null(brush) & !is.null(x)){
+      y <- filter(data, Year >= x[1] & Year <= x[2])
+    } else y <- brushedPoints(data, brush)
+    if(nrow(y)==0) y <- data
+  } else {
+    dec <- data$Decade
+    r <- if(is.null(brush) & !is.null(x)) c(x[1], x[2]) else c(brush$xmin, brush$xmax)
+    intlev <- round(r[1]):round(r[2])
+    intlev <- intlev[!intlev %in% c(0, nlevels(dec) + 1)]
+    y <- dplyr::filter(data, as.integer(dec) %in% intlev)
+  }
+  y
+}
