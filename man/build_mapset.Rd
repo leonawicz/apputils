@@ -2,15 +2,17 @@
 % Please edit documentation in R/maps.R
 \name{build_mapset}
 \alias{build_mapset}
-\title{Build leaflet map from among multiple available maps.}
+\title{Build leaflet map from among multiple available maps}
 \usage{
-build_mapset(shp, regions, ids, mapset, mapsets, default = "",
-  default.name = default, all_loc_names, xyz, progress = F)
+build_mapset(shp, all_regions, ids, mapset, mapsets, default = "",
+  default.name = default, all_locs_shapefile, xyz, color = c("#000000",
+  "#000000", "#3C8DBC"), fill = c("#000000", "#3C8DBC", "#3C8DBC"),
+  color_opacity = c(0.5, 1, 1), fill_opacity = c(0, 0, 0.4), progress = F)
 }
 \arguments{
 \item{shp}{a shapefile pertaining to a single \code{mapset}.}
 
-\item{regions}{a named vector of region IDs pertaining to regions in \code{shp}.}
+\item{all_regions}{a named vector of region IDs pertaining to regions in \code{shp}.}
 
 \item{ids}{literal names of regions in \code{shp} (may not match \code{regions} elements).}
 
@@ -18,16 +20,24 @@ build_mapset(shp, regions, ids, mapset, mapsets, default = "",
 
 \item{mapsets}{character, vector of all available map sets.}
 
-\item{default}{name of a default map set, if used. Otherwise defaults to \code{default=""}, the empty string.}
+\item{default}{name of a default map set, if used. Otherwise defaults to \code{default=""}.}
 
 \item{default.name}{label used in place of \code{default} string. Defaults to \code{default}.}
 
-\item{all_loc_names}{a named list (names match \code{mapsets})
+\item{all_locs_shapefile}{a named list (names match \code{mapsets})
 where each list element is a vector of regions specified to match the region IDs in \code{shp}.}
 
 \item{xyz}{a named list (names match \code{mapsets})
 where each list element is a vector of three values: longitude, latitude, and zoom level, for centering and zoom level setup.
 Alternatively, a non-list vector of three values if all map sets will share a common centering and zoom level.}
+
+\item{color}{vector of three polygon border colors. See details.}
+
+\item{fill}{vector of three polygon fill colors. See details.}
+
+\item{color_opacity}{numeric vector of three polygon border color opacities. See details.}
+
+\item{fill_opacity}{numeric vector of three polygon fill color opacities. See details.}
 
 \item{progress}{logical, add progress bar in app during map rendering. Helpful is rendering is slow.}
 }
@@ -46,6 +56,12 @@ change appearance on mouse hover and click (selection).
 
 A \code{default} map may be identified, and if so, it is assumed to be a simpler base map with only a single polygon.
 Such a map set has one region, and therefore is fully colored as permanently "selected", with no need to click a polygon.
+
+Polygon border and fill colors and opacities are vectors of three values each.
+These correspond to unselected, highlighted and selected polygons, respectively.
+While \code{build_mapset} deals primarily with unselected or highlighted polygons and \code{update_mapset}
+deals strictly with selected polygons, \code{build_mapset} still takes a third value because this is used
+in the case of a \code{default} map set consisting of a single polygon (which is always colored and filled as a "selected" polygon).
 }
 \examples{
 #not run
