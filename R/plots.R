@@ -191,13 +191,8 @@ mouseInfo <- function(clk, dblclk, hov, brush){
     paste0("xmin=", round(e$xmin, 1), " xmax=", round(e$xmax, 1),
            " ymin=", round(e$ymin, 1), " ymax=", round(e$ymax, 1))
   }
-
-  paste0(
-    "click: ", xy_str(clk),
-    "dblclick: ", xy_str(dblclk),
-    "hover: ", xy_str(hov),
-    "brush: ", xy_range_str(brush)
-  )
+  paste0("click: ", xy_str(clk), "dblclick: ", xy_str(dblclk),
+    "hover: ", xy_str(hov), "brush: ", xy_range_str(brush))
 }
 
 #' Mouseover info browser feedback.
