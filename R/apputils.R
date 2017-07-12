@@ -43,6 +43,8 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #' @param container list of style arguments for the container div. See details and example.
 #' @param toast list of style arguments for the toast. See details and example.
 #' @param position character, defaults to \code{"top-center"}.
+#' @param opacity numeric, toast opacity. Appended to \code{container}.
+#' @param hover.opacity numeric, toast opacity on mouse hover.
 #'
 #' @return an html style tag.
 #' @export
@@ -52,16 +54,33 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #'   list('overflow-y'='auto', width='70%', height='700px'),
 #'   list(top='100px', margin='0 auto', left='115px')
 #' )
-update_toastr_css <- function(container=NULL, toast=NULL, position="top-center"){
+update_toastr_css <- function(container=NULL, toast=NULL, opacity=0.8, hover.opacity=1, position="top-center"){
   if(is.null(container) & is.null(toast))
     stop("Must provide valid arguments to at least one of container or toast.")
+  set_op <- function(op){
+    list(opacity=op,
+         '-ms-filter'=paste0("progid:DXImageTransform.Microsoft.Alpha(Opacity=", 100*op, ")"),
+         filter=paste0("alpha(", 100*op, ")"))
+  }
+
+  if(!is.null(opacity)){
+    op <- set_op(opacity)
+    container <- c(container, op)
+  }
+  if(!is.null(hover.opacity)){
+    hov.op <- set_op(hover.opacity)
+    hover <- paste0('#toast-container.toast-', position, ' > :hover {\n  ',
+      paste0(paste(names(hov.op), hov.op, sep=":", collapse=";\n  "), ";\n}"))
+  } else hover <- NULL
+
   if(!is.null(container))
     container <- paste0('#toast-container.toast-', position, ' > div {\n  ',
       paste0(paste(names(container), container, sep=":", collapse=";\n  "), ";\n}"))
   if(!is.null(toast))
     toast <- paste0('.toast-', position, ' {\n  ',
       paste0(paste(names(toast), toast, sep=":", collapse=";\n  "), ";\n}"))
-  shiny::tags$style(shiny::HTML(paste(container, toast, sep="\n")))
+
+  shiny::tags$style(shiny::HTML(paste(container, toast, hover, sep="\n")))
 }
 
 #' Require non-null inputs in app UI

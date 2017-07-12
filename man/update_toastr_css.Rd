@@ -4,12 +4,17 @@
 \alias{update_toastr_css}
 \title{Update shinytoastr css}
 \usage{
-update_toastr_css(container = NULL, toast = NULL, position = "top-center")
+update_toastr_css(container = NULL, toast = NULL, opacity = 0.8,
+  hover.opacity = 1, position = "top-center")
 }
 \arguments{
 \item{container}{list of style arguments for the container div. See details and example.}
 
 \item{toast}{list of style arguments for the toast. See details and example.}
+
+\item{opacity}{numeric, toast opacity. Appended to \code{container}.}
+
+\item{hover.opacity}{numeric, toast opacity on mouse hover.}
 
 \item{position}{character, defaults to \code{"top-center"}.}
 }
