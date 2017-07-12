@@ -52,6 +52,7 @@
 
 /* overrides for top-center toast (shinytoastr::toast_*) */
 #toast-container.toast-top-center > div {
+  overflow-y: auto;
   width: 50%;
   height: 200px;
 }
