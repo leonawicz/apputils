@@ -51,6 +51,18 @@
 }
 
 /* overrides for top-center toast (shinytoastr::toast_*) */
+#toast-container > div {
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+}
+
+#toast-container.toast-top-right > div {
+  opacity: 0.8;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  filter: alpha(opacity=80);
+}
+
 #toast-container.toast-top-center > div {
   overflow-y: auto;
   width: 50%;
