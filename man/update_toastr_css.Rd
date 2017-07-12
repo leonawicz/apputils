@@ -4,13 +4,18 @@
 \alias{update_toastr_css}
 \title{Update shinytoastr css}
 \usage{
-update_toastr_css(container = NULL, toast = NULL, opacity = 0.8,
-  hover.opacity = 1, position = "top-center")
+update_toastr_css(container = NULL, toast = NULL, rgba = NULL,
+  hover.rgba = NULL, opacity = NULL, hover.opacity = NULL,
+  position = "top-center")
 }
 \arguments{
 \item{container}{list of style arguments for the container div. See details and example.}
 
 \item{toast}{list of style arguments for the toast. See details and example.}
+
+\item{rgba}{numeric, vector of four css rgba property values for background color, e.g., \code{c(0,0,0,0.5)}. See details.}
+
+\item{hover.rgba}{numeric, vector of four css rgba property values for background color on mouse hover. See details.}
 
 \item{opacity}{numeric, toast opacity. Appended to \code{container}.}
 
@@ -33,6 +38,10 @@ hence the default for \code{position} is \code{"top-center"}.
 Note that list names and values ay be quoted if necessary. See example.
 Should be familiar with source toastr css in addition to running the example
 in order to understand which elements apply to \code{container} vs. \code{toast}.
+
+If wanting to keep text fully opaque in the toast while using semi-transparency,
+especially useful when adding a background image, use css rgba instead of opacity.
+\code{rgba} and\code{hover.rgba} nullify opacity arguments if both are provided, respectively.
 }
 \examples{
 update_toastr_css(

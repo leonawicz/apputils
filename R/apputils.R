@@ -40,9 +40,15 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #' Should be familiar with source toastr css in addition to running the example
 #' in order to understand which elements apply to \code{container} vs. \code{toast}.
 #'
+#' If wanting to keep text fully opaque in the toast while using semi-transparency,
+#' especially useful when adding a background image, use css rgba instead of opacity.
+#' \code{rgba} and\code{hover.rgba} nullify opacity arguments if both are provided, respectively.
+#'
 #' @param container list of style arguments for the container div. See details and example.
 #' @param toast list of style arguments for the toast. See details and example.
 #' @param position character, defaults to \code{"top-center"}.
+#' @param rgba numeric, vector of four css rgba property values for background color, e.g., \code{c(0,0,0,0.5)}. See details.
+#' @param hover.rgba numeric, vector of four css rgba property values for background color on mouse hover. See details.
 #' @param opacity numeric, toast opacity. Appended to \code{container}.
 #' @param hover.opacity numeric, toast opacity on mouse hover.
 #'
@@ -54,7 +60,8 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #'   list('overflow-y'='auto', width='70%', height='700px'),
 #'   list(top='100px', margin='0 auto', left='115px')
 #' )
-update_toastr_css <- function(container=NULL, toast=NULL, opacity=0.8, hover.opacity=1, position="top-center"){
+update_toastr_css <- function(container=NULL, toast=NULL, rgba=NULL, hover.rgba=NULL,
+                              opacity=NULL, hover.opacity=NULL, position="top-center"){
   if(is.null(container) & is.null(toast))
     stop("Must provide valid arguments to at least one of container or toast.")
   set_op <- function(op){
@@ -63,15 +70,23 @@ update_toastr_css <- function(container=NULL, toast=NULL, opacity=0.8, hover.opa
          filter=paste0("alpha(", 100*op, ")"))
   }
 
-  if(!is.null(opacity)){
+  if(!is.null(opacity) && is.null(rgba)){
     op <- set_op(opacity)
     container <- c(container, op)
   }
-  if(!is.null(hover.opacity)){
+  if(!is.null(hover.opacity) & is.null(hover.rgba)){
     hov.op <- set_op(hover.opacity)
     hover <- paste0('#toast-container.toast-', position, ' > :hover {\n  ',
-      paste0(paste(names(hov.op), hov.op, sep=":", collapse=";\n  "), ";\n}"))
+                    paste0(paste(names(hov.op), hov.op, sep=":", collapse=";\n  "), ";\n}"))
   } else hover <- NULL
+
+  if(!is.null(rgba)) rgba <- paste0('rgba(', paste0(rgba, collapse=","), ")")
+  if(!is.null(hover.rgba)) hover.rgba <- paste0('rgba(', paste0(hover.rgba, collapse=","), ")")
+  if(!is.null(rgba)) container <- c(container, list('background-color'=rgba))
+  if(!is.null(hover.rgba)){
+    hover <- paste0('#toast-container.toast-', position, ' > :hover {\n  ',
+                    paste0(paste("background-color", hover.rgba, sep=":", collapse=";\n  "), ";\n}"))
+  }
 
   if(!is.null(container))
     container <- paste0('#toast-container.toast-', position, ' > div {\n  ',
