@@ -165,7 +165,7 @@ dist_data <- function(data, variable, margin=NULL, seed=NULL, metric, year.range
     } else {
       data <- dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val/25.4, 3), round((9/5)*Val + 32, 1)))
     }
-    if(variable=="pr") x$Val[x$Val < 0] <- 0
+    if(variable=="pr") data <- dplyr::mutate(data, Val=ifelse(Val < 0, 0, Val))
     data <- dplyr::mutate(data, Decade=factor( # Add decade factor column
       paste0(Year - Year %% 10, "s"), levels=paste0(unique(Year - Year %% 10), "s")))
   }
