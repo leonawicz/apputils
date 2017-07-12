@@ -1,3 +1,9 @@
+/* set shinydashboard main (right) panel area background to white */
+.content-wrapper,
+.right-side {
+  background-color: #ffffff;
+}
+
 /* associated with valueBox (shinydashboard) and icon (shiny) apputils override functions */
 .img-local {
 }
@@ -50,57 +56,57 @@
   height: 200px;
 }
 
-.toast-top-center { 
-   top: 400px;   
+.toast-top-center {
+   top: 400px;
    margin: 0 auto;
    left: 115px;
  }
 
  /* custom button styles to match default shinydashboard theme */
-.btn-go { 
-  color: #ffffff; 
-  background-color: #3C8DBC; 
-  border-color: #3C8DBC; 
-} 
- 
-.btn-go:hover, 
-.btn-go:focus, 
-.btn-go:active, 
-.btn-go.active, 
-.open .dropdown-toggle.btn-go { 
-  color: #ffffff; 
-  background-color: #357CA5; 
-  border-color: #3C8DBC; 
-} 
- 
-.btn-go:active, 
-.btn-go.active, 
-.open .dropdown-toggle.btn-go { 
-  background-image: none; 
-} 
- 
-.btn-go.disabled, 
-.btn-go[disabled], 
-fieldset[disabled] .btn-go, 
-.btn-go.disabled:hover, 
-.btn-go[disabled]:hover, 
-fieldset[disabled] .btn-go:hover, 
-.btn-go.disabled:focus, 
-.btn-go[disabled]:focus, 
-fieldset[disabled] .btn-go:focus, 
-.btn-go.disabled:active, 
-.btn-go[disabled]:active, 
-fieldset[disabled] .btn-go:active, 
-.btn-go.disabled.active, 
-.btn-go[disabled].active, 
-fieldset[disabled] .btn-go.active { 
-  background-color: #3C8DBC; 
-  border-color: #3C8DBC; 
-} 
- 
-.btn-go .badge { 
-  color: #3C8DBC; 
-  background-color: #ffffff; 
+.btn-go {
+  color: #ffffff;
+  background-color: #3C8DBC;
+  border-color: #3C8DBC;
+}
+
+.btn-go:hover,
+.btn-go:focus,
+.btn-go:active,
+.btn-go.active,
+.open .dropdown-toggle.btn-go {
+  color: #ffffff;
+  background-color: #357CA5;
+  border-color: #3C8DBC;
+}
+
+.btn-go:active,
+.btn-go.active,
+.open .dropdown-toggle.btn-go {
+  background-image: none;
+}
+
+.btn-go.disabled,
+.btn-go[disabled],
+fieldset[disabled] .btn-go,
+.btn-go.disabled:hover,
+.btn-go[disabled]:hover,
+fieldset[disabled] .btn-go:hover,
+.btn-go.disabled:focus,
+.btn-go[disabled]:focus,
+fieldset[disabled] .btn-go:focus,
+.btn-go.disabled:active,
+.btn-go[disabled]:active,
+fieldset[disabled] .btn-go:active,
+.btn-go.disabled.active,
+.btn-go[disabled].active,
+fieldset[disabled] .btn-go.active {
+  background-color: #3C8DBC;
+  border-color: #3C8DBC;
+}
+
+.btn-go .badge {
+  color: #3C8DBC;
+  background-color: #ffffff;
 }
 
 /* image links with text and semi-transparent background animation on hover */
