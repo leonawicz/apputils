@@ -14,7 +14,7 @@ update_toastr_css(container = NULL, toast = NULL, position = "top-center")
 \item{position}{character, defaults to \code{"top-center"}.}
 }
 \value{
-a character string of css.
+an html style tag.
 }
 \description{
 Update toast css from shinytoastr package.
@@ -30,8 +30,8 @@ Should be familiar with source toastr css in addition to running the example
 in order to understand which elements apply to \code{container} vs. \code{toast}.
 }
 \examples{
-cat(update_toastr_css(
+update_toastr_css(
   list('overflow-y'='auto', width='70\%', height='700px'),
   list(top='100px', margin='0 auto', left='115px')
-))
+)
 }

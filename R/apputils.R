@@ -44,22 +44,24 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #' @param toast list of style arguments for the toast. See details and example.
 #' @param position character, defaults to \code{"top-center"}.
 #'
-#' @return a character string of css.
+#' @return an html style tag.
 #' @export
 #'
 #' @examples
-#' cat(update_toastr_css(
+#' update_toastr_css(
 #'   list('overflow-y'='auto', width='70%', height='700px'),
 #'   list(top='100px', margin='0 auto', left='115px')
-#' ))
+#' )
 update_toastr_css <- function(container=NULL, toast=NULL, position="top-center"){
+  if(is.null(container) & is.null(toast))
+    stop("Must provide valid arguments to at least one of container or toast.")
   if(!is.null(container))
     container <- paste0('#toast-container.toast-', position, ' > div {\n  ',
       paste0(paste(names(container), container, sep=":", collapse=";\n  "), ";\n}"))
   if(!is.null(toast))
     toast <- paste0('.toast-', position, ' {\n  ',
       paste0(paste(names(toast), toast, sep=":", collapse=";\n  "), ";\n}"))
-  paste(container, toast, sep="\n")
+  shiny::tags$style(shiny::HTML(paste(container, toast, sep="\n")))
 }
 
 #' Require non-null inputs in app UI
