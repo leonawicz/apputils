@@ -6,7 +6,7 @@
 \usage{
 update_toastr_css(container = NULL, toast = NULL, rgba = NULL,
   hover.rgba = NULL, opacity = NULL, hover.opacity = NULL,
-  position = "top-center")
+  radius = NULL, position = "top-center")
 }
 \arguments{
 \item{container}{list of style arguments for the container div. See details and example.}
@@ -20,6 +20,8 @@ update_toastr_css(container = NULL, toast = NULL, rgba = NULL,
 \item{opacity}{numeric, toast opacity. Appended to \code{container}.}
 
 \item{hover.opacity}{numeric, toast opacity on mouse hover.}
+
+\item{radius}{character, border radius, e.g., \code{"0px"}.}
 
 \item{position}{character, defaults to \code{"top-center"}.}
 }

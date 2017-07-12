@@ -51,6 +51,7 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #' @param hover.rgba numeric, vector of four css rgba property values for background color on mouse hover. See details.
 #' @param opacity numeric, toast opacity. Appended to \code{container}.
 #' @param hover.opacity numeric, toast opacity on mouse hover.
+#' @param radius character, border radius, e.g., \code{"0px"}.
 #'
 #' @return an html style tag.
 #' @export
@@ -61,7 +62,7 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #'   list(top='100px', margin='0 auto', left='115px')
 #' )
 update_toastr_css <- function(container=NULL, toast=NULL, rgba=NULL, hover.rgba=NULL,
-                              opacity=NULL, hover.opacity=NULL, position="top-center"){
+                              opacity=NULL, hover.opacity=NULL, radius=NULL, position="top-center"){
   if(is.null(container) & is.null(toast))
     stop("Must provide valid arguments to at least one of container or toast.")
   set_op <- function(op){
@@ -87,6 +88,8 @@ update_toastr_css <- function(container=NULL, toast=NULL, rgba=NULL, hover.rgba=
     hover <- paste0('#toast-container.toast-', position, ' > :hover {\n  ',
                     paste0(paste("background-color", hover.rgba, sep=":", collapse=";\n  "), ";\n}"))
   }
+  if(!is.null(radius)) container <- c(container, list(
+    '-moz-border-radius'=radius, '-webkit-border-radius'=radius, 'border-radius'=radius))
 
   if(!is.null(container))
     container <- paste0('#toast-container.toast-', position, ' > div {\n  ',
