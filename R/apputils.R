@@ -27,6 +27,41 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
     return(shiny::tagList(x, shinytoastr::useToastr()))
 }
 
+#' Update shinytoastr css
+#'
+#' Update toast css from shinytoastr package.
+#'
+#' \code{apputils} already contains some toastr css overrides (loaded via \code{use_apputils}).
+#' This function allows for injecting additonal or different css overrides for a specific toast container
+#' that may not already be as specified by \code{apputils}. This is typically used to adjust the app intro toast,
+#' hence the default for \code{position} is \code{"top-center"}.
+#'
+#' Note that list names and values ay be quoted if necessary. See example.
+#' Should be familiar with source toastr css in addition to running the example
+#' in order to understand which elements apply to \code{container} vs. \code{toast}.
+#'
+#' @param container list of style arguments for the container div. See details and example.
+#' @param toast list of style arguments for the toast. See details and example.
+#' @param position character, defaults to \code{"top-center"}.
+#'
+#' @return a character string of css.
+#' @export
+#'
+#' @examples
+#' cat(update_toastr_css(
+#'   list('overflow-y'='auto', width='70%', height='700px'),
+#'   list(top='100px', margin='0 auto', left='115px')
+#' ))
+update_toastr_css <- function(container=NULL, toast=NULL, position="top-center"){
+  if(!is.null(container))
+    container <- paste0('#toast-container.toast-', position, ' > div {\n  ',
+      paste0(paste(names(container), container, sep=":", collapse=";\n  "), ";\n}"))
+  if(!is.null(toast))
+    toast <- paste0('#toast-', position, ' {\n  ',
+      paste0(paste(names(toast), toast, sep=":", collapse=";\n  "), ";\n}"))
+  paste(container, toast, sep="\n")
+}
+
 #' Require non-null inputs in app UI
 #'
 #' Generate quoted javascript logic for non-null inputs.
