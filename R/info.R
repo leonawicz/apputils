@@ -368,6 +368,39 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
   stop("invalid FAQ format.")
 }
 
+#' Add footer to Shiny dashboard sidebar
+#'
+#' Add a foot to a Shiny dashboard sidebar that includes a logo image link and a label.
+#'
+#' \code{style} pertains to the logo and label whereas \code{width} is for the logo specifically and only \code{height}
+#' pertains directly to the footer tag.
+#'
+#' @param href url, will open in new window.
+#' @param src image url.
+#' @param label character, should be short.
+#' @param width width of logo.
+#' @param height height of footer, defaults to \code{"160px"}.
+#' @param italic logical, for label text.
+#' @param bold logical, for label text.
+#' @param style character, option style string for logo and label. See function for defaults.
+#'
+#' @return an html footer tag.
+#' @export
+#'
+#' @examples
+#' #not run
+dashboard_footer <- function(href, src, label="", width="100%", height="160px", italic=TRUE, bold=TRUE,
+                             style="text-align:center; align: center; padding: 0px; margin: 0px;"){
+  if(italic) label <- shiny::em(label)
+  if(bold) label <- shiny::strong(label)
+  shiny::tags$footer(
+    shiny::a(href=href, target="_blank", shiny::tags$img(src=src, width=width), style=style),
+    shiny::p(label, style=style),
+    style=paste0("position:absolute; align: center; bottom:0px; width:100%; height:",
+                 height, "; color: white; padding: 5px;")
+  )
+}
+
 # rintrojs calback function helpers
 .stepEquals <- function(i) paste0("this._currentStep==", i-1, collapse=" || ")
 
