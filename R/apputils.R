@@ -20,11 +20,11 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
   x <- shiny::tags$head(shiny::tags$link(rel = 'stylesheet', type = 'text/css', href = 'resources/apputils.css'))
   if(!use_rintrojs & !use_shinytoastr) return(x)
   if(use_rintrojs & use_shinytoastr)
-    return(shiny::tagList(x, shinytoastr::useToastr(), rintrojs::introjsUI()))
+    return(shiny::tagList(shinytoastr::useToastr(), rintrojs::introjsUI(), x))
   if(use_rintrojs)
-    return(shiny::tagList(x, rintrojs::introjsUI()))
+    return(shiny::tagList(rintrojs::introjsUI(), x))
   if(use_shinytoastr)
-    return(shiny::tagList(x, shinytoastr::useToastr()))
+    return(shiny::tagList(shinytoastr::useToastr(), x))
 }
 
 #' Update shinytoastr css
