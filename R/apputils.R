@@ -26,3 +26,18 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
   if(use_shinytoastr)
     return(shiny::tagList(x, shinytoastr::useToastr()))
 }
+
+#' Require non-null inputs in app UI
+#'
+#' Generate quoted javascript logic for non-null inputs.
+#'
+#' @param inputs a character vector of inputs.
+#'
+#' @return a character string of the javascript condition.
+#' @export
+#'
+#' @examples
+#' inputs_not_null(c("input1", "input2"))
+inputs_not_null <- function(inputs){
+  paste(paste0("input.", inputs), "!== null", collapse=" & ")
+}
