@@ -57,7 +57,7 @@ update_toastr_css <- function(container=NULL, toast=NULL, position="top-center")
     container <- paste0('#toast-container.toast-', position, ' > div {\n  ',
       paste0(paste(names(container), container, sep=":", collapse=";\n  "), ";\n}"))
   if(!is.null(toast))
-    toast <- paste0('#toast-', position, ' {\n  ',
+    toast <- paste0('.toast-', position, ' {\n  ',
       paste0(paste(names(toast), toast, sep=":", collapse=";\n  "), ";\n}"))
   paste(container, toast, sep="\n")
 }
