@@ -19,6 +19,8 @@
 #' @param width.icon character, icon image width, defaults to \code{"90px"}.
 #' @param text.size numeric, scaling for text size, defaults to \code{75}. See details.
 #' @param value.size numeric, scaling for value size, defaults to \code{150}. See details.
+#' @param output character, \code{"boxes"} (default) or \code{"list"}.
+#' A list is useful for returning raw output, e.g. for sending to a rmarkdown report.
 #'
 #' @return a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
 #' @export
@@ -27,7 +29,7 @@
 #' #not run
 stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-blue", "blue"), dec,
                        main_title="<h4>Aggregate period statistics</h4>",
-                       height="110px", width.icon="90px", text.size=75, value.size=150){
+                       height="110px", width.icon="90px", text.size=75, value.size=150, output="boxes"){
   if(!type %in% c("annual", "decadal")) stop("type must be 'annual' or 'decadal'.")
   if(!length(clrs) %in% c(1,2,6)) stop("Invalid color vector.")
   if(length(clrs)==2) clrs <- clrs[c(1,1,2,1,2,2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
@@ -126,7 +128,8 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
     }
     names(y) <- c("mn", "mx", "dn", "up", "totdif", "totpct")
-    x <- shiny::tagList(
+    if(output=="list") return(y)
+    shiny::tagList(
       shiny::HTML(main_title),
       shiny::fluidRow(
         shiny::tags$style(shiny::HTML(paste0(".small-box {height: ", height, " !important;}"))),

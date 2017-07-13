@@ -7,7 +7,8 @@
 stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
   clrs = c("light-blue", "blue"), dec,
   main_title = "<h4>Aggregate period statistics</h4>", height = "110px",
-  width.icon = "90px", text.size = 75, value.size = 150)
+  width.icon = "90px", text.size = 75, value.size = 150,
+  output = "boxes")
 }
 \arguments{
 \item{x}{a data frame.}
@@ -31,6 +32,9 @@ stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
 \item{text.size}{numeric, scaling for text size, defaults to \code{75}. See details.}
 
 \item{value.size}{numeric, scaling for value size, defaults to \code{150}. See details.}
+
+\item{output}{character, \code{"boxes"} (default) or \code{"list"}.
+A list is useful for returning raw output, e.g. for sending to a rmarkdown report.}
 }
 \value{
 a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
