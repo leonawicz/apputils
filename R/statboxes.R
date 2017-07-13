@@ -52,6 +52,10 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
     statlab <- list(
       c("Mean", dec), c("Min", dec), c("Max", dec), c("Median", dec), c("IQR", dec), c("Std Dev", dec)
     )
+    if(output=="list"){
+      names(statval) <- purrr::map(statlab, ~.x[1])
+      return(statval)
+    }
     val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
     text <- purrr::map2(statlab, text.size, ~pTextSize(.x, .y, margin=0))
     if(style=="valueBox"){
@@ -62,7 +66,6 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
     }
     names(y) <- c("mean", "min", "max", "med", "iqr", "sd")
-    if(output=="list") return(y)
     y <- shiny::tagList(
       shiny::HTML(main_title),
       shiny::fluidRow(
@@ -117,6 +120,10 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
       c("Total change", dec),
       c("% change", dec)
     )
+    if(output=="list"){
+      names(statval) <- purrr::map(statlab, ~.x[1])
+      return(statval)
+    }
     val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
     text <- purrr::map2(statlab, text.size, ~pTextSize(.x, .y, margin=0))
     src <- paste0("resources/images/",
@@ -130,7 +137,6 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
     }
     names(y) <- c("mn", "mx", "dn", "up", "totdif", "totpct")
-    if(output=="list") return(y)
     shiny::tagList(
       shiny::HTML(main_title),
       shiny::fluidRow(
