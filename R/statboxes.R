@@ -53,7 +53,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
       c("Mean", dec), c("Min", dec), c("Max", dec), c("Median", dec), c("IQR", dec), c("Std Dev", dec)
     )
     if(output=="list"){
-      names(statval) <- purrr::map(statlab, ~.x[1])
+      names(statval) <- purrr::map_chr(statlab, ~.x[1])
       return(statval)
     }
     val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
@@ -121,7 +121,8 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
       c("% change", dec)
     )
     if(output=="list"){
-      names(statval) <- purrr::map(statlab, ~.x[1])
+      statval <- purrr::map_chr(statval, ~as.character(.x))
+      names(statval) <- purrr::map_chr(statlab, ~.x[1])
       return(statval)
     }
     val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
