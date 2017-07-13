@@ -62,7 +62,8 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
     }
     names(y) <- c("mean", "min", "max", "med", "iqr", "sd")
-    x <- shiny::tagList(
+    if(output=="list") return(y)
+    y <- shiny::tagList(
       shiny::HTML(main_title),
       shiny::fluidRow(
         shiny::tags$style(shiny::HTML(paste0(".small-box {height: ", height, " !important;}"))),
@@ -70,7 +71,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
         shiny::column(2, y$iqr), shiny::column(2, y$min), shiny::column(2, y$max)
       )
     )
-    return(x)
+    return(y)
   } else {
     dots <- paste0("mean(Val)")
     pr <- !x$Var[1] %in% c("tas", "tasmin", "tasmax")
@@ -172,7 +173,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
 #' @examples
 #' #not run
 stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, height="110px",
-  width.icon="90px", text.size=75, value.size=150, output, main_title="<h4>Aggregate period statistics</h4>",
+  width.icon="90px", text.size=75, value.size=150, output="boxes", main_title="<h4>Aggregate period statistics</h4>",
   clrs.default=list(c("light-blue", "blue")), prevent){
 
   if(!style %in% c("valueBox", "infoBox")) stop("Invalid style argument.")
