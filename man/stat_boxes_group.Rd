@@ -4,25 +4,22 @@
 \alias{stat_boxes_group}
 \title{Generate a group of stat boxes sets.}
 \usage{
-stat_boxes_group(x, clrby, clrs.default = list(c("light-blue", "blue")),
-  type = "annual", style = "valueBox", rnd = 0,
-  main_title = "<h4>Aggregate period statistics</h4>", height = "110px",
-  width.icon = "90px", text.size = 75, value.size = 150, prevent)
+stat_boxes_group(x, clrby, type = "annual", style = "valueBox", rnd = 0,
+  height = "110px", width.icon = "90px", text.size = 75,
+  value.size = 150, output,
+  main_title = "<h4>Aggregate period statistics</h4>",
+  clrs.default = list(c("light-blue", "blue")), prevent)
 }
 \arguments{
 \item{x}{a  master data frame, which may or may not be split into multiple groups, depending on \code{clrby}.}
 
 \item{clrby}{character, column name of \code{x} to color groups of stat box sets by. May be \code{NULL}.}
 
-\item{clrs.default}{list of color vectors, one vector for each group.}
-
 \item{type}{character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.}
 
 \item{style}{character, \code{"valueBox"} (default) or \code{"infoBox"}.}
 
 \item{rnd}{decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.}
-
-\item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
 
 \item{height}{character, stat box height. defaults to \code{"110px"}.}
 
@@ -31,6 +28,13 @@ stat_boxes_group(x, clrby, clrs.default = list(c("light-blue", "blue")),
 \item{text.size}{numeric, scaling for text size, defaults to \code{75}. See details.}
 
 \item{value.size}{numeric, scaling for value size, defaults to \code{150}. See details.}
+
+\item{output}{character, \code{"boxes"} (default) or \code{"list"}.
+A list is useful for returning raw output, e.g. for sending to a rmarkdown report.}
+
+\item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
+
+\item{clrs.default}{list of color vectors, one vector for each group.}
 
 \item{prevent}{logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).}
 }

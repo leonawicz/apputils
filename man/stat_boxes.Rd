@@ -4,11 +4,11 @@
 \alias{stat_boxes}
 \title{Generate a set of stat boxes.}
 \usage{
-stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
-  clrs = c("light-blue", "blue"), dec,
-  main_title = "<h4>Aggregate period statistics</h4>", height = "110px",
-  width.icon = "90px", text.size = 75, value.size = 150,
-  output = "boxes")
+stat_boxes(x, type = "annual", style = "valueBox", rnd = 0, dec,
+  height = "110px", width.icon = "90px", text.size = 75,
+  value.size = 150, output = "boxes",
+  main_title = "<h4>Aggregate period statistics</h4>",
+  clrs = c("light-blue", "blue"))
 }
 \arguments{
 \item{x}{a data frame.}
@@ -19,11 +19,7 @@ stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
 
 \item{rnd}{decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.}
 
-\item{clrs}{character, background colors of stat boxes. See details.}
-
 \item{dec}{character, the sorted unique values of \code{x$Decade}. Typically provided by calling function. See \code{stat_boxes_group}.}
-
-\item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
 
 \item{height}{character, stat box height. defaults to \code{"110px"}.}
 
@@ -35,6 +31,10 @@ stat_boxes(x, type = "annual", style = "valueBox", rnd = 0,
 
 \item{output}{character, \code{"boxes"} (default) or \code{"list"}.
 A list is useful for returning raw output, e.g. for sending to a rmarkdown report.}
+
+\item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
+
+\item{clrs}{character, background colors of stat boxes. See details.}
 }
 \value{
 a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.

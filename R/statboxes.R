@@ -12,24 +12,25 @@
 #' @param type character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.
 #' @param style character, \code{"valueBox"} (default) or \code{"infoBox"}.
 #' @param rnd decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.
-#' @param clrs character, background colors of stat boxes. See details.
 #' @param dec character, the sorted unique values of \code{x$Decade}. Typically provided by calling function. See \code{stat_boxes_group}.
-#' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
 #' @param height character, stat box height. defaults to \code{"110px"}.
 #' @param width.icon character, icon image width, defaults to \code{"90px"}.
 #' @param text.size numeric, scaling for text size, defaults to \code{75}. See details.
 #' @param value.size numeric, scaling for value size, defaults to \code{150}. See details.
 #' @param output character, \code{"boxes"} (default) or \code{"list"}.
 #' A list is useful for returning raw output, e.g. for sending to a rmarkdown report.
+#' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
+#' @param clrs character, background colors of stat boxes. See details.
 #'
 #' @return a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
 #' @export
 #'
 #' @examples
 #' #not run
-stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-blue", "blue"), dec,
-                       main_title="<h4>Aggregate period statistics</h4>",
-                       height="110px", width.icon="90px", text.size=75, value.size=150, output="boxes"){
+stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="110px",
+  width.icon="90px", text.size=75, value.size=150, output="boxes",
+  main_title="<h4>Aggregate period statistics</h4>", clrs=c("light-blue", "blue")){
+
   if(!type %in% c("annual", "decadal")) stop("type must be 'annual' or 'decadal'.")
   if(!length(clrs) %in% c(1,2,6)) stop("Invalid color vector.")
   if(length(clrs)==2) clrs <- clrs[c(1,1,2,1,2,2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
@@ -152,15 +153,17 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
 #'
 #' @param x a  master data frame, which may or may not be split into multiple groups, depending on \code{clrby}.
 #' @param clrby character, column name of \code{x} to color groups of stat box sets by. May be \code{NULL}.
-#' @param clrs.default list of color vectors, one vector for each group.
 #' @param type character, type of stat box set. Must be \code{"annual"} (default) or \code{"decadal"}.
 #' @param style character, \code{"valueBox"} (default) or \code{"infoBox"}.
 #' @param rnd decimal places to round data to for appearance in stat box (\code{valueBox} widget). Defaults to \code{0}.
-#' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
 #' @param height character, stat box height. defaults to \code{"110px"}.
 #' @param width.icon character, icon image width, defaults to \code{"90px"}.
 #' @param text.size numeric, scaling for text size, defaults to \code{75}. See details.
 #' @param value.size numeric, scaling for value size, defaults to \code{150}. See details.
+#' @param output character, \code{"boxes"} (default) or \code{"list"}.
+#' A list is useful for returning raw output, e.g. for sending to a rmarkdown report.
+#' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
+#' @param clrs.default list of color vectors, one vector for each group.
 #' @param prevent logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).
 #'
 #' @return a group list of tag lists containing stat box sets.
@@ -168,8 +171,10 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, clrs=c("light-
 #'
 #' @examples
 #' #not run
-stat_boxes_group <- function(x, clrby, clrs.default=list(c("light-blue", "blue")), type="annual", style="valueBox", rnd=0,
-  main_title="<h4>Aggregate period statistics</h4>", height="110px", width.icon="90px", text.size=75, value.size=150, prevent){
+stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, height="110px",
+  width.icon="90px", text.size=75, value.size=150, output, main_title="<h4>Aggregate period statistics</h4>",
+  clrs.default=list(c("light-blue", "blue")), prevent){
+
   if(!style %in% c("valueBox", "infoBox")) stop("Invalid style argument.")
   if(length(style)==1) style <- rep(style, 6)
   if(length(style) != 6) stop("style argument must be vector of length one or six.")
@@ -192,6 +197,6 @@ stat_boxes_group <- function(x, clrby, clrs.default=list(c("light-blue", "blue")
     subtitles <- paste0("<h5>", names(x), "</h5>")
     subtitles[1] <- paste0(main_title, subtitles[1])
   }
-  purrr::map(seq_along(x), ~stat_boxes(x[[.x]], type, style[.x], rnd, gsub("#", "", clrs[[.x]]),
-                                       dec, subtitles[[.x]], height, width.icon, text.size, value.size))
+  purrr::map(seq_along(x), ~stat_boxes(x[[.x]], type, style[.x], rnd, dec, height, width.icon, text.size,
+                                       value.size, output, subtitles[[.x]], gsub("#", "", clrs[[.x]])))
 }
