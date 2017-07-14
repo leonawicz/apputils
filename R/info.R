@@ -216,7 +216,7 @@ appintro <- function(title, message, logo=NULL, logo.position="title", type="toa
 #'   \item{fmz}{What are fire management zones?}
 #'   \item{apps}{How did you make this app? Are other apps available?}
 #'   \item{alfresco_simulations}{What do "simulations" refer to in the data selection area?}
-#'   \item{factsheet_about}{What are fact sheets and how do they work?}
+#'   \item{factsheet_about}{What are fact sheets?}
 #'   \item{factsheet_availability}{Why are fact shees not always available?}
 #'   \item{climdist_variables}{What do the available distributions represent?}
 #' }
@@ -303,7 +303,7 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
         The ability to summarize across simulations using the mean, minimum or maximum,
         allows us to explore the uncertainty that is specifically associated with the simulation of fire activity in ALFRESCO.", style="text-align:justify")
     ),
-    factsheet_about=list("What are fact sheets and how do they work?",
+    factsheet_about=list("What are fact sheets?",
       shiny::tagList(
         shiny::p("Fact sheets are short summary reports pertaining to selected data.
           The fact sheet button in the sidebar offers dynamic reports for download.
@@ -312,17 +312,13 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
           or a similar report might need to be written based on different data entirely.
           Dynamic reports are typically used in cases like these where data are expected to change, affecting plots, tables and text in a document,
           and it would be cumbersome to revise a report by hand.", style="text-align:justify"),
-        shiny::p("In this application, fact sheets are generated uniquely depending on which variable is currently selected for investigation.
-          Pressing the fact sheet button generates a report for the currently displayed variable.
-          For example, if viewing burn area simulation outputs, the download button generates a burn area fact sheet.
-          The button is only available when on an analysis tab pertaining to a specific ALFRESCO simulation output variable.
-          It is not visible from the data selection tab because there is nothing to yet lay out in a report.", style="text-align:justify"),
-        shiny::p("This is because the download button is not merely a dynamic link to five different static reports;
-          it is used for accessing completely dynamic reports.
-          Fact sheets pertaining to the five available variables are in turn each customized based on the user's data selections and other input settings.
+        shiny::p("In this application, fact sheets are customized based on the user's data selections and other input settings.
           Changing the selected range of years, the subset of climate models or geographic regions, and so on,
-          changes the content of the report. Plots are included as displayed in the app, using settings chosen by the user,
-          and the text in a fact sheet mutates accordingly as well.", style="text-align:justify")
+          changes the content of the report.
+          Plots are included as displayed in the app and the report's text is updated as well.", style="text-align:justify"),
+        shiny::p("Fact sheets are available when sufficient data are selected to deem robustly reportable.
+          Note that at least 30 years of observations must be selected required and at least one climate model (not just CRU data).
+          Otherwise the fact sheet download button will not be available.")
       )
     ),
     factsheet_availability=list("Why are fact sheets not always available?",
