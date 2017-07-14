@@ -315,10 +315,10 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
         shiny::p("In this application, fact sheets are customized based on the user's data selections and other input settings.
           Changing the selected range of years, the subset of climate models or geographic regions, and so on,
           changes the content of the report.
-          Plots are included as displayed in the app and the report's text is updated as well.", style="text-align:justify"),
+          Plots are included as displayed in the app and the report text is updated as well.", style="text-align:justify"),
         shiny::p("Fact sheets are available when sufficient data are selected to deem robustly reportable.
-          Note that at least 30 years of observations must be selected required and at least one climate model (not just CRU data).
-          Otherwise the fact sheet download button will not be available.")
+          Note that at least 30 years of observations and at least one climate model (not just CRU data) must be selected.
+          Otherwise the fact sheet download button will be unavailable.")
       )
     ),
     factsheet_availability=list("Why are fact sheets not always available?",
