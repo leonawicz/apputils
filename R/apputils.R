@@ -115,3 +115,26 @@ update_toastr_css <- function(container=NULL, toast=NULL, rgba=NULL, hover.rgba=
 inputs_not_null <- function(inputs){
   paste(paste0("input.", inputs), "!== null", collapse=" & ")
 }
+
+#' Add HTML content to app launch overlay
+#'
+#' Add HTML content on top of the semi-transparent full screen overlay shown at app launch.
+#'
+#' @param text character, typically a string of html.
+#' @param logo character, path to image.
+#' @param loading.logo character, path to image.
+#' @param text.loading character, text to accompany \code{loading.logo} or alone.
+#'
+#' @return a \code{shiny::HTML} string.
+#' @export
+#'
+#' @examples
+#' #not run
+app_overlay <- function(text, logo=NULL, loading.logo=NULL, text.loading='<h1>Loading...</h1>'){
+  x <- '<div id="fade-wrapper">\n  <div id="fade-wrapper-content">'
+  if(!is.null(logo)) x <- paste0(x, '<p><img src="', logo, '"></p><br/><br/>')
+  if(!is.null(text)) x <- paste0(x, text)
+  if(!is.null(loading.logo)) x <- paste0(x, '<p><img src="', loading.logo, '" ></p>')
+  if(!is.null(text.loading)) x <- paste0(x, text.loading)
+  shiny::HTML(paste0(x, '</div></div>'))
+}

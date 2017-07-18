@@ -3,6 +3,7 @@
 export(.colorFacet)
 export(.getPosition)
 export(app_citation)
+export(app_overlay)
 export(app_showcase)
 export(appintro)
 export(brushed_data)
