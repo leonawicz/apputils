@@ -2,7 +2,7 @@
 % Please edit documentation in R/apputils.R
 \name{app_overlay}
 \alias{app_overlay}
-\title{Title}
+\title{Add HTML content to app launch overlay}
 \usage{
 app_overlay(text, logo = NULL, loading.logo = NULL,
   text.loading = "<h1>Loading...</h1>")
@@ -20,7 +20,7 @@ app_overlay(text, logo = NULL, loading.logo = NULL,
 a \code{shiny::HTML} string.
 }
 \description{
-Title
+Add HTML content on top of the semi-transparent full screen overlay shown at app launch.
 }
 \examples{
 #not run

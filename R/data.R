@@ -44,7 +44,8 @@
 #' @param variable character, a valid random variable. See details for currently avaiable options.
 #' @param margin variable to marginalize over. Defaults to \code{NULL}.
 #' @param seed numeric or \code{NULL} (default), set random seed for reproducible sampling in app.
-#' @param metric logical, output metric units. Otherwise US Standard. \code{data} is assumed to be in metric units.
+#' @param metric \code{NULL} or logical. Output data in metric units, otherwise in US Standard. Input data in \code{data} is assumed metric.
+#' If \code{NULL} (default), no conversion or climate variable-specific rounding is performed.
 #' @param year.range full range of years in data set.
 #' @param rcp.min.yr minimum year for RCP, e.g., for CMIP5 data this is 2006.
 #' @param base.max.yr maximum year for baseline historical comparison data set
@@ -67,7 +68,7 @@
 #'
 #' @examples
 #' #not run
-dist_data <- function(data, variable, margin=NULL, seed=NULL, metric, year.range, rcp.min.yr, base.max.yr,
+dist_data <- function(data, variable, margin=NULL, seed=NULL, metric=NULL, year.range, rcp.min.yr, base.max.yr,
                       all_models, baseline_model=NULL, composite="Composite GCM",
                       baseline_scenario="Historical", general_scenario="Projected",
                       margin.drop=c(baseline_scenario, baseline_model),
@@ -160,16 +161,38 @@ dist_data <- function(data, variable, margin=NULL, seed=NULL, metric, year.range
     }
   }
   if(nrow(data) > 0 & variable %in% valid_variables){ # unit conversion
-    if(metric){
-      data <- dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val), round(Val, 1)))
-    } else {
-      data <- dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val/25.4, 3), round((9/5)*Val + 32, 1)))
+    if(is.logical(metric)){
+      if(metric){
+        data <- dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val), round(Val, 1)))
+      } else {
+        data <- dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val/25.4, 3), round((9/5)*Val + 32, 1)))
+      }
     }
     if(variable=="pr") data <- dplyr::mutate(data, Val=ifelse(Val < 0, 0, Val))
     data <- dplyr::mutate(data, Decade=factor( # Add decade factor column
       paste0(Year - Year %% 10, "s"), levels=paste0(unique(Year - Year %% 10), "s")))
   }
   data
+}
+
+#' Convert units and round data
+#'
+#' Convert units and round climate data when the \code{Var} column in \code{data} is one of
+#' \code{"pr"}, \code{"tas"}, \code{"tasmin"} or \code{"tasmax"}.
+#' This function is for a specialized context.
+#'
+#' @param data a data frame with the appropriate columns and data.
+#' @param metric whether the values in the \code{Val} column are to be output in metric or US standard.
+#' Input data in column \code{Val} of \code{data} is assumed metric.
+#'
+#' @return a data frame.
+#' @export
+#'
+#' @examples
+#' #not run
+clim_convert_round <- function(data, metric){
+  if(metric) return(dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val), round(Val, 1))))
+  dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val/25.4, 3), round((9/5)*Val + 32, 1)))
 }
 
 #' Filter data frame based on plot brush

@@ -4,8 +4,8 @@
 \alias{dist_data}
 \title{Compile a specialized data frame based on the \code{rvtable} package}
 \usage{
-dist_data(data, variable, margin = NULL, seed = NULL, metric, year.range,
-  rcp.min.yr, base.max.yr, all_models, baseline_model = NULL,
+dist_data(data, variable, margin = NULL, seed = NULL, metric = NULL,
+  year.range, rcp.min.yr, base.max.yr, all_models, baseline_model = NULL,
   composite = "Composite GCM", baseline_scenario = "Historical",
   general_scenario = "Projected", margin.drop = c(baseline_scenario,
   baseline_model), density.size = 200, margin.size = 100,
@@ -20,7 +20,8 @@ dist_data(data, variable, margin = NULL, seed = NULL, metric, year.range,
 
 \item{seed}{numeric or \code{NULL} (default), set random seed for reproducible sampling in app.}
 
-\item{metric}{logical, output metric units. Otherwise US Standard. \code{data} is assumed to be in metric units.}
+\item{metric}{\code{NULL} or logical. Output data in metric units, otherwise in US Standard. Input data in \code{data} is assumed metric.
+If \code{NULL} (default), no conversion or climate variable-specific rounding is performed.}
 
 \item{year.range}{full range of years in data set.}
 
