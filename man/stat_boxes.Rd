@@ -8,7 +8,7 @@ stat_boxes(x, type = "annual", style = "valueBox", rnd = 0, dec,
   height = "110px", width.icon = "90px", text.size = 75,
   value.size = 150, output = "boxes",
   main_title = "<h4>Aggregate period statistics</h4>",
-  clrs = c("light-blue", "blue"))
+  clrs = c("light-blue", "blue"), theme = "white")
 }
 \arguments{
 \item{x}{a data frame.}
@@ -35,6 +35,8 @@ A list is useful for returning raw output, e.g. for sending to a rmarkdown repor
 \item{main_title}{character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.}
 
 \item{clrs}{character, background colors of stat boxes. See details.}
+
+\item{theme}{color theme, either \code{"white"} (default) or \code{"black"}.}
 }
 \value{
 a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.

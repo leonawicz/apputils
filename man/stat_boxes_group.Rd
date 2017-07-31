@@ -8,7 +8,7 @@ stat_boxes_group(x, clrby, type = "annual", style = "valueBox", rnd = 0,
   height = "110px", width.icon = "90px", text.size = 75,
   value.size = 150, output = "boxes",
   main_title = "<h4>Aggregate period statistics</h4>",
-  clrs.default = list(c("light-blue", "blue")), prevent)
+  clrs.default = list(c("light-blue", "blue")), prevent, theme = "white")
 }
 \arguments{
 \item{x}{a  master data frame, which may or may not be split into multiple groups, depending on \code{clrby}.}
@@ -37,6 +37,8 @@ A list is useful for returning raw output, e.g. for sending to a rmarkdown repor
 \item{clrs.default}{list of color vectors, one vector for each group.}
 
 \item{prevent}{logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).}
+
+\item{theme}{color theme, either \code{"white"} (default) or \code{"black"}.}
 }
 \value{
 a group list of tag lists containing stat box sets.
