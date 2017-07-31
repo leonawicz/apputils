@@ -209,6 +209,69 @@ stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, h
                                        value.size, output, subtitles[[.x]], gsub("#", "", clrs[[.x]])))
 }
 
+#' Accessor for apputils icons
+#'
+#' Access path to local \code{apputils} stat box icon image files.
+#'
+#' This accessor function provides convenient access to local package resources.
+#' Specifically, given an ID, it returns the resource path to a stat box icon png file.
+#' This is typically used in a Shiny app that has \code{apputils} loaded.
+#' Available options include:
+#' \describe{
+#'   \item{normal}{Normal distribution density curve}
+#'   \item{min}{Normal curve with minimum line and statistic notation}
+#'   \item{max}{As above, for the maximum}
+#'   \item{mean}{As above, for the mean}
+#'   \item{sd}{As above, with two lines marking +/- one standard deviation}
+#'   \item{median}{As above, for the median}
+#'   \item{iqr}{Box plot with interquartile range marked and labeled}
+#'   \item{b0}{Beta zero hat for linear models, scatter plot with linear model intercept highlight}
+#'   \item{b1}{Beta one hat for linear models, scatter plot with linear model slope highlight}
+#'   \item{r2}{R-squared, scatter plot with correlation highlight}
+#'   \item{pvalue}{Normal distribution curve with lower tail highlight}
+#'   \item{inc}{Increasing trend line with delta change symbol}
+#'   \item{dec}{As above but decreasing}
+#'   \item{pctinc}{As above but with percentage symbol added}
+#'   \item{pctdec}{As above but decreasing and with percentage symbol added}
+#'   \item{barinc}{Increasing consecutive bars with arrow change indicators}
+#'   \item{bardec}{As above but decreasing}
+#' }
+#'
+#' @param id character, id to be matched to a stat box icon.
+#' @param theme character, \code{"white"} (default) or \code{"black"}.
+#'
+#' @return character string specifying the local image file location in the \code{apputils} package.
+#' @export
+#'
+#' @examples
+#' statIcon("normal")
+statIcon <- function(id, theme="white"){
+  if(!theme %in% c("white", "black")) stop("theme must be 'white' or 'black'.")
+  iconopts <- c('normal', 'min', 'max', 'mean', 'sd', 'median', 'iqr', 'bo', 'b1',
+                'r2', 'pvalue', 'inc', 'dec', 'pctinc', 'pctdec', 'barinc', 'bardec')
+  if(!icon %in% iconopts) stop("Invalid id. See help for options.")
+  x <- switch(id,
+              normal="stat_icon_normal_dist",
+              min="stat_icon_normal_min",
+              max="stat_icon_normal_max",
+              mean="stat_icon_normal_mean",
+              sd="stat_icon_normal_sd",
+              median="stat_icon_normal_median",
+              iqr="stat_icon_boxplot_iqr",
+              b0="stat_icon_pars_b0hat",
+              b1="stat_icon_pars_b1hat",
+              r2="stat_icon_pars_r2",
+              pvalue="stat_icon_pars_pvalue",
+              inc="stat_icon_ts_deltaInc",
+              dec="stat_icon_ts_deltaDec",
+              pctinc="stat_icon_ts_deltaPctInc",
+              pctdec="stat_icon_ts_deltaPctDec",
+              barinc="stat_icon_bar_deltaPos",
+              bardec="stat_icon_bar_deltaNeg"
+  )
+  paste0("resources/images/", x, "_", theme, ".png")
+}
+
 #' Generate png thumbnail icons for various quantities
 #'
 #' Generate png thumbnail icons for various quantities including common statistics, model parameter estimates,

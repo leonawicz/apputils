@@ -32,7 +32,7 @@ or a taglist of multiple HTML components if the answer contains more complex con
 A key difference with the \code{open} argument that can be passed in a list to \code{bscollapse.args}
 is that it must simply match a single \emph{dictionary entry} \code{id}, not a collapse panel question title or id (e.g., \code{open="apps"}).
 
-THe current FAQ dictionary IDs and the questions they refer to include:
+The current FAQ dictionary IDs and the questions they refer to include:
 \describe{
   \item{distributions}{Why use probability distributions?}
   \item{gcm}{What is a GCM?}
