@@ -249,7 +249,7 @@ statIcon <- function(id, theme="white"){
   if(!theme %in% c("white", "black")) stop("theme must be 'white' or 'black'.")
   iconopts <- c('normal', 'min', 'max', 'mean', 'sd', 'median', 'iqr', 'bo', 'b1',
                 'r2', 'pvalue', 'inc', 'dec', 'pctinc', 'pctdec', 'barinc', 'bardec')
-  if(!icon %in% iconopts) stop("Invalid id. See help for options.")
+  if(!id %in% iconopts) stop("Invalid id. See help for options.")
   x <- switch(id,
               normal="stat_icon_normal_dist",
               min="stat_icon_normal_min",
@@ -267,8 +267,7 @@ statIcon <- function(id, theme="white"){
               pctinc="stat_icon_ts_deltaPctInc",
               pctdec="stat_icon_ts_deltaPctDec",
               barinc="stat_icon_bar_deltaPos",
-              bardec="stat_icon_bar_deltaNeg"
-  )
+              bardec="stat_icon_bar_deltaNeg")
   paste0("resources/images/", x, "_", theme, ".png")
 }
 
