@@ -21,6 +21,7 @@
 #' A list is useful for returning raw output, e.g. for sending to a rmarkdown report.
 #' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
 #' @param clrs character, background colors of stat boxes. See details.
+#' @param theme color theme, either \code{"white"} (default) or \code{"black"}.
 #'
 #' @return a \code{shiny::tagList} containing a heading and a fluid row of six stat boxes.
 #' @export
@@ -29,15 +30,13 @@
 #' #not run
 stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="110px",
   width.icon="90px", text.size=75, value.size=150, output="boxes",
-  main_title="<h4>Aggregate period statistics</h4>", clrs=c("light-blue", "blue")){
+  main_title="<h4>Aggregate period statistics</h4>", clrs=c("light-blue", "blue"), theme="white"){
 
   if(!type %in% c("annual", "decadal")) stop("type must be 'annual' or 'decadal'.")
   if(!length(clrs) %in% c(1,2,6)) stop("Invalid color vector.")
   if(length(clrs)==2) clrs <- clrs[c(1,1,2,1,2,2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
   if(type=="annual"){
-    src <- paste0("resources/images/stat_icon_",
-                  c("normal_mean", "normal_min", "normal_max", "normal_median", "boxplot_iqr", "normal_sd"),
-                  "_white.png")
+    src <- statIcon(c("mean", "min", "max", "median", "iqr", "sd"), theme)
     x <- dplyr::ungroup(x) %>% dplyr::summarise_(.dots=list(
       Mean_=paste0("mean(Val)"),
       Min_=paste0("min(Val)"),
@@ -100,15 +99,15 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
       totpct=pct
     )
 
-    src.dnup <- c("stat_icon_bar_deltaNeg_white.png", "stat_icon_bar_deltaPos_white.png")
+    src.dnup <- statIcon(c("bardec", "barinc"), theme)
     low.change <- "Max loss"
     high.change <- "Max gain"
     if(!is.na(statval$dn[1]) && statval$dn > 0) { src.dnup[1] <- src.dnup[2]; low.change <- "Min Gain" }
     if(!is.na(statval$up[1]) && statval$up < 0) { src.dnup[2] <- src.dnup[1]; high.change <- "Min loss" }
     if(tot < 0){
-      src.totals <- c("stat_icon_ts_deltaDec_white.png", "stat_icon_ts_deltaPctDec_white.png")
+      src.totals <- statIcon(c("dec", "pctdec"), theme)
     } else {
-      src.totals <- c("stat_icon_ts_deltaInc_white.png", "stat_icon_ts_deltaPctInc_white.png")
+      src.totals <- statIcon(c("inc", "pctinc"), theme)
     }
     dec <- if(nrow(x)==1) paste(x$Decade[1]) else paste(x$Decade[c(1, nrow(x))], collapse=" - ")
 
@@ -127,9 +126,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
     }
     val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
     text <- purrr::map2(statlab, text.size, ~pTextSize(.x, .y, margin=0))
-    src <- paste0("resources/images/",
-                  c("stat_icon_normal_min_white.png", "stat_icon_normal_max_white.png",
-                    src.dnup[1], src.dnup[2], src.totals[1], src.totals[2]))
+    src <- c(statIcon(c("min", "max"), theme), src.dnup[1], src.dnup[2], src.totals[1], src.totals[2])
     if(style=="valueBox"){
       y <- purrr::map(seq_along(text), ~valueBox(val[[.x]], text[[.x]],
         apputils::icon(list(src=src[.x], width=width.icon), lib="local"), clrs[.x], width=NULL))
@@ -173,6 +170,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
 #' @param main_title character, typically contains html. Defaults to \code{"<h4>Aggregate period statistics</h4>"}.
 #' @param clrs.default list of color vectors, one vector for each group.
 #' @param prevent logical, whether stat boxes should be prevented (contextual, e.g., no data available in app).
+#' @param theme color theme, either \code{"white"} (default) or \code{"black"}.
 #'
 #' @return a group list of tag lists containing stat box sets.
 #' @export
@@ -181,7 +179,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
 #' #not run
 stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, height="110px",
   width.icon="90px", text.size=75, value.size=150, output="boxes", main_title="<h4>Aggregate period statistics</h4>",
-  clrs.default=list(c("light-blue", "blue")), prevent){
+  clrs.default=list(c("light-blue", "blue")), prevent, theme="white"){
 
   if(!style %in% c("valueBox", "infoBox")) stop("Invalid style argument.")
   if(length(style)==1) style <- rep(style, 6)
@@ -206,7 +204,7 @@ stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, h
     subtitles[1] <- paste0(main_title, subtitles[1])
   }
   purrr::map(seq_along(x), ~stat_boxes(x[[.x]], type, style[.x], rnd, dec, height, width.icon, text.size,
-                                       value.size, output, subtitles[[.x]], gsub("#", "", clrs[[.x]])))
+                                       value.size, output, subtitles[[.x]], gsub("#", "", clrs[[.x]]), theme))
 }
 
 #' Accessor for apputils icons
