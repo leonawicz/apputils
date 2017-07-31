@@ -245,7 +245,7 @@ stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, h
 #' statIcon("normal")
 statIcon <- function(id, theme="white"){
   if(!theme %in% c("white", "black")) stop("theme must be 'white' or 'black'.")
-  iconopts <- c('normal', 'min', 'max', 'mean', 'sd', 'median', 'iqr', 'bo', 'b1',
+  iconopts <- c('normal', 'min', 'max', 'mean', 'sd', 'median', 'iqr', 'b0', 'b1',
                 'r2', 'pvalue', 'inc', 'dec', 'pctinc', 'pctdec', 'barinc', 'bardec')
   if(!all(id %in% iconopts)) stop("Invalid id. See help for options.")
   x <- sapply(id, function(x) switch(x,
