@@ -13,19 +13,25 @@
 #'
 #' @examples
 #' #not run
-sbg_to_tables <- function(d, grp, rnd=0){
+sbg_to_tables <- function (d, grp, rnd=0){
   id <- c("annual", "decadal")
   clr <- !is.null(grp)
-  if(clr) lev <- levels(d[[grp]])
   x <- purrr::map(id, ~stat_boxes_group(
-    d, grp, rnd=rnd, type=.x, prevent=FALSE, output="list")) %>%
-    purrr::map(~dplyr::tbl_df(data.frame(do.call(rbind, .x), stringsAsFactors=FALSE)))
-  names(x[[1]])[6] <- "SD"
-  names(x[[2]])[2:5] <- gsub("\\.", " ", names(x[[2]][2:5]))
-  names(x[[2]])[6] <- "Percent change"
-  if(clr){
-    x <- purrr::map(x, ~dplyr::mutate(.x, ColorBy=factor(lev, levels=lev)))
-    names(x[[1]])[1] <- names(x[[2]][1]) <- grp
+    d, grp, rnd = rnd, type = .x, prevent = FALSE, output = "list")) %>%
+    purrr::map(~dplyr::tbl_df(data.frame(do.call(rbind, .x), stringsAsFactors = FALSE)))
+  if (clr){
+    lev <- levels(d[[grp]])
+    nam <- purrr::map(x, ~c("ColorBy", names(.x)))
+    x <- purrr::map2(x, nam, ~dplyr::mutate(.x, ColorBy = factor(lev, levels = lev)) %>%
+                       dplyr::select_(.dots=.y))
+    names(x[[1]])[1] <- names(x[[2]])[1] <- grp
+    names(x[[1]])[6+1] <- "SD"
+    names(x[[2]])[-1] <- gsub("\\.", " ", names(x[[2]]))[-1]
+    names(x[[2]])[6+1] <- "Percent change"
+  } else {
+    names(x[[1]])[6] <- "SD"
+    names(x[[2]]) <- gsub("\\.", " ", names(x[[2]]))
+    names(x[[2]])[6] <- "Percent change"
   }
   names(x) <- id
   x
