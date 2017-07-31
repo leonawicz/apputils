@@ -208,3 +208,206 @@ stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, h
   purrr::map(seq_along(x), ~stat_boxes(x[[.x]], type, style[.x], rnd, dec, height, width.icon, text.size,
                                        value.size, output, subtitles[[.x]], gsub("#", "", clrs[[.x]])))
 }
+
+#' Generate png thumbnail icons for various quantities
+#'
+#' Generate png thumbnail icons for various quantities including common statistics, model parameter estimates,
+#' trends and rates of change.
+#'
+#' The standard white and dark theme icon versions are procuded using the default call, \code{makeIcons()},
+#' and \code{makeIcons("black", "gray30", "black")}, respectively.
+#' The function code is repetetive and includes hardcoded values because each icon is uniquely tailored,
+#' for example, for proper text placement. This function serves as a package reference to how the standard icon set
+#' is created from scratch.
+#'
+#' @param primary_color primary color.
+#' @param secondary_color secondary color.
+#' @param color_theme color theme.
+#' @param dir output directory.
+#'
+#' @return This function is used for its png file-generating side effects.
+#' @export
+#'
+#' @examples
+#' #not run
+makeIcons <- function(primary_color="#FFFFFF", secondary_color="#FFFFFF75", color_theme="white", dir="."){
+  # setup
+  set.seed(1)
+  xlm <- c(-4.5, 4.5)
+  x <- seq(xlm[1], xlm[2], length=1000)
+  y <- dnorm(x)
+  x2 <- rnorm(500000)
+  x2 <- x2[x2 > xlm[1] & x2 < xlm[2]]
+  mar <- c(0.1, 0.1, 0.1 ,0.1)
+  sysfonts::font.add("cam", "cambriaz.TTF")
+  showtext::showtext.auto()
+
+  # distribution icons
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_dist_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=primary_color)
+  lines(x, y, col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_mean_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
+  lines(x, y, col=secondary_color)
+  abline(v=0, lwd=3, lty=2, col=primary_color)
+  legend("topright", legend=expression(bolditalic(bar(x))), bty ="n", pch=NA, cex=3,  yjust=1, adj=c(-0.5, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_min_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
+  lines(x, y, col=secondary_color)
+  abline(v=xlm[1], lwd=3, lty=2, col=primary_color)
+  legend("topright", legend=expression(bolditalic(x[(1)])), bty ="n", pch=NA, cex=1.8, adj=c(-0.275, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_max_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
+  lines(x, y, col=secondary_color)
+  abline(v=xlm[2], lwd=3, lty=2, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(x[(n)])), bty ="n", pch=NA, cex=1.8,  adj=c(1, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_median_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
+  lines(x, y, col=secondary_color)
+  abline(v=0, lwd=3, lty=2, col=primary_color)
+  legend("topright", legend=expression(bolditalic(tilde(x))), bty ="n", pch=NA, cex=3,  adj=c(-0.5, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_sd_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
+  lines(x, y, col=secondary_color)
+  abline(v=c(-1,1), lwd=3, lty=2, col=primary_color)
+  legend("topright", legend=expression(bolditalic(s)), bty="n", pch=NA, cex=3, adj=c(-0.5, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_pvalue_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
+  hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
+  qn <- qnorm(0.05)
+  idx <- which(x <= qn)
+  polygon(c(x[idx], rev(x[idx])), c(y[idx], rep(0, length(idx))), col=primary_color, border=NA)
+  lines(x, y, col=secondary_color)
+  abline(v=qn, lwd=3, lty=2, col=primary_color)
+  arrows(qn, 0.1, min(x), 0.1, lwd=3, col=primary_color, length=0.15)
+  legend("topright", legend=expression(bolditalic(p)), bty ="n", pch=NA, cex=3,  yjust=1, adj=c(-0.5, 0), text.col=primary_color)
+  dev.off()
+
+  showtext::showtext.auto(enable=FALSE)
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_boxplot_iqr_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  boxplot(x2, outline=FALSE, axes=FALSE, frame=FALSE,  lty=1, border=secondary_color, boxcol=primary_color)
+  text(1.35, -0.05, expression("}"), cex=2, col=primary_color)
+  showtext::showtext.begin()
+  text(1.35, 1.5, expression("IQR"), cex=1.5, col=primary_color)
+  showtext::showtext.end()
+  dev.off()
+
+  showtext::showtext.auto()
+
+  # time series icons
+  y <- scale(c(0.3,0.4,2,0.7,2,1.5,3.5,2.75,4))
+  x <- scale(seq_along(y))
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaDec_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  lines(x, rev(y), lty=2, col=secondary_color)
+  arrows(x[1], y[length(y)], x[length(x)], y[1], lwd=3, col=primary_color)
+  legend("topright", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8, adj=c(-0.75, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaInc_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  lines(x, y, lty=2, col=secondary_color)
+  arrows(x[1], y[1], x[length(x)], y[length(y)], lwd=3, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8,  adj=c(2.5, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaPctDec_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  lines(x, rev(y), lty=2, col=secondary_color)
+  arrows(x[1], y[length(y)], x[length(x)], y[1], lwd=3, col=primary_color)
+  legend("topright", legend=expression(bolditalic(symbol("\045")~Delta)), bty ="n", pch=NA, cex=1.8, adj=c(-0.25, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaPctInc_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  lines(x, y, lty=2, col=secondary_color)
+  arrows(x[1], y[1], x[length(x)], y[length(y)], lwd=3, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(symbol("\045")~Delta)), bty ="n", pch=NA, cex=1.8,  adj=c(0.9, 0), text.col=primary_color)
+  dev.off()
+
+  # bar icons
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_bar_deltaNeg_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  barplot(c(4,1), axes=FALSE, lty=1, border=primary_color, col=secondary_color)
+  arrows(1.6, 4, 1.6, 1.2, lwd=3, col=primary_color)
+  legend("topright", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8, adj=c(-0.5, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_bar_deltaPos_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  barplot(c(1,4), axes=FALSE, lty=1, border=primary_color, col=secondary_color)
+  arrows(1, 1.2, 1, 4, lwd=3, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8, adj=c(2.5, 0), text.col=primary_color)
+  dev.off()
+
+  # linear models
+  set.seed(7)
+  x <- rnorm(25, sd=1.5)
+  y <- 0.5*x + rnorm(25, sd=0.5)
+  lm1 <- lm(y ~ x)
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_r2_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y) + c(0, 0.1))
+  axis(side=1, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=primary_color)
+  axis(side=2, at=range(y) + c(-1, 1)*c(diff(range(y))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=primary_color)
+  points(x, y, pch=1, cex=1, col=secondary_color)
+  abline(lm1, lwd=3, lty=2, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(R^2)), bty ="n", pch=NA, cex=2.4, adj=c(1.4, 0), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_b0hat_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(x) + c(0, 0.1))
+  axis(side=1, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
+  axis(side=2, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
+  points(x, y, cex=1, pch=1, col=secondary_color)
+  abline(lm1, lwd=3, lty=2, col=secondary_color)
+  a <- lm1$coefficients[2]*min(y) + lm1$coefficients[1] - 0.3
+  arrows(max(x), a, min(x), a, lwd=3, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(hat(beta[0]))), bty ="n", pch=NA, cex=2.2, adj=c(1.4, 0.1), text.col=primary_color)
+  dev.off()
+
+  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_b1hat_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  par(lwd=2, mar=mar, family="cam")
+  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y) + c(0, 0.1))
+  axis(side=1, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
+  axis(side=2, at=range(y) + c(-1, 1)*c(diff(range(y))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
+  points(x, y, pch=1, cex=1, col=secondary_color)
+  abline(lm1, lwd=2, lty=2, col=primary_color)
+  segments(-1.2, -0.9, 3.3, -0.9, lwd=3, col=primary_color)
+  arrows(3.5, -0.9, 3.5, 1.4, lwd=3, col=primary_color)
+  legend("topleft", legend=expression(bolditalic(hat(beta[1]))), bty ="n", pch=NA, cex=2.2, adj=c(1.4, 0.1), text.col=primary_color)
+  dev.off()
+}
