@@ -1,5 +1,10 @@
 globalVariables(c(".", "%>%", "Model", "RCP", "Year", "Var", "Val", "Decade", "Decadal_mean"))
 
+#' @importFrom grDevices dev.off
+#' @importFrom graphics abline arrows axis barplot boxplot hist legend lines par plot points polygon segments text
+#' @importFrom stats dnorm qnorm rnorm lm
+NULL
+
 #' Initialize apputils
 #'
 #' Call this function once near the top of the Shiny UI definition.
