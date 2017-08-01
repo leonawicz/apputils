@@ -272,7 +272,7 @@ kilo_mega <- function(x){
 ggObserve <- function(session, dblclick, brush, dbrush, rvx, rvy=NULL, rvbrush=brush, zoomable=TRUE){
   # double click ggplot observation
   if(zoomable){
-    observeEvent(input[[dblclick]], {
+    shiny::observeEvent(input[[dblclick]], {
       brush <- input[[brush]]
       if(!is.null(brush)){
         rv_plots[[rvx]] <- c(brush$xmin, brush$xmax)
@@ -283,14 +283,14 @@ ggObserve <- function(session, dblclick, brush, dbrush, rvx, rvy=NULL, rvbrush=b
       }
     })
     # zoom ggplot observation (reset brush on zoom)
-    observe({
+    shiny::observe({
       x <- rv_plots[[rvx]]
       y <- if(is.null(rvy)) NULL else rv_plots[[rvy]]
-      isolate(if(!is.null(x) | !is.null(y)) session$resetBrush(brush))
+      shiny::isolate(if(!is.null(x) | !is.null(y)) session$resetBrush(brush))
     })
   }
   # brushed data observation
-  observeEvent(dbrush(), {
+  shiny::observeEvent(dbrush(), {
     if(is.null(dbrush())) return()
     if(is.null(rv[[rvbrush]]) || !identical(rv[[rvbrush]], dbrush()))
       rv[[rvbrush]] <- dbrush()
