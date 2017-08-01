@@ -232,3 +232,67 @@ kilo_mega <- function(x){
       if(abs(x) < 1e6) paste0(round(x/1000), "K") else
         paste0(round(x/1e6, 2), "M")
 }
+
+#' Plot Observers
+#'
+#' Convenient wrapper around observers related to Shiny plot outputs.
+#'
+#' These observers require the app plots to be ggplot2 plots.
+#' Note that `resetOnNew` in `plotOutput` should be set to \code{FALSE}.
+#' It may be preferable to leave \code{resetOnNew=TRUE} if setting \code{zoomable=FALSE} here.
+#' These observers require a context where it can also be assumed that plot outputs are
+#' properly isolated and responsive to updates initiated by the observers.
+#' The plot functions themselves also take two data arguments, a brushed data frame that is a subset of rows from
+#' a master data frame, and the master. Internally, these plots functions make their own determination
+#' of how to plot brushed vs. unbrushed data.
+#'
+#' The reactive object passed via \code{dbrush} must be wrapped in \code{isolate}.
+#' The reactive values object containing \code{rvx} and \code{rvy} must be named \code{rv_plots},
+#' i.e., \code{rv_plots <- reactiveValues(x=NULL, y=NULL)}.
+#' The reactive values object containing \code{rvbrush} must be named \code{rv},
+#' i.e., \code{rv <- reactiveValues(brush=NULL)}.
+#' \code{zoomable} is best set to \code{FALSE} for discrete x-axis plots like \code{geom_boxplot}
+#' because zooming in on the discrete axis is problematic for the current brushed data observation implementation.
+#'
+#'
+#' @param session Shiny session object.
+#' @param dblclick charatcer, double click input id specified in `plotOutput`.
+#' @param brush charatcer, brush input id specified in `plotOutput`.
+#' @param dbrush reactive object containing data frame whose rows are based on the brushed region of the plot. See details.
+#' @param rvx charatcer, name of x coordinates object stored in a reactive values object. See details.
+#' @param rvy charatcer, name of y coordinates object stored in a reactive values object. See details.
+#' @param rvbrush charatcer, double click input id specified in `plotOutput`.
+#' @param zoomable logical, whether the plot is intended to be zoomable on double click. Defaults to \code{TRUE}.
+#'
+#' @return this function is called for its observer side effects.
+#' @export
+#'
+#' @examples
+#' #not run
+ggObserve <- function(session, dblclick, brush, dbrush, rvx, rvy=NULL, rvbrush=brush, zoomable=TRUE){
+  # double click ggplot observation
+  if(zoomable){
+    observeEvent(input[[dblclick]], {
+      brush <- input[[brush]]
+      if(!is.null(brush)){
+        rv_plots[[rvx]] <- c(brush$xmin, brush$xmax)
+        if(!is.null(rvy)) rv_plots[[rvy]] <- c(brush$ymin, brush$ymax)
+      } else {
+        rv_plots[[rvx]] <- NULL
+        if(!is.null(rvy)) rv_plots[[rvy]] <- NULL
+      }
+    })
+    # zoom ggplot observation (reset brush on zoom)
+    observe({
+      x <- rv_plots[[rvx]]
+      y <- if(is.null(rvy)) NULL else rv_plots[[rvy]]
+      isolate(if(!is.null(x) | !is.null(y)) session$resetBrush(brush))
+    })
+  }
+  # brushed data observation
+  observeEvent(dbrush(), {
+    if(is.null(dbrush())) return()
+    if(is.null(rv[[rvbrush]]) || !identical(rv[[rvbrush]], dbrush()))
+      rv[[rvbrush]] <- dbrush()
+  })
+}
