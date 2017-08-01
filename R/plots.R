@@ -255,7 +255,10 @@ kilo_mega <- function(x){
 #' because zooming in on the discrete axis is problematic for the current brushed data observation implementation.
 #'
 #'
-#' @param session Shiny session object.
+#' @param session Shiny \code{session} object.
+#' @param input Shiny \code{input} object.
+#' @param rv reactive values object passthrough.
+#' @param rv_plots reactive values object passthrough.
 #' @param dblclick charatcer, double click input id specified in `plotOutput`.
 #' @param brush charatcer, brush input id specified in `plotOutput`.
 #' @param dbrush reactive object containing data frame whose rows are based on the brushed region of the plot. See details.
@@ -269,7 +272,7 @@ kilo_mega <- function(x){
 #'
 #' @examples
 #' #not run
-ggObserve <- function(session, dblclick, brush, dbrush, rvx, rvy=NULL, rvbrush=brush, zoomable=TRUE){
+ggObserve <- function(session, input, rv, rv_plots, dblclick, brush, dbrush, rvx, rvy=NULL, rvbrush=brush, zoomable=TRUE){
   # double click ggplot observation
   if(zoomable){
     shiny::observeEvent(input[[dblclick]], {

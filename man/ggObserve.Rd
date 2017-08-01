@@ -4,11 +4,17 @@
 \alias{ggObserve}
 \title{Plot Observers}
 \usage{
-ggObserve(session, dblclick, brush, dbrush, rvx, rvy = NULL,
-  rvbrush = brush, zoomable = TRUE)
+ggObserve(session, input, rv, rv_plots, dblclick, brush, dbrush, rvx,
+  rvy = NULL, rvbrush = brush, zoomable = TRUE)
 }
 \arguments{
-\item{session}{Shiny session object.}
+\item{session}{Shiny \code{session} object.}
+
+\item{input}{Shiny \code{input} object.}
+
+\item{rv}{reactive values object passthrough.}
+
+\item{rv_plots}{reactive values object passthrough.}
 
 \item{dblclick}{charatcer, double click input id specified in `plotOutput`.}
 
