@@ -39,7 +39,6 @@ Convenient wrapper around observers related to Shiny plot outputs.
 \details{
 These observers require the app plots to be ggplot2 plots.
 Note that `resetOnNew` in `plotOutput` should be set to \code{FALSE}.
-It may be preferable to leave \code{resetOnNew=TRUE} if setting \code{zoomable=FALSE} here.
 These observers require a context where it can also be assumed that plot outputs are
 properly isolated and responsive to updates initiated by the observers.
 The plot functions themselves also take two data arguments, a brushed data frame that is a subset of rows from
