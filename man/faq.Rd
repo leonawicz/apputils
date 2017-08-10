@@ -41,7 +41,7 @@ The current FAQ dictionary IDs and the questions they refer to include:
   \item{apps}{How did you make this app? Are other apps available?}
   \item{alfresco_simulations}{What do "simulations" refer to in the data selection area?}
   \item{factsheet_about}{What are fact sheets?}
-  \item{factsheet_availability}{Why are fact shees not always available?}
+  \item{factsheet_availability}{Why are fact sheets not always available?}
   \item{climdist_variables}{What do the available distributions represent?}
 }
 }

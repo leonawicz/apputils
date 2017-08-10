@@ -23,7 +23,7 @@ This function filters data frame rows to a subset corresponding to observations 
 }
 \details{
 This implementation is for brushing restricted to the x-axis and to two types of data frames.
-The annual type handles continous x-axis data and expects a data frame with a\code{Year} column that is x-variable.
+The annual type handles continuous x-axis data and expects a data frame with a\code{Year} column that is x-variable.
 The decadal type handles categorical x-axis data and expects a \code{Decade} column that is the x-variable.
 \code{x} and \code{brush} are commonly reactive values in \code{server.R}, storing the observed click and brush coordinates in \code{input},
 rather than the \code{input} objects directly.

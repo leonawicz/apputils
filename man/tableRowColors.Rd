@@ -2,7 +2,7 @@
 % Please edit documentation in R/tables.R
 \name{tableRowColors}
 \alias{tableRowColors}
-\title{COlor table rows according to ggplot coloring by groups.}
+\title{Color table rows according to ggplot coloring by groups.}
 \usage{
 tableRowColors(data, variable, colorvec, alpha_append = NULL)
 }
@@ -19,7 +19,7 @@ tableRowColors(data, variable, colorvec, alpha_append = NULL)
 a DT::styleEqual call.
 }
 \description{
-COlor table rows according to ggplot coloring by groups.
+Color table rows according to ggplot coloring by groups.
 }
 \examples{
 #not run

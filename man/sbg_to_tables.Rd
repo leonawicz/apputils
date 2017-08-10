@@ -12,7 +12,7 @@ sbg_to_tables(d, grp, rnd = 0)
 \item{grp}{character or \code{NULL}, factor variable (column name) in \code{d}
 used to determine the number of groups of stat box sets.}
 
-\item{rnd}{numeric, numer of decimal places to round values to.}
+\item{rnd}{numeric, number of decimal places to round values to.}
 }
 \value{
 a list of data frames.

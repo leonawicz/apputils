@@ -18,7 +18,7 @@ a character string wrapped in \code{shiny::HTML}.
 Generate CSS for background color and text color of value boxes based on hex color input.
 }
 \details{
-Colors must be in hex color format with hashtag, e.g., \code{"#FFFFFF"}.
+Colors must be in hex color format, e.g., \code{"#FFFFFF"}.
 This function generates CSS to be added to a Shiny app.
 New value box elements are named by appending the hex color to \code{.bg-} without the \code{#}.
 When using the \code{valueBox} override function in \code{apputils},

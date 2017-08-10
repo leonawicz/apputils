@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.R
 \name{app_citation}
 \alias{app_citation}
-\title{Genrate a recommended app citation.}
+\title{Generate a recommended app citation}
 \usage{
 app_citation(author, year, title, publisher, url,
   heading = "Recommended citation", heading.size = "h3")
@@ -18,7 +18,7 @@ app_citation(author, year, title, publisher, url,
 
 \item{url}{the url of the application.}
 
-\item{heading}{the heading of the citation section, defauls to \code{"Recommended citation"}.}
+\item{heading}{the heading of the citation section, defaults to \code{"Recommended citation"}.}
 
 \item{heading.size}{character, the heading tag, defaults to \code{"h3"}.}
 }

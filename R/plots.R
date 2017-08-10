@@ -187,7 +187,7 @@ colorFacet <- function(g, d, cby, clr, fby, scales){
   g
 }
 
-#' Mousover info
+#' Mouseover info
 #'
 #' @param clk click coordinates.
 #' @param dblclk double click coordinates.
@@ -276,12 +276,12 @@ kilo_mega <- function(x){
 #' @param input Shiny \code{input} object.
 #' @param rv reactive values object passthrough.
 #' @param rv_plots reactive values object passthrough.
-#' @param dblclick charatcer, double click input id specified in `plotOutput`.
-#' @param brush charatcer, brush input id specified in `plotOutput`.
+#' @param dblclick character, double click input id specified in `plotOutput`.
+#' @param brush character, brush input id specified in `plotOutput`.
 #' @param dbrush reactive object containing data frame whose rows are based on the brushed region of the plot. See details.
-#' @param rvx charatcer, name of x coordinates object stored in a reactive values object. See details.
-#' @param rvy charatcer, name of y coordinates object stored in a reactive values object. See details.
-#' @param rvbrush charatcer, double click input id specified in `plotOutput`.
+#' @param rvx character, name of x coordinates object stored in a reactive values object. See details.
+#' @param rvy character, name of y coordinates object stored in a reactive values object. See details.
+#' @param rvbrush character, double click input id specified in `plotOutput`.
 #' @param zoomable logical, whether the plot is intended to be zoomable on double click. Defaults to \code{TRUE}.
 #'
 #' @return this function is called for its observer side effects.

@@ -9,7 +9,7 @@ read_md_paragraphs(file, ptag = FALSE, collapse = FALSE)
 \arguments{
 \item{file}{character, file to read text from.}
 
-\item{ptag}{logical, wrap paragraphs in html paragraph tag an include full justifcation.}
+\item{ptag}{logical, wrap paragraphs in html paragraph tag an include full justification.}
 
 \item{collapse}{logical, collapse vector of paragraphs into a single element.}
 }
@@ -17,7 +17,7 @@ read_md_paragraphs(file, ptag = FALSE, collapse = FALSE)
 a vector of character strings.
 }
 \description{
-Read paragrpahs from a text file based on markdown format.
+Read paragraphs from a text file based on markdown format.
 }
 \details{
 The text file does not need to be a \code{.md} file. The function merely relies on the assumption that

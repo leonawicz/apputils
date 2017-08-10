@@ -41,7 +41,7 @@
 #' Detailed progress is provided for sampling from distributions and for calculating marginal distributions.
 #'
 #' @param data a data frame. It does not need to be an \code{rvtable}-class data frame in advance, but it must be coercible to one.
-#' @param variable character, a valid random variable. See details for currently avaiable options.
+#' @param variable character, a valid random variable. See details for currently available options.
 #' @param margin variable to marginalize over. Defaults to \code{NULL}.
 #' @param seed numeric or \code{NULL} (default), set random seed for reproducible sampling in app.
 #' @param metric \code{NULL} or logical. Output data in metric units, otherwise in US Standard. Input data in \code{data} is assumed metric.
@@ -61,7 +61,7 @@
 #' @param margin_size numeric, sample size for marginalizing operations. Defaults to \code{100}.
 #' @param sample_size numeric, sample size for density estimations. Defaults to \code{margin.size}.
 #' @param limit_sample logical, see details.
-#' @param progress logical, inlcude progress bar in app.
+#' @param progress logical, include progress bar in app.
 #'
 #' @return a specialized data frame
 #' @export
@@ -207,7 +207,7 @@ clim_convert_round <- function(data, metric){
 #' This function filters data frame rows to a subset corresponding to observations included in the brushed region of a plot.
 #'
 #' This implementation is for brushing restricted to the x-axis and to two types of data frames.
-#' The annual type handles continous x-axis data and expects a data frame with a\code{Year} column that is x-variable.
+#' The annual type handles continuous x-axis data and expects a data frame with a\code{Year} column that is x-variable.
 #' The decadal type handles categorical x-axis data and expects a \code{Decade} column that is the x-variable.
 #' \code{x} and \code{brush} are commonly reactive values in \code{server.R}, storing the observed click and brush coordinates in \code{input},
 #' rather than the \code{input} objects directly.

@@ -107,11 +107,11 @@ build_mapset <- function(shp, all_regions, ids, mapset, mapsets, default="",
 #' since this function only deals with the adding of selected polygons
 #' to the map, not the adding of unselected polygons or polygon mouse hover options.
 #'
-#' Note that the \code{selectInput} obsever context (\code{trigger="selectInput"}) requires all arguments to be supplied except for
+#' Note that the \code{selectInput} observer context (\code{trigger="selectInput"}) requires all arguments to be supplied except for
 #' \code{click_id} and {session}, which are needed only for \code{trigger="mapclick"}.
 #' In the case of the latter, the only arguments needed (or used) are
 #' \code{trigger}, \code{click_id}, \code{session} and \code{selected_regions}. All other arguments may be left out.
-#' Map clicks are observed strictly to update the syncronized \code{selectInput}, not to remove or add polygons directly.
+#' Map clicks are observed strictly to update the synchronized \code{selectInput}, not to remove or add polygons directly.
 #' In turn, changes to the \code{selectInput}, whether by the user directly, or by updating on map click observation,
 #' are responsible for updating map polygon layers.
 #'

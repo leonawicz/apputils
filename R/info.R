@@ -68,7 +68,7 @@ app_showcase <- function(drop=NULL){
   do.call(.app_img_links, c(args, drop=list(drop)))
 }
 
-#' Genrate a recommended app citation.
+#' Generate a recommended app citation
 #'
 #' Generate a sub section for an app's information page to provide a recommended citation.
 #'
@@ -80,7 +80,7 @@ app_showcase <- function(drop=NULL){
 #' @param title citation title.
 #' @param publisher the publisher.
 #' @param url the url of the application.
-#' @param heading the heading of the citation section, defauls to \code{"Recommended citation"}.
+#' @param heading the heading of the citation section, defaults to \code{"Recommended citation"}.
 #' @param heading.size character, the heading tag, defaults to \code{"h3"}.
 #'
 #' @return a character string wrapped in \code{shiny::HTML}.
@@ -94,7 +94,7 @@ app_citation <- function(author, year, title, publisher, url, heading="Recommend
   ))
 }
 
-#' Add contact information widget to app.
+#' Add contact information widget to app
 #'
 #' @param logos named list. Currently accepted names must be \code{uaf}, \code{iarc} or \code{snap}. List elements are image urls for \code{src}.
 #'
@@ -208,7 +208,7 @@ appintro <- function(title, message, logo=NULL, logo.position="title", type="toa
 #'   \item{apps}{How did you make this app? Are other apps available?}
 #'   \item{alfresco_simulations}{What do "simulations" refer to in the data selection area?}
 #'   \item{factsheet_about}{What are fact sheets?}
-#'   \item{factsheet_availability}{Why are fact shees not always available?}
+#'   \item{factsheet_availability}{Why are fact sheets not always available?}
 #'   \item{climdist_variables}{What do the available distributions represent?}
 #' }
 #'
@@ -417,7 +417,7 @@ dashboard_footer <- function(href, src, label="", width="100%", height="160px", 
 #' and add and trigger a new class in its place.
 #'
 #' This function is useful on rintrojs tours in order to, for example, ensure that the active tab panel
-#' changes acordingly depending on tour content that is required to be visible during particular steps.
+#' changes accordingly depending on tour content that is required to be visible during particular steps.
 #' Note that only one active class should be added at a time. Call twice to add two active classes for a common step.
 #'
 #'
@@ -436,7 +436,7 @@ tour_changeClass <- function(step, from, to){
 
 #' Read paragraphs from file
 #'
-#' Read paragrpahs from a text file based on markdown format.
+#' Read paragraphs from a text file based on markdown format.
 #'
 #' The text file does not need to be a \code{.md} file. The function merely relies on the assumption that
 #' paragraphs are separated by an empty line, based on markdown formatting. This allows for typing up
@@ -448,7 +448,7 @@ tour_changeClass <- function(step, from, to){
 #' or a collapsed string of html text (\code{ptag=TRUE} and \code{collapse=TRUE}) for an app description.
 #'
 #' @param file character, file to read text from.
-#' @param ptag logical, wrap paragraphs in html paragraph tag an include full justifcation.
+#' @param ptag logical, wrap paragraphs in html paragraph tag an include full justification.
 #' @param collapse logical, collapse vector of paragraphs into a single element.
 #'
 #' @return a vector of character strings.

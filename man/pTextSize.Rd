@@ -2,7 +2,7 @@
 % Please edit documentation in R/override.R
 \name{pTextSize}
 \alias{pTextSize}
-\title{Size of text in overridden shiny dashboard value box function eidget output.}
+\title{Size of text in overridden shiny dashboard value box function widget output}
 \usage{
 pTextSize(x, value, margin = NULL, default.value = 100)
 }
@@ -19,7 +19,7 @@ pTextSize(x, value, margin = NULL, default.value = 100)
 a shiny taglist.
 }
 \description{
-Size of text in overridden shiny dashboard value box function eidget output.
+Size of text in overridden shiny dashboard value box function widget output
 }
 \examples{
 #not run

@@ -51,7 +51,7 @@ Generate a group of multiple sets of six related stat boxes that summarize the d
 \code{type="valueBox"} than \code{type="infoBox"}. See \code{stat_boxes} directly for more information on internal function.
 If there is a need to have more complete control over customizing content of value or info boxes, use \code{valueBox}
 or \code{infoBox} directly. \code{stat_boxes} and \code{stat_boxes_group} are two levels of wrapper functions that are intended to
-produce specific content for summarizing values in a data frame, pooled or by group, repsectively.
+produce specific content for summarizing values in a data frame, pooled or by group, respectively.
 }
 \examples{
 #not run

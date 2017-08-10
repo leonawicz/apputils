@@ -4,7 +4,7 @@ Title: Supporting Functions And Objects For Shiny Apps
 Version: 0.4.7
 Author: Matthew Leonawicz
 Maintainer: Matthew Leonawicz <mfleonawicz@alaska.edu>
-Description: Common utilty functions, settings and references used across multiple Shiny apps.
+Description: Common utility functions, settings and references used across multiple Shiny apps.
 License: MIT
 Encoding: UTF-8
 LazyData: true

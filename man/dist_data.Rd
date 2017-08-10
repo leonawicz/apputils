@@ -14,7 +14,7 @@ dist_data(data, variable, margin = NULL, seed = NULL, metric = NULL,
 \arguments{
 \item{data}{a data frame. It does not need to be an \code{rvtable}-class data frame in advance, but it must be coercible to one.}
 
-\item{variable}{character, a valid random variable. See details for currently avaiable options.}
+\item{variable}{character, a valid random variable. See details for currently available options.}
 
 \item{margin}{variable to marginalize over. Defaults to \code{NULL}.}
 
@@ -51,7 +51,7 @@ Defaults to the baseline scenario and baseline model.}
 
 \item{limit_sample}{logical, see details.}
 
-\item{progress}{logical, inlcude progress bar in app.}
+\item{progress}{logical, include progress bar in app.}
 }
 \value{
 a specialized data frame

@@ -6,7 +6,7 @@
 #' @param d data frame to use for generating stat box groups.
 #' @param grp character or \code{NULL}, factor variable (column name) in \code{d}
 #' used to determine the number of groups of stat box sets.
-#' @param rnd numeric, numer of decimal places to round values to.
+#' @param rnd numeric, number of decimal places to round values to.
 #'
 #' @return a list of data frames.
 #' @export

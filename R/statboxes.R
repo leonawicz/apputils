@@ -160,7 +160,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
 #' \code{type="valueBox"} than \code{type="infoBox"}. See \code{stat_boxes} directly for more information on internal function.
 #' If there is a need to have more complete control over customizing content of value or info boxes, use \code{valueBox}
 #' or \code{infoBox} directly. \code{stat_boxes} and \code{stat_boxes_group} are two levels of wrapper functions that are intended to
-#' produce specific content for summarizing values in a data frame, pooled or by group, repsectively.
+#' produce specific content for summarizing values in a data frame, pooled or by group, respectively.
 #'
 #' @param x a  master data frame, which may or may not be split into multiple groups, depending on \code{clrby}.
 #' @param clrby character, column name of \code{x} to color groups of stat box sets by. May be \code{NULL}.
@@ -280,9 +280,9 @@ statIcon <- function(id, theme="white"){
 #' Generate png thumbnail icons for various quantities including common statistics, model parameter estimates,
 #' trends and rates of change.
 #'
-#' The standard white and dark theme icon versions are procuded using the default call, \code{makeIcons()},
+#' The standard white and dark theme icon versions are produced using the default call, \code{makeIcons()},
 #' and \code{makeIcons("black", "gray30", "black")}, respectively.
-#' The function code is repetetive and includes hardcoded values because each icon is uniquely tailored,
+#' The function code is repetitive and includes hardcoded values because each icon is uniquely tailored,
 #' for example, for proper text placement. This function serves as a package reference to how the standard icon set
 #' is created from scratch.
 #'

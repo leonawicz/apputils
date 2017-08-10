@@ -24,9 +24,9 @@ Generate png thumbnail icons for various quantities including common statistics,
 trends and rates of change.
 }
 \details{
-The standard white and dark theme icon versions are procuded using the default call, \code{makeIcons()},
+The standard white and dark theme icon versions are produced using the default call, \code{makeIcons()},
 and \code{makeIcons("black", "gray30", "black")}, respectively.
-The function code is repetetive and includes hardcoded values because each icon is uniquely tailored,
+The function code is repetitive and includes hardcoded values because each icon is uniquely tailored,
 for example, for proper text placement. This function serves as a package reference to how the standard icon set
 is created from scratch.
 }

@@ -16,17 +16,17 @@ ggObserve(session, input, rv, rv_plots, dblclick, brush, dbrush, rvx,
 
 \item{rv_plots}{reactive values object passthrough.}
 
-\item{dblclick}{charatcer, double click input id specified in `plotOutput`.}
+\item{dblclick}{character, double click input id specified in `plotOutput`.}
 
-\item{brush}{charatcer, brush input id specified in `plotOutput`.}
+\item{brush}{character, brush input id specified in `plotOutput`.}
 
 \item{dbrush}{reactive object containing data frame whose rows are based on the brushed region of the plot. See details.}
 
-\item{rvx}{charatcer, name of x coordinates object stored in a reactive values object. See details.}
+\item{rvx}{character, name of x coordinates object stored in a reactive values object. See details.}
 
-\item{rvy}{charatcer, name of y coordinates object stored in a reactive values object. See details.}
+\item{rvy}{character, name of y coordinates object stored in a reactive values object. See details.}
 
-\item{rvbrush}{charatcer, double click input id specified in `plotOutput`.}
+\item{rvbrush}{character, double click input id specified in `plotOutput`.}
 
 \item{zoomable}{logical, whether the plot is intended to be zoomable on double click. Defaults to \code{TRUE}.}
 }

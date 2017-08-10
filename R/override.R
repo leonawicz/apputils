@@ -1,4 +1,4 @@
-#' Size of text in overridden shiny dashboard value box function eidget output.
+#' Size of text in overridden shiny dashboard value box function widget output
 #'
 #' @param x text.
 #' @param value size.
@@ -144,7 +144,7 @@ icon <- function (name, class = NULL, lib = "font-awesome"){
 #'
 #' Generate CSS for background color and text color of value boxes based on hex color input.
 #'
-#' Colors must be in hex color format with hashtag, e.g., \code{"#FFFFFF"}.
+#' Colors must be in hex color format, e.g., \code{"#FFFFFF"}.
 #' This function generates CSS to be added to a Shiny app.
 #' New value box elements are named by appending the hex color to \code{.bg-} without the \code{#}.
 #' When using the \code{valueBox} override function in \code{apputils},

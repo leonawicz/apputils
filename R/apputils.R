@@ -38,11 +38,11 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
 #' Update toast css from shinytoastr package.
 #'
 #' \code{apputils} already contains some toastr css overrides (loaded via \code{use_apputils}).
-#' This function allows for injecting additonal or different css overrides for a specific toast container
+#' This function allows for injecting additional or different css overrides for a specific toast container
 #' that may not already be as specified by \code{apputils}. This is typically used to adjust the app intro toast,
 #' hence the default for \code{position} is \code{"top-center"}.
 #'
-#' Note that list names and values ay be quoted if necessary. See example.
+#' Note that list names and values may be quoted if necessary. See example.
 #' Should be familiar with source toastr css in addition to running the example
 #' in order to understand which elements apply to \code{container} vs. \code{toast}.
 #'

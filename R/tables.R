@@ -1,4 +1,4 @@
-#' COlor table rows according to ggplot coloring by groups.
+#' Color table rows according to ggplot coloring by groups.
 #'
 #' @param data a special data frame.
 #' @param variable a column name in the data specifying the factor used for plot colors.

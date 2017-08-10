@@ -22,7 +22,7 @@ and add and trigger a new class in its place.
 }
 \details{
 This function is useful on rintrojs tours in order to, for example, ensure that the active tab panel
-changes acordingly depending on tour content that is required to be visible during particular steps.
+changes accordingly depending on tour content that is required to be visible during particular steps.
 Note that only one active class should be added at a time. Call twice to add two active classes for a common step.
 }
 \examples{

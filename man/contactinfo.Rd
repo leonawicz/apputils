@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.R
 \name{contactinfo}
 \alias{contactinfo}
-\title{Add contact information widget to app.}
+\title{Add contact information widget to app}
 \usage{
 contactinfo(logos = NULL)
 }
@@ -13,7 +13,7 @@ contactinfo(logos = NULL)
 a shiny taglist.
 }
 \description{
-Add contact information widget to app.
+Add contact information widget to app
 }
 \examples{
 #not run
