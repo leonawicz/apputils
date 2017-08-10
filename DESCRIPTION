@@ -25,4 +25,5 @@ Suggests: Cairo,
     showtext,
     sysfonts,
     testthat,
-    lintr
+    lintr,
+    covr
