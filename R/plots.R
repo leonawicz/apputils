@@ -1,4 +1,7 @@
-#' Generate a vector of colors.
+#' Generate a vector of colors
+#'
+#' The current implementation returns a vector of colors based on a specific color palette.
+#' The maximum colors returned is 12.
 #'
 #' @param n integer, number of colors requested in palette.
 #'
@@ -9,23 +12,28 @@
 #' #not run
 tolpal <- function(n){
   if(n==0) return()
-  if(n >= 12) return(c("#332288", "#6699CC", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#661100", "#CC6677", "#AA4466", "#882255", "#AA4499"))
+  if(n >= 12) return(c("#332288", "#6699CC", "#88CCEE", "#44AA99", "#117733", "#999933",
+                       "#ffad33", "#661100", "#CC6677", "#AA4466", "#882255", "#AA4499"))
   switch(n,
          "1"=c("#4477AA"),
          "2"=c("#4477AA", "#CC6677"),
          "3"=c("#4477AA", "#ffad33", "#CC6677"),
          "4"=c("#4477AA", "#117733", "#ffad33", "#CC6677"),
          "5"=c("#332288", "#88CCEE", "#117733", "#ffad33", "#CC6677"),
-         "6"=c("#332288", "#88CCEE", "#117733", "#ffad33", "#CC6677","#AA4499"),
-         "7"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#ffad33", "#CC6677","#AA4499"),
-         "8"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#CC6677","#AA4499"),
-         "9"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#CC6677", "#882255", "#AA4499"),
-         "10"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#661100", "#CC6677", "#882255", "#AA4499"),
-         "11"=c("#332288", "#6699CC", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#661100", "#CC6677", "#882255", "#AA4499")
+         "6"=c("#332288", "#88CCEE", "#117733", "#ffad33", "#CC6677", "#AA4499"),
+         "7"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#ffad33", "#CC6677", "#AA4499"),
+         "8"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#CC6677",
+               "#AA4499"),
+         "9"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#CC6677",
+               "#882255", "#AA4499"),
+         "10"=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33", "#661100",
+                "#CC6677", "#882255", "#AA4499"),
+         "11"=c("#332288", "#6699CC", "#88CCEE", "#44AA99", "#117733", "#999933", "#ffad33",
+                "#661100", "#CC6677", "#882255", "#AA4499")
   )
 }
 
-#' Divide sample size by a factor based on the number of RCP-GCM combinations.
+#' Divide sample size by a factor based on the number of RCP-GCM combinations
 #'
 #' This function reduces sample size of point sample overlays in plots to improve aesthetics and/or save time
 #' when there are too many points to plot.
@@ -50,7 +58,7 @@ samplesize_factor <- function(x, baseline){
   n.rcps * n.models
 }
 
-#' Get ggplot theme.
+#' Get ggplot theme
 #'
 #' @return a theme.
 #' @export
@@ -62,19 +70,19 @@ get_plottheme <- function(){
     panel.grid.major=ggplot2::element_line(size=0.5, color="grey"),
     plot.title=ggplot2::element_text(hjust=0.5),
     axis.line=ggplot2::element_line(size=.7, color="black"),
-    axis.ticks.length=ggplot2::unit(0.35,"cm"),
+    axis.ticks.length=ggplot2::unit(0.35, "cm"),
     legend.position="bottom",
     legend.justification="right",
     legend.title=ggplot2::element_blank(),
     legend.text=ggplot2::element_text(size=14),
     text=ggplot2::element_text(size=18),
-    panel.spacing.x=ggplot2::unit(0.25,"cm"),
-    plot.margin=ggplot2::unit(c(0.5, 1, 0.5, 0.5),"cm"),
+    panel.spacing.x=ggplot2::unit(0.25, "cm"),
+    plot.margin=ggplot2::unit(c(0.5, 1, 0.5, 0.5), "cm"),
     strip.text=ggplot2::element_text(size=14)
   )
 }
 
-#' Create breaks for ggplot.
+#' Create breaks for ggplot
 #'
 #' @param yrs years vector for time series plot.
 #' @param n.facets number of facets.
@@ -87,7 +95,7 @@ get_plottheme <- function(){
 get_breaks <- function(yrs, n.facets=1){
   n <- length(yrs)
   if(n.facets==1) cols <- 1 else
-    if(n.facets %in% c(2,4)) cols <- 2 else cols <- 3
+    if(n.facets %in% c(2, 4)) cols <- 2 else cols <- 3
     if(n <= 15){
       if(cols < 2) return(yrs) else return(seq(yrs[1], yrs[n], by=2))
     }
@@ -101,7 +109,7 @@ get_breaks <- function(yrs, n.facets=1){
       unique(c(yrs[1], a, yrs[n]))
 }
 
-#' Interaction in ggplot.
+#' Interaction helper for ggplot
 #'
 #' @param x a character vector.
 #'
@@ -117,7 +125,11 @@ interact <- function(x){
   paste0("interaction(", paste0(x, collapse=","), ")")
 }
 
-#' Position for ggplot.
+#' Positioning helper for ggplot
+#'
+#' This functions assists with position by combining information on whether or not jitter is present in a plot,
+#' there is a categorical variable for coloring, and if the plot uses dodge positioning when coloring variable levels.
+#'
 #'
 #' @param jitter logical.
 #' @param cby character, factor to color by.
@@ -131,7 +143,7 @@ interact <- function(x){
 #'
 #' @examples
 #' #not run
-.getPosition <- function(jitter, cby, w=0.2, h=0, wd=0.75, dodgeable=FALSE){
+getPosition <- function(jitter, cby, w=0.2, h=0, wd=0.75, dodgeable=FALSE){
   if(jitter) x <- ggplot2::position_jitter(width=w, height=h) else x <- "identity"
   if(!dodgeable) return(x)
   if(!is.null(cby)){
@@ -145,14 +157,20 @@ interact <- function(x){
 }
 
 
-#' Color and facet helper.
+#' Coloring and faceting helper for ggplot
+#'
+#' This function takes a \code{ggplot} object and source data frame, \code{d}, and adds manual color and fill scale layers
+#' based on \code{cby} and \code{clr} and/or faceting based on \code{fby} and \code{scales}.
+#' The data frame, \code{d}, is passed for determining the levels of the factor \code{cby} in \code{d}.
+#' The \code{cby} and \code{fby} columns in \code{d} must be factors.
+#' Like coloring, faceting must be done by a single factor variable, not crossed factors.
 #'
 #' @param g a ggplot object.
 #' @param d a data frame.
-#' @param cby character.
-#' @param clr character.
-#' @param fby character.
-#' @param scales character.
+#' @param cby character, factor column in \code{d}.
+#' @param clr character, color vector. If \code{NULL}, no coloring by levels of \code{cby} occurs.
+#' @param fby character, factor column in \code{d}.
+#' @param scales character, passed to \code{scales} in \code{ggplot2::facet_wrap}.
 #'
 #' @return a ggplot object.
 #' @export
@@ -160,7 +178,7 @@ interact <- function(x){
 #' @examples
 #' #not run
 #' @importFrom stats as.formula
-.colorFacet <- function(g, d, cby, clr, fby, scales){
+colorFacet <- function(g, d, cby, clr, fby, scales){
   if(!is.null(clr)){
     g <- g + ggplot2::scale_fill_manual(values=clr, limits=levels(d[[cby]])) +
       ggplot2::scale_colour_manual(values=clr, limits=levels(d[[cby]]))
@@ -169,7 +187,7 @@ interact <- function(x){
   g
 }
 
-#' Mousover info.
+#' Mousover info
 #'
 #' @param clk click coordinates.
 #' @param dblclk double click coordinates.
@@ -195,7 +213,7 @@ mouseInfo <- function(clk, dblclk, hov, brush){
     "hover: ", xy_str(hov), "brush: ", xy_range_str(brush))
 }
 
-#' Mouseover info browser feedback.
+#' Mouseover info browser feedback
 #'
 #' @param x logical.
 #' @param ns module namespace.
@@ -213,7 +231,7 @@ mouseLog <- function(x, ns, width){
   ) else NULL
 }
 
-#' Kilo and Mega labels for rescaled data.
+#' Kilo and Mega labels for rescaled data
 #'
 #' Kilo (K) and Mega (M) labels for rescaled plot axes and stat boxes.
 #'
@@ -233,7 +251,7 @@ kilo_mega <- function(x){
         paste0(round(x/1e6, 2), "M")
 }
 
-#' Plot Observers
+#' Plot observers
 #'
 #' Convenient wrapper around observers related to Shiny plot outputs.
 #'
@@ -271,7 +289,8 @@ kilo_mega <- function(x){
 #'
 #' @examples
 #' #not run
-ggObserve <- function(session, input, rv, rv_plots, dblclick, brush, dbrush, rvx, rvy=NULL, rvbrush=brush, zoomable=TRUE){
+ggObserve <- function(session, input, rv, rv_plots, dblclick, brush, dbrush,
+                      rvx, rvy=NULL, rvbrush=brush, zoomable=TRUE){
   # double click ggplot observation
   if(zoomable){
     shiny::observeEvent(input[[dblclick]], {
