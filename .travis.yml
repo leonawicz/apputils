@@ -3,9 +3,10 @@
 language: R
 sudo: false
 cache: packages
+r_packages:
+  - covr
 r_github_packages:
   - leonawicz/rvtable
-  - jimhester/covr
 
 after_success:
   - Rscript -e 'covr::codecov()'
