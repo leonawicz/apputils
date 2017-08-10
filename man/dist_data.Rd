@@ -5,11 +5,11 @@
 \title{Compile a specialized data frame based on the \code{rvtable} package}
 \usage{
 dist_data(data, variable, margin = NULL, seed = NULL, metric = NULL,
-  year.range, rcp.min.yr, base.max.yr, all_models, baseline_model = NULL,
+  year_range, rcp_min_yr, base_max_yr, all_models, baseline_model = NULL,
   composite = "Composite GCM", baseline_scenario = "Historical",
-  general_scenario = "Projected", margin.drop = c(baseline_scenario,
-  baseline_model), density.size = 200, margin.size = 100,
-  sample.size = margin.size, limit.sample = TRUE, progress = TRUE)
+  general_scenario = "Projected", margin_drop = c(baseline_scenario,
+  baseline_model), density_size = 200, margin_size = 100,
+  sample_size = margin_size, limit_sample = TRUE, progress = TRUE)
 }
 \arguments{
 \item{data}{a data frame. It does not need to be an \code{rvtable}-class data frame in advance, but it must be coercible to one.}
@@ -23,11 +23,11 @@ dist_data(data, variable, margin = NULL, seed = NULL, metric = NULL,
 \item{metric}{\code{NULL} or logical. Output data in metric units, otherwise in US Standard. Input data in \code{data} is assumed metric.
 If \code{NULL} (default), no conversion or climate variable-specific rounding is performed.}
 
-\item{year.range}{full range of years in data set.}
+\item{year_range}{full range of years in data set.}
 
-\item{rcp.min.yr}{minimum year for RCP, e.g., for CMIP5 data this is 2006.}
+\item{rcp_min_yr}{minimum year for RCP, e.g., for CMIP5 data this is 2006.}
 
-\item{base.max.yr}{maximum year for baseline historical comparison data set
+\item{base_max_yr}{maximum year for baseline historical comparison data set
 that sometimes accompanies GCM data (e.g., CRU observation-based data, version 4.0 is 2015)}
 
 \item{all_models}{character, vector of climate model names in data set, to include baseline model if present.}
@@ -40,16 +40,16 @@ that sometimes accompanies GCM data (e.g., CRU observation-based data, version 4
 
 \item{general_scenario}{character, defaults to \code{"Projected"}.}
 
-\item{margin.drop}{levels of variables to exclude from marginalizing operations on those variables.
+\item{margin_drop}{levels of variables to exclude from marginalizing operations on those variables.
 Defaults to the baseline scenario and baseline model.}
 
-\item{density.size}{numeric, sample size for density estimations. Defaults to \code{200}.}
+\item{density_size}{numeric, sample size for density estimations. Defaults to \code{200}.}
 
-\item{margin.size}{numeric, sample size for marginalizing operations. Defaults to \code{100}.}
+\item{margin_size}{numeric, sample size for marginalizing operations. Defaults to \code{100}.}
 
-\item{sample.size}{numeric, sample size for density estimations. Defaults to \code{margin.size}.}
+\item{sample_size}{numeric, sample size for density estimations. Defaults to \code{margin.size}.}
 
-\item{limit.sample}{logical, see details.}
+\item{limit_sample}{logical, see details.}
 
 \item{progress}{logical, inlcude progress bar in app.}
 }

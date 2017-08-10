@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{mouseLog}
 \alias{mouseLog}
-\title{Mouseover info browser feedback.}
+\title{Mouseover info browser feedback}
 \usage{
 mouseLog(x, ns, width)
 }
@@ -17,7 +17,7 @@ mouseLog(x, ns, width)
 a shiny column containing mouseover plot interaction coordinate feedback.
 }
 \description{
-Mouseover info browser feedback.
+Mouseover info browser feedback
 }
 \examples{
 #not run

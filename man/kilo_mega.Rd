@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{kilo_mega}
 \alias{kilo_mega}
-\title{Kilo and Mega labels for rescaled data.}
+\title{Kilo and Mega labels for rescaled data}
 \usage{
 kilo_mega(x)
 }

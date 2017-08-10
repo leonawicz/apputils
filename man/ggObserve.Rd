@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{ggObserve}
 \alias{ggObserve}
-\title{Plot Observers}
+\title{Plot observers}
 \usage{
 ggObserve(session, input, rv, rv_plots, dblclick, brush, dbrush, rvx,
   rvy = NULL, rvbrush = brush, zoomable = TRUE)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{samplesize_factor}
 \alias{samplesize_factor}
-\title{Divide sample size by a factor based on the number of RCP-GCM combinations.}
+\title{Divide sample size by a factor based on the number of RCP-GCM combinations}
 \usage{
 samplesize_factor(x, baseline)
 }

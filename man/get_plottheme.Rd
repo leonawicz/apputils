@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{get_plottheme}
 \alias{get_plottheme}
-\title{Get ggplot theme.}
+\title{Get ggplot theme}
 \usage{
 get_plottheme()
 }
@@ -10,7 +10,7 @@ get_plottheme()
 a theme.
 }
 \description{
-Get ggplot theme.
+Get ggplot theme
 }
 \examples{
 #not run

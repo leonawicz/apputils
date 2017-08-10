@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{get_breaks}
 \alias{get_breaks}
-\title{Create breaks for ggplot.}
+\title{Create breaks for ggplot}
 \usage{
 get_breaks(yrs, n.facets = 1)
 }
@@ -15,7 +15,7 @@ get_breaks(yrs, n.facets = 1)
 a numeric vector.
 }
 \description{
-Create breaks for ggplot.
+Create breaks for ggplot
 }
 \examples{
 #not run

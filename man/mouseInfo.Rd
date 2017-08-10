@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{mouseInfo}
 \alias{mouseInfo}
-\title{Mousover info.}
+\title{Mousover info}
 \usage{
 mouseInfo(clk, dblclk, hov, brush)
 }
@@ -19,7 +19,7 @@ mouseInfo(clk, dblclk, hov, brush)
 character string.
 }
 \description{
-Mousover info.
+Mousover info
 }
 \examples{
 #not run

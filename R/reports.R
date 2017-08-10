@@ -20,7 +20,7 @@ sbg_to_tables <- function (d, grp, rnd=0){
     d, grp, rnd = rnd, type = .x, prevent = FALSE, output = "list")) %>%
     purrr::map(~dplyr::tbl_df(data.frame(do.call(rbind, .x), stringsAsFactors = FALSE)))
   if (clr){
-    lev <- levels(d[[grp]])
+    lev <- levels(d[[grp]]) # nolint
     nam <- purrr::map(x, ~c("ColorBy", names(.x)))
     x <- purrr::map2(x, nam, ~dplyr::mutate(.x, ColorBy = factor(lev, levels = lev)) %>%
                        dplyr::select_(.dots=.y))

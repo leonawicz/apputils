@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{interact}
 \alias{interact}
-\title{Interaction in ggplot.}
+\title{Interaction helper for ggplot}
 \usage{
 interact(x)
 }
@@ -13,7 +13,7 @@ interact(x)
 an unevaluated string for ggplot interaction term.
 }
 \description{
-Interaction in ggplot.
+Interaction helper for ggplot
 }
 \examples{
 #not run

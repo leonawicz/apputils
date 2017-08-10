@@ -40,8 +40,10 @@
 #'
 #' @examples
 #' #not run
-build_mapset <- function(shp, all_regions, ids, mapset, mapsets, default="", default.name=default, all_locs_shapefile, xyz,
-                         color=c("#000000", "#000000", "#3C8DBC"), fill=c("#000000", "#3C8DBC", "#3C8DBC"),
+build_mapset <- function(shp, all_regions, ids, mapset, mapsets, default="",
+                         default.name=default, all_locs_shapefile, xyz,
+                         color=c("#000000", "#000000", "#3C8DBC"),
+                         fill=c("#000000", "#3C8DBC", "#3C8DBC"),
                          color_opacity=c(0.5, 1, 1), fill_opacity=c(0, 0, 0.4), progress=F){
   if(progress){
     prog <- shiny::Progress$new()
@@ -64,17 +66,19 @@ build_mapset <- function(shp, all_regions, ids, mapset, mapsets, default="", def
     z.lab <- names(all_regions[idx])
   }
   n <- 1 + length(z)
-  x <- leaflet::leaflet() %>% leaflet::addTiles() %>% leaflet::setView(xyz[[mapset]][1], xyz[[mapset]][2], xyz[[mapset]][3])
+  x <- leaflet::leaflet() %>% leaflet::addTiles() %>%
+    leaflet::setView(xyz[[mapset]][1], xyz[[mapset]][2], xyz[[mapset]][3])
   if(progress) prog$inc(1/n, detail="Basemap built")
   # Add background polygon region outlines after map is created
   if(!is_default){
     for(i in seq_along(z)){
       x <- x %>% leaflet::addPolygons(
-        data=shp[shp[[ids]]==z[i],], stroke=TRUE, weight=1,
+        data=shp[shp[[ids]]==z[i], ], stroke=TRUE, weight=1,
         color=color[1], fillColor=fill[1], opacity=color_opacity[1], fillOpacity=fill_opacity[1],
         group="not_selected", layerId=z.id[i], label=z.lab[i],
-        highlightOptions=leaflet::highlightOptions(weight=2, bringToFront=FALSE, sendToBack=FALSE,
-                                                   color=color[2], fillColor=fill[2], opacity=color_opacity[2], fillOpacity=fill_opacity[2]))
+        highlightOptions=leaflet::highlightOptions(
+          weight=2, bringToFront=FALSE, sendToBack=FALSE,
+          color=color[2], fillColor=fill[2], opacity=color_opacity[2], fillOpacity=fill_opacity[2]))
       if(progress) prog$inc((i+1)/n, detail=paste("Adding polygon", i))
     }
   } else {
@@ -155,17 +159,17 @@ update_mapset <- function(trigger, shp, mapset, ids, selected_regions, all_regio
   if(!trigger %in% c("selectInput", "mapclick")) stop("trigger must be 'selectInput' or 'mapclick'")
   if(!is.null(selected_regions) && selected_regions[1]==default) return()
   if(trigger=="selectInput"){
-    proxy <- leaflet::leafletProxy(map)
+    proxy <- leaflet::leafletProxy(map) # nolint
     z <- as.character(shp[[ids]])
     idx <- match(z, all_locs_shapefile[[mapset]])
     not_selected <- dplyr::setdiff(all_regions, selected_regions)
     if(length(not_selected))
       purrr::walk(not_selected, ~proxy %>% leaflet::removeShape(layerId=paste0("selected_", .x)))
     if(length(selected_regions)){
-      shp_regions <- as.character(all_locs_shapefile[[mapset]][match(selected_regions, all_locs[[mapset]])])
-      z.lab <- names(selected_regions[idx])
+      shp_regions <- as.character(all_locs_shapefile[[mapset]][match(selected_regions, all_locs[[mapset]])]) # nolint
+      z.lab <- names(selected_regions[idx]) # nolint
       purrr::walk(seq_along(selected_regions), ~proxy %>%
-        leaflet::addPolygons(data=shp[shp[[ids]]==shp_regions[.x],], stroke=TRUE, weight=1, label=z.lab[.x],
+        leaflet::addPolygons(data=shp[shp[[ids]]==shp_regions[.x], ], stroke=TRUE, weight=1, label=z.lab[.x],
           color=color, fillColor=fill, opacity=color_opacity, fillOpacity=fill_opacity,
           group="selected", layerId=paste0("selected_", selected_regions[.x]),
           highlightOptions=leaflet::highlightOptions(weight=2, bringToFront=FALSE, sendToBack=FALSE,

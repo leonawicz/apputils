@@ -82,15 +82,16 @@ infoBox <- function(title, value = NULL, subtitle = NULL, icon = NULL, color = "
     shinydashboard:::tagAssert(icon, type = icon$name)
   if(!is.null(icon)){
     if(!icon$name %in% c("i", "img")) stop("'icon$name' must be 'i' or 'img'.")
-    iconClass <- if(icon$name=="i") "icon-large" else "img"
+    iconClass <- if(icon$name=="i") "icon-large" else "img" # nolint
   }
   colorClass <- paste0("bg-", color)
-  boxContent <- shiny::div(class = "info-box", class = if (fill)
-    colorClass, shiny::span(class = "info-box-icon", class = if (!fill)
-      colorClass, icon), shiny::div(class = "info-box-content", shiny::span(class = "info-box-text",
-                                                              title), if (!is.null(value))
-                                                                shiny::span(class = "info-box-number", value), if (!is.null(subtitle))
-                                                                  shiny::p(subtitle)))
+  boxContent <- shiny::div(
+    class = "info-box", class = if (fill) colorClass,
+    shiny::span(class = "info-box-icon", class = if (!fill) colorClass, icon),
+    shiny::div(class = "info-box-content",
+               shiny::span(class = "info-box-text", title),
+               if (!is.null(value)) shiny::span(class = "info-box-number", value),
+               if (!is.null(subtitle)) shiny::p(subtitle)))
   if (!is.null(href))
     boxContent <- shiny::a(href = href, boxContent)
   shiny::div(class = if (!is.null(width))
@@ -133,8 +134,8 @@ icon <- function (name, class = NULL, lib = "font-awesome"){
     iconClass <- paste(iconClass, class)
   iconTag <- shiny::tags$i(class = iconClass)
   if (lib == "font-awesome") {
-    htmltools::htmlDependencies(iconTag) <- htmltools::htmlDependency("font-awesome",
-                                                                      "4.6.3", c(href = "shared/font-awesome"), stylesheet = "css/font-awesome.min.css")
+    htmltools::htmlDependencies(iconTag) <- htmltools::htmlDependency(
+      "font-awesome", "4.6.3", c(href = "shared/font-awesome"), stylesheet = "css/font-awesome.min.css")
   }
   iconTag
 }
@@ -160,7 +161,8 @@ icon <- function (name, class = NULL, lib = "font-awesome"){
 #' #not run
 valueBoxColorsCSS <- function(bg="#333333", col="#FFFFFF"){
   x <- gsub("#", "", bg)
-  shiny::HTML(paste0(".bg-", x, " { background-color: #", x, " !important; color: ", col, " !important; }", collapse="\n"))
+  shiny::HTML(paste0(".bg-", x, " { background-color: #", x, " !important; color: ",
+                     col, " !important; }", collapse="\n"))
 }
 
 #' Generate CSS for a value box color palette.

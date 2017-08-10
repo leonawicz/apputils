@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{tolpal}
 \alias{tolpal}
-\title{Generate a vector of colors.}
+\title{Generate a vector of colors}
 \usage{
 tolpal(n)
 }
@@ -13,7 +13,8 @@ tolpal(n)
 a vector of colors.
 }
 \description{
-Generate a vector of colors.
+The current implementation returns a vector of colors based on a specific color palette.
+The maximum colors returned is 12.
 }
 \examples{
 #not run

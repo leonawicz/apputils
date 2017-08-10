@@ -33,10 +33,10 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
   main_title="<h4>Aggregate period statistics</h4>", clrs=c("light-blue", "blue"), theme="white"){
 
   if(!type %in% c("annual", "decadal")) stop("type must be 'annual' or 'decadal'.")
-  if(!length(clrs) %in% c(1,2,6)) stop("Invalid color vector.")
-  if(length(clrs)==2) clrs <- clrs[c(1,1,2,1,2,2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
+  if(!length(clrs) %in% c(1, 2, 6)) stop("Invalid color vector.")
+  if(length(clrs)==2) clrs <- clrs[c(1, 1, 2, 1, 2, 2)] else if(length(clrs)==1) clrs <- rep(clrs, 6)
   if(type=="annual"){
-    src <- statIcon(c("mean", "min", "max", "median", "iqr", "sd"), theme)
+    src <- statIcon(c("mean", "min", "max", "median", "iqr", "sd"), theme) # nolint
     x <- dplyr::ungroup(x) %>% dplyr::summarise_(.dots=list(
       Mean_=paste0("mean(Val)"),
       Min_=paste0("min(Val)"),
@@ -55,7 +55,7 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
       names(statval) <- purrr::map_chr(statlab, ~.x[1])
       return(statval)
     }
-    val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y))
+    val <- purrr::map2(statval, value.size, ~pTextSize(.x, .y)) # nolint
     text <- purrr::map2(statlab, text.size, ~pTextSize(.x, .y, margin=0))
     if(style=="valueBox"){
       y <- purrr::map(seq_along(text), ~valueBox(val[[.x]], text[[.x]],
@@ -102,8 +102,14 @@ stat_boxes <- function(x, type="annual", style="valueBox", rnd=0, dec, height="1
     src.dnup <- statIcon(c("bardec", "barinc"), theme)
     low.change <- "Max loss"
     high.change <- "Max gain"
-    if(!is.na(statval$dn[1]) && statval$dn > 0) { src.dnup[1] <- src.dnup[2]; low.change <- "Min Gain" }
-    if(!is.na(statval$up[1]) && statval$up < 0) { src.dnup[2] <- src.dnup[1]; high.change <- "Min loss" }
+    if(!is.na(statval$dn[1]) && statval$dn > 0){
+      src.dnup[1] <- src.dnup[2]
+      low.change <- "Min Gain"
+    }
+    if(!is.na(statval$up[1]) && statval$up < 0){
+      src.dnup[2] <- src.dnup[1]
+      high.change <- "Min loss"
+    }
     if(tot < 0){
       src.totals <- statIcon(c("dec", "pctdec"), theme)
     } else {
@@ -245,8 +251,8 @@ stat_boxes_group <- function(x, clrby, type="annual", style="valueBox", rnd=0, h
 #' statIcon("normal")
 statIcon <- function(id, theme="white"){
   if(!theme %in% c("white", "black")) stop("theme must be 'white' or 'black'.")
-  iconopts <- c('normal', 'min', 'max', 'mean', 'sd', 'median', 'iqr', 'b0', 'b1',
-                'r2', 'pvalue', 'inc', 'dec', 'pctinc', 'pctdec', 'barinc', 'bardec')
+  iconopts <- c("normal", "min", "max", "mean", "sd", "median", "iqr", "b0", "b1",
+                "r2", "pvalue", "inc", "dec", "pctinc", "pctdec", "barinc", "bardec")
   if(!all(id %in% iconopts)) stop("Invalid id. See help for options.")
   x <- sapply(id, function(x) switch(x,
               normal="stat_icon_normal_dist",
@@ -298,64 +304,76 @@ makeIcons <- function(primary_color="#FFFFFF", secondary_color="#FFFFFF75", colo
   y <- dnorm(x)
   x2 <- rnorm(500000)
   x2 <- x2[x2 > xlm[1] & x2 < xlm[2]]
-  mar <- c(0.1, 0.1, 0.1 ,0.1)
+  mar <- c(0.1, 0.1, 0.1, 0.1)
   sysfonts::font.add("cam", "cambriaz.TTF")
   showtext::showtext.auto()
 
+  files <- paste0(c(
+    "stat_icon_normal_dist", "stat_icon_normal_mean", "stat_icon_normal_min", "stat_icon_normal_max",
+    "stat_icon_normal_median", "stat_icon_normal_sd", "stat_icon_pars_pvalue", "stat_icon_boxplot_iqr",
+    "stat_icon_ts_deltaDec", "stat_icon_ts_deltaInc", "stat_icon_ts_deltaPctDec",
+    "stat_icon_ts_deltaPctInc", "stat_icon_bar_deltaNeg", "stat_icon_bar_deltaPos",
+    "stat_icon_pars_r2", "stat_icon_pars_b0hat", "stat_icon_pars_b1hat"
+    ), "_", color_theme, ".png")
   # distribution icons
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_dist_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[1]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=primary_color)
   lines(x, y, col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_mean_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[2]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
   lines(x, y, col=secondary_color)
   abline(v=0, lwd=3, lty=2, col=primary_color)
-  legend("topright", legend=expression(bolditalic(bar(x))), bty ="n", pch=NA, cex=3,  yjust=1, adj=c(-0.5, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(bar(x))), bty ="n",
+         pch=NA, cex=3,  yjust=1, adj=c(-0.5, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_min_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[3]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
   lines(x, y, col=secondary_color)
   abline(v=xlm[1], lwd=3, lty=2, col=primary_color)
-  legend("topright", legend=expression(bolditalic(x[(1)])), bty ="n", pch=NA, cex=1.8, adj=c(-0.275, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(x[(1)])), bty ="n",
+         pch=NA, cex=1.8, adj=c(-0.275, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_max_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[4]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
   lines(x, y, col=secondary_color)
   abline(v=xlm[2], lwd=3, lty=2, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(x[(n)])), bty ="n", pch=NA, cex=1.8,  adj=c(1, 0), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(x[(n)])), bty ="n",
+         pch=NA, cex=1.8,  adj=c(1, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_median_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[5]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
   lines(x, y, col=secondary_color)
   abline(v=0, lwd=3, lty=2, col=primary_color)
-  legend("topright", legend=expression(bolditalic(tilde(x))), bty ="n", pch=NA, cex=3,  adj=c(-0.5, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(tilde(x))), bty ="n",
+         pch=NA, cex=3,  adj=c(-0.5, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_normal_sd_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[6]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
   lines(x, y, col=secondary_color)
-  abline(v=c(-1,1), lwd=3, lty=2, col=primary_color)
-  legend("topright", legend=expression(bolditalic(s)), bty="n", pch=NA, cex=3, adj=c(-0.5, 0), text.col=primary_color)
+  abline(v=c(-1, 1), lwd=3, lty=2, col=primary_color)
+  legend("topright", legend=expression(bolditalic(s)), bty="n",
+         pch=NA, cex=3, adj=c(-0.5, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_pvalue_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[7]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   plot(x, y, type="n", axes=FALSE, xlab="", ylab="", xlim=xlm)
   hist(x2, breaks=seq(xlm[1], xlm[2], by=1), freq=FALSE, add=TRUE, border=secondary_color)
@@ -365,12 +383,13 @@ makeIcons <- function(primary_color="#FFFFFF", secondary_color="#FFFFFF75", colo
   lines(x, y, col=secondary_color)
   abline(v=qn, lwd=3, lty=2, col=primary_color)
   arrows(qn, 0.1, min(x), 0.1, lwd=3, col=primary_color, length=0.15)
-  legend("topright", legend=expression(bolditalic(p)), bty ="n", pch=NA, cex=3,  yjust=1, adj=c(-0.5, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(p)), bty ="n",
+         pch=NA, cex=3,  yjust=1, adj=c(-0.5, 0), text.col=primary_color)
   dev.off()
 
   showtext::showtext.auto(enable=FALSE)
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_boxplot_iqr_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[8]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
   boxplot(x2, outline=FALSE, axes=FALSE, frame=FALSE,  lty=1, border=secondary_color, boxcol=primary_color)
   text(1.35, -0.05, expression("}"), cex=2, col=primary_color)
@@ -382,54 +401,60 @@ makeIcons <- function(primary_color="#FFFFFF", secondary_color="#FFFFFF75", colo
   showtext::showtext.auto()
 
   # time series icons
-  y <- scale(c(0.3,0.4,2,0.7,2,1.5,3.5,2.75,4))
+  y <- scale(c(0.3, 0.4, 2, 0.7, 2, 1.5, 3.5, 2.75, 4))
   x <- scale(seq_along(y))
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaDec_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[9]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
   lines(x, rev(y), lty=2, col=secondary_color)
   arrows(x[1], y[length(y)], x[length(x)], y[1], lwd=3, col=primary_color)
-  legend("topright", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8, adj=c(-0.75, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(Delta)), bty ="n",
+         pch=NA, cex=1.8, adj=c(-0.75, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaInc_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[10]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
   lines(x, y, lty=2, col=secondary_color)
   arrows(x[1], y[1], x[length(x)], y[length(y)], lwd=3, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8,  adj=c(2.5, 0), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(Delta)), bty ="n",
+         pch=NA, cex=1.8,  adj=c(2.5, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaPctDec_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[11]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
   lines(x, rev(y), lty=2, col=secondary_color)
   arrows(x[1], y[length(y)], x[length(x)], y[1], lwd=3, col=primary_color)
-  legend("topright", legend=expression(bolditalic(symbol("\045")~Delta)), bty ="n", pch=NA, cex=1.8, adj=c(-0.25, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(symbol("\045")~Delta)), bty ="n",
+         pch=NA, cex=1.8, adj=c(-0.25, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_ts_deltaPctInc_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[12]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y))
   lines(x, y, lty=2, col=secondary_color)
   arrows(x[1], y[1], x[length(x)], y[length(y)], lwd=3, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(symbol("\045")~Delta)), bty ="n", pch=NA, cex=1.8,  adj=c(0.9, 0), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(symbol("\045")~Delta)), bty ="n",
+         pch=NA, cex=1.8,  adj=c(0.9, 0), text.col=primary_color)
   dev.off()
 
   # bar icons
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_bar_deltaNeg_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[13]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  barplot(c(4,1), axes=FALSE, lty=1, border=primary_color, col=secondary_color)
+  barplot(c(4, 1), axes=FALSE, lty=1, border=primary_color, col=secondary_color)
   arrows(1.6, 4, 1.6, 1.2, lwd=3, col=primary_color)
-  legend("topright", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8, adj=c(-0.5, 0), text.col=primary_color)
+  legend("topright", legend=expression(bolditalic(Delta)), bty ="n",
+         pch=NA, cex=1.8, adj=c(-0.5, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_bar_deltaPos_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[14]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  barplot(c(1,4), axes=FALSE, lty=1, border=primary_color, col=secondary_color)
+  barplot(c(1, 4), axes=FALSE, lty=1, border=primary_color, col=secondary_color)
   arrows(1, 1.2, 1, 4, lwd=3, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(Delta)), bty ="n", pch=NA, cex=1.8, adj=c(2.5, 0), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(Delta)), bty ="n",
+         pch=NA, cex=1.8, adj=c(2.5, 0), text.col=primary_color)
   dev.off()
 
   # linear models
@@ -437,37 +462,40 @@ makeIcons <- function(primary_color="#FFFFFF", secondary_color="#FFFFFF75", colo
   x <- rnorm(25, sd=1.5)
   y <- 0.5*x + rnorm(25, sd=0.5)
   lm1 <- lm(y ~ x)
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_r2_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[15]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y) + c(0, 0.1))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y) + c(0, 0.1))
   axis(side=1, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=primary_color)
   axis(side=2, at=range(y) + c(-1, 1)*c(diff(range(y))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=primary_color)
   points(x, y, pch=1, cex=1, col=secondary_color)
   abline(lm1, lwd=3, lty=2, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(R^2)), bty ="n", pch=NA, cex=2.4, adj=c(1.4, 0), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(R^2)), bty ="n",
+         pch=NA, cex=2.4, adj=c(1.4, 0), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_b0hat_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[16]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(x) + c(0, 0.1))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(x) + c(0, 0.1))
   axis(side=1, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
   axis(side=2, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
   points(x, y, cex=1, pch=1, col=secondary_color)
   abline(lm1, lwd=3, lty=2, col=secondary_color)
   a <- lm1$coefficients[2]*min(y) + lm1$coefficients[1] - 0.3
   arrows(max(x), a, min(x), a, lwd=3, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(hat(beta[0]))), bty ="n", pch=NA, cex=2.2, adj=c(1.4, 0.1), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(hat(beta[0]))), bty ="n",
+         pch=NA, cex=2.2, adj=c(1.4, 0.1), text.col=primary_color)
   dev.off()
 
-  Cairo::CairoPNG(paste0(dir, "/stat_icon_pars_b1hat_", color_theme, ".png"), width=96, height=96, bg="transparent")
+  Cairo::CairoPNG(file.path(dir, files[17]), width=96, height=96, bg="transparent")
   par(lwd=2, mar=mar, family="cam")
-  plot(0,0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y) + c(0, 0.1))
+  plot(0, 0, type="n", axes=FALSE, xlab="", ylab="", xlim=range(x), ylim=range(y) + c(0, 0.1))
   axis(side=1, at=range(x) + c(-1, 1)*c(diff(range(x))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
   axis(side=2, at=range(y) + c(-1, 1)*c(diff(range(y))*0.04), labels=FALSE, lwd.ticks=0, lwd=3, col=secondary_color)
   points(x, y, pch=1, cex=1, col=secondary_color)
   abline(lm1, lwd=2, lty=2, col=primary_color)
   segments(-1.2, -0.9, 3.3, -0.9, lwd=3, col=primary_color)
   arrows(3.5, -0.9, 3.5, 1.4, lwd=3, col=primary_color)
-  legend("topleft", legend=expression(bolditalic(hat(beta[1]))), bty ="n", pch=NA, cex=2.2, adj=c(1.4, 0.1), text.col=primary_color)
+  legend("topleft", legend=expression(bolditalic(hat(beta[1]))), bty ="n",
+         pch=NA, cex=2.2, adj=c(1.4, 0.1), text.col=primary_color)
   dev.off()
 }
