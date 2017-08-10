@@ -18,3 +18,9 @@ Install the latest development version from github with
 
 Please file a minimal reproducible example of any clear bug at
 [github](https://github.com/leonawicz/apputils/issues).
+
+Reference
+---------
+
+[Package reference and function
+documentation](https://leonawicz.github.io/apputils/)
