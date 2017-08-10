@@ -22,7 +22,7 @@ NULL
 #' #not run
 use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
   shiny::addResourcePath("resources", system.file("resources", package = "apputils"))
-  x <- shiny::tags$head(shiny::tags$link(rel = 'stylesheet', type = 'text/css', href = 'resources/apputils.css'))
+  x <- shiny::tags$head(shiny::tags$link(rel = "stylesheet", type = "text/css", href = "resources/apputils.css"))
   if(!use_rintrojs & !use_shinytoastr) return(x)
   if(use_rintrojs & use_shinytoastr)
     return(shiny::tagList(shinytoastr::useToastr(), rintrojs::introjsUI(), x))
@@ -32,6 +32,7 @@ use_apputils <- function(use_rintrojs=FALSE, use_shinytoastr=FALSE) {
     return(shiny::tagList(shinytoastr::useToastr(), x))
 }
 
+# nolint start
 #' Update shinytoastr css
 #'
 #' Update toast css from shinytoastr package.
@@ -105,6 +106,7 @@ update_toastr_css <- function(container=NULL, toast=NULL, rgba=NULL, hover.rgba=
 
   shiny::tags$style(shiny::HTML(paste(container, toast, hover, sep="\n")))
 }
+# nolint end
 
 #' Require non-null inputs in app UI
 #'
@@ -121,6 +123,7 @@ inputs_not_null <- function(inputs){
   paste(paste0("input.", inputs), "!== null", collapse=" & ")
 }
 
+# nolint start
 #' Add HTML content to app launch overlay
 #'
 #' Add HTML content on top of the semi-transparent full screen overlay shown at app launch.
@@ -143,3 +146,4 @@ app_overlay <- function(text, logo=NULL, loading.logo=NULL, text.loading='<h1>Lo
   if(!is.null(text.loading)) x <- paste0(x, text.loading)
   shiny::HTML(paste0(x, '</div></div>'))
 }
+# nolint end

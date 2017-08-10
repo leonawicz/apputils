@@ -1,19 +1,4 @@
-#' Grab gist urls.
-#'
-#' @param id shorthand character id refering to entry in gist_url dictionary.
-#'
-#' @return a character string.
-#' @export
-#'
-#' @examples
-#' #not run
-gist_url <- function(id){
-  switch(id,
-    css="https://gist.githubusercontent.com/leonawicz/24ed656f63d4a889ad7043bc5436a641/raw/050538f0c78616ac53a03ebebe9c256d33f9053f/shiny_app_styles.css",
-    showcase="https://gist.githubusercontent.com/leonawicz/fb34c7d835e546c3790e7d0d6aa8bdeb/raw/f53040823f222df76d26e2828f4dcfe6da022ad3/shiny_app_showcase.R"
-  )
-}
-
+# nolint start
 .app_img_link <- function(app_url, img_url, title, subtitle, height=200){
   shiny::HTML(paste0(
     '<div class="img_link_wrap">
@@ -27,8 +12,10 @@ gist_url <- function(id){
     </div>
     </a>')) # contextual, must remove a closing div with mutliple inline calls
 }
+# nolint end
 
-.app_img_links <- function(app_url, img_url, title, subtitle, drop=NULL, height=200, min.width=300, max.width=400, col.width=4){
+.app_img_links <- function(app_url, img_url, title, subtitle, drop=NULL,
+                           height=200, min.width=300, max.width=400, col.width=4){
   apps <- basename(app_url)
   if(!is.null(drop) && !all(drop %in% apps)) stop("Cannot drop apps that are not in the master list.")
   idx <- if(is.null(drop)) seq_along(apps) else seq_along(app_url)[-match(drop, apps)]
@@ -145,6 +132,7 @@ contactinfo <- function(logos=NULL){
   )
 }
 
+# nolint start
 #' App launch information
 #'
 #' Show information about an app during launch such as a 'welcome/what to do' toast message.
@@ -172,8 +160,11 @@ contactinfo <- function(logos=NULL){
 #'
 #' @examples
 #' #not run
-appintro <- function(title, message, logo=NULL, logo.position="title", type="toast", toast.type="info", heading.size="h2",
-                     toast.args=list(timeOut=10000, extendedTimeOut=10000, position="top-center", closeButton=TRUE, preventDuplicates=TRUE)){
+appintro <- function(title, message, logo=NULL, logo.position="title", type="toast",
+                     toast.type="info", heading.size="h2",
+                     toast.args=list(
+                       timeOut=10000, extendedTimeOut=10000, position="top-center",
+                       closeButton=TRUE, preventDuplicates=TRUE)){
   title <- as.character(do.call(heading.size, list(title)))
   if(!is.null(logo)){
     close_tag <- "' style='float:right; width:200px; padding-left:15px;'/>"
@@ -231,7 +222,8 @@ appintro <- function(title, message, logo=NULL, logo.position="title", type="toa
 #'
 #' @examples
 #' #not run
-faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NULL, multiple=FALSE), showcase.args=list(drop=NULL)){
+faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NULL, multiple=FALSE),
+                showcase.args=list(drop=NULL)){
   faqlist <- list(
     distributions=list("Why use probability distributions?",
       shiny::tagList(
@@ -363,6 +355,7 @@ faq <- function(id, format="bscollapse", bscollapse.args=list(id="faq", open=NUL
                    as.list(c(bscollapse.args, purrr::map(faqlist, ~shinyBS::bsCollapsePanel(.x[[1]], .x[[2]], style="info"))))))
   stop("invalid FAQ format.")
 }
+# nolint end
 
 #' Add footer to Shiny dashboard sidebar
 #'

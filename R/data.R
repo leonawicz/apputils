@@ -46,21 +46,21 @@
 #' @param seed numeric or \code{NULL} (default), set random seed for reproducible sampling in app.
 #' @param metric \code{NULL} or logical. Output data in metric units, otherwise in US Standard. Input data in \code{data} is assumed metric.
 #' If \code{NULL} (default), no conversion or climate variable-specific rounding is performed.
-#' @param year.range full range of years in data set.
-#' @param rcp.min.yr minimum year for RCP, e.g., for CMIP5 data this is 2006.
-#' @param base.max.yr maximum year for baseline historical comparison data set
+#' @param year_range full range of years in data set.
+#' @param rcp_min_yr minimum year for RCP, e.g., for CMIP5 data this is 2006.
+#' @param base_max_yr maximum year for baseline historical comparison data set
 #' that sometimes accompanies GCM data (e.g., CRU observation-based data, version 4.0 is 2015)
 #' @param all_models character, vector of climate model names in data set, to include baseline model if present.
 #' @param baseline_model character, name of baseline model in data set, e.g., \code{"CRU 4.0"}.
 #' @param composite character, name to use for composite climate models after marginalizing over models.
 #' @param baseline_scenario character, defaults to \code{"Historical"}.
 #' @param general_scenario character, defaults to \code{"Projected"}.
-#' @param margin.drop levels of variables to exclude from marginalizing operations on those variables.
+#' @param margin_drop levels of variables to exclude from marginalizing operations on those variables.
 #' Defaults to the baseline scenario and baseline model.
-#' @param density.size numeric, sample size for density estimations. Defaults to \code{200}.
-#' @param margin.size numeric, sample size for marginalizing operations. Defaults to \code{100}.
-#' @param sample.size numeric, sample size for density estimations. Defaults to \code{margin.size}.
-#' @param limit.sample logical, see details.
+#' @param density_size numeric, sample size for density estimations. Defaults to \code{200}.
+#' @param margin_size numeric, sample size for marginalizing operations. Defaults to \code{100}.
+#' @param sample_size numeric, sample size for density estimations. Defaults to \code{margin.size}.
+#' @param limit_sample logical, see details.
 #' @param progress logical, inlcude progress bar in app.
 #'
 #' @return a specialized data frame
@@ -68,12 +68,12 @@
 #'
 #' @examples
 #' #not run
-dist_data <- function(data, variable, margin=NULL, seed=NULL, metric=NULL, year.range, rcp.min.yr, base.max.yr,
+dist_data <- function(data, variable, margin=NULL, seed=NULL, metric=NULL, year_range, rcp_min_yr, base_max_yr,
                       all_models, baseline_model=NULL, composite="Composite GCM",
                       baseline_scenario="Historical", general_scenario="Projected",
-                      margin.drop=c(baseline_scenario, baseline_model),
-                      density.size=200, margin.size=100, sample.size=margin.size,
-                      limit.sample=TRUE, progress=TRUE){
+                      margin_drop=c(baseline_scenario, baseline_model),
+                      density_size=200, margin_size=100, sample_size=margin_size,
+                      limit_sample=TRUE, progress=TRUE){
   valid_variables <- c("pr", "tas", "tasmin", "tasmax")
   required_vars <- c("Val", "Prob", "RCP", "Model", "Var", "Year")
   if(!variable %in% valid_variables) stop("Invalid variable.")
@@ -81,62 +81,66 @@ dist_data <- function(data, variable, margin=NULL, seed=NULL, metric=NULL, year.
     stop(paste0("data must contain columns: ", paste(required_vars, collapse=", "), "."))
   if(length(unique(data$Var)) > 1) stop("Data frame must contain only one 'Var' variable.")
   if(is.numeric(seed)) set.seed(seed)
-  m <- .check_marginalize(data, margin, drop=margin.drop) # determine need for marginalization
+  m <- .check_marginalize(data, margin, drop=margin_drop) # determine need for marginalization
   merge_vars <- !is.null(m) && !"" %in% m
   lev.rcps <- NULL
   base <- baseline_model %in% all_models
-  if(year.range[1] < rcp.min.yr || (base && year.range[1] <= base.max.yr))
+  if(year_range[1] < rcp_min_yr || (base && year_range[1] <= base_max_yr))
     lev.rcps <- baseline_scenario
-  if(year.range[2] >= rcp.min.yr) lev.rcps <- c(lev.rcps, general_scenario)
+  if(year_range[2] >= rcp_min_yr) lev.rcps <- c(lev.rcps, general_scenario)
 
-  d.args <- if(variable=="pr") list(n=density.size, adjust=0.1, from=0) else list(n=density.size, adjust=0.1)
-  s.args <- list(n=margin.size) # marginalize steps
-  n.samples <- sample.size # final sampling
-  if(merge_vars & base){ # split CRU from GCMs
+  d.args <- if(variable=="pr") list(n=density_size, adjust=0.1, from=0) else list(n=density_size, adjust=0.1)
+  s.args <- list(n=margin_size) # marginalize steps
+  n.samples <- sample_size # final sampling
+  if(merge_vars & base){
+    # split CRU from GCMs
     lev.models <- if("Model" %in% m) c(baseline_model, composite) else all_models
-    data.base <- dplyr::filter(data, Model==baseline_model) %>% dplyr::mutate(Model=factor(Model, levels=lev.models)) %>%
+    data.base <- dplyr::filter(data, Model==baseline_model) %>%
+      dplyr::mutate(Model=factor(Model, levels=lev.models)) %>%
       split(.$Year) %>% purrr::map(~rvtable::rvtable(.x))
     data <- dplyr::filter(data, Model!=baseline_model)
   }
   if(!merge_vars){
-    n.factor <- if(limit.sample) samplesize_factor(data, baseline_model) else 1
+    n.factor <- if(limit_sample) samplesize_factor(data, baseline_model) else 1
   } else if(!base){
     n.factor <- 1
   }
   data <- data %>% split(.$Year) %>% purrr::map(~rvtable::rvtable(.x))
-  n.steps <- length(data)
+  n_steps <- length(data)
   step <- 0
   if(progress){
     prog <- shiny::Progress$new()
     on.exit(prog$close())
   }
-  if(merge_vars){ # marginalize (excludes baseline model and scenario, e.g. CRU and historical GCM, data)
+  if(merge_vars){
+    # marginalize (excludes baseline model and scenario, e.g. CRU and historical GCM, data)
     msg <- "Integrating variables..."
     if(progress){
       prog$set(0, message=msg, detail=NULL)
-      n.steps.marginal <- if(length(m)) n.steps*length(m) else n.steps
+      n_steps_marginal <- if(length(m)) n_steps*length(m) else n_steps
     }
     for(i in seq_along(m)){
       for(j in seq_along(data)){
         if(progress){
           step <- step + 1
-          detail <- paste0("Marginalizing over ", m[i], "s: ", round(100*step/n.steps.marginal), "%")
-          if(step %% 5 == 0 || step==n.steps.marginal) prog$set(step/n.steps.marginal, msg, detail)
+          detail <- paste0("Marginalizing over ", m[i], "s: ", round(100*step/n_steps_marginal), "%")
+          if(step %% 5 == 0 || step==n_steps_marginal) prog$set(step/n_steps_marginal, msg, detail)
         }
         data[[j]] <- rvtable::marginalize(data[[j]], m[i], density.args=d.args, sample.args=s.args)
       }
     }
   }
-  if(merge_vars & base){ # update factor levels (with baseline model data)
+  if(merge_vars & base){
+    # update factor levels (with baseline model data)
     data.base <- dplyr::bind_rows(data.base)
     data <- dplyr::bind_rows(data) %>% dplyr::ungroup()
     if("Model" %in% m) data <- dplyr::mutate(data, Model=factor(lev.models[-1], levels=lev.models))
     if("RCP" %in% m){
       if(length(lev.rcps)==1) lev.rcps <- rep(lev.rcps, 2) # historical always present
       data.base <- dplyr::mutate(data.base, RCP=factor(as.character(RCP), levels=unique(lev.rcps)))
-      data <- dplyr::mutate(data, RCP=factor(ifelse(Year < rcp.min.yr, lev.rcps[1], lev.rcps[2]), unique(lev.rcps)))
+      data <- dplyr::mutate(data, RCP=factor(ifelse(Year < rcp_min_yr, lev.rcps[1], lev.rcps[2]), unique(lev.rcps)))
     }
-    n.factor <- if(limit.sample) samplesize_factor(data, baseline_model) else 1
+    n.factor <- if(limit_sample) samplesize_factor(data, baseline_model) else 1
     data <- dplyr::bind_rows(data.base, data) %>% split(.$Year) %>% purrr::map(~rvtable::rvtable(.x))
   }
   if(progress){
@@ -144,23 +148,26 @@ dist_data <- function(data, variable, margin=NULL, seed=NULL, metric=NULL, year.
     msg <- "Sampling distributions..."
     prog$set(0, message=msg, detail=NULL)
   } # adjust sample based on number of RCPs and GCMs
-  for(j in seq_along(data)){ # sample distributions
+  for(j in seq_along(data)){
+    # sample distributions
     if(progress){
       step <- step + 1
-      if(step %% 5 == 0 || step==n.steps)
-        prog$set(step/n.steps, message=msg, detail=paste0(round(100*step/n.steps), "%"))
+      if(step %% 5 == 0 || step==n_steps)
+        prog$set(step/n_steps, message=msg, detail=paste0(round(100*step/n_steps), "%"))
     }
     data[[j]] <- rvtable::sample_rvtable(data[[j]], n=max(10, round(n.samples/n.factor)))
   }
   data <- dplyr::bind_rows(data) %>% dplyr::ungroup()
-  if(merge_vars & !base){ # update factor levels (no baseline model data)
+  if(merge_vars & !base){
+    # update factor levels (no baseline model data)
     if("Model" %in% m) data <- dplyr::mutate(data, Model=factor(composite, levels=composite))
     if("RCP" %in% m){
       if(length(lev.rcps)==1) lev.rcps <- rep(lev.rcps, 2) # projected always present
-      data <- dplyr::mutate(data, RCP=factor(ifelse(Year < rcp.min.yr, lev.rcps[1], lev.rcps[2]), unique(lev.rcps)))
+      data <- dplyr::mutate(data, RCP=factor(ifelse(Year < rcp_min_yr, lev.rcps[1], lev.rcps[2]), unique(lev.rcps)))
     }
   }
-  if(nrow(data) > 0 & variable %in% valid_variables){ # unit conversion
+  if(nrow(data) > 0 & variable %in% valid_variables){
+    # unit conversion
     if(is.logical(metric)){
       if(metric){
         data <- dplyr::mutate(data, Val=ifelse(Var=="pr", round(Val), round(Val, 1)))
