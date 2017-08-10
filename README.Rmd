@@ -13,7 +13,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "README-")
 # apputils
 
 [![Travis-CI Build Status](https://travis-ci.org/leonawicz/apputils.svg?branch=master)](https://travis-ci.org/leonawicz/rapputils)
-[![Coverage Status](https://img.shields.io/codecov/c/github/leonawicz/apputils/master.svg)](https://codecov.io/github/leonawicz/apputils?branch=master)
+<!-- [![Coverage Status](https://img.shields.io/codecov/c/github/leonawicz/apputils/master.svg)](https://codecov.io/github/leonawicz/apputils?branch=master) -->
 
 apputils is an R package containing common utilty functions, settings and references used across multiple Shiny apps.
 
