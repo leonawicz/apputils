@@ -3,8 +3,9 @@
 ^README\.html$
 ^README\.Rmd$
 ^README-.*\.png$
-README.md
-.lintr
+^README\.md$
+^\.lintr$
 ^\.travis\.yml$
 ^codecov\.yml$
 ^docs$
+^inst/\.lintr$
