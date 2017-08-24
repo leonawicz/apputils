@@ -6,7 +6,7 @@ Author: Matthew Leonawicz
 Maintainer: Matthew Leonawicz <mfleonawicz@alaska.edu>
 Authors@R: person("Matthew", "Leonawicz", role = c("aut", "cre"), email = "mfleonawicz@alaska.edu")
 Description: Common utility functions, settings and references used across multiple Shiny apps.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: dplyr,
@@ -15,6 +15,7 @@ Imports: dplyr,
     DT,
     htmltools,
     ggplot2,
+    magrittr,
     purrr,
     shinyBS,
     rintrojs,

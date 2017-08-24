@@ -1,5 +1,6 @@
-globalVariables(c(".", "%>%", "Model", "RCP", "Year", "Var", "Val", "Decade", "Decadal_mean", "input"))
+globalVariables(c(".", "Model", "RCP", "Year", "Var", "Val", "Decade", "Decadal_mean", "input"))
 
+#' @importFrom magrittr %>%
 #' @importFrom grDevices dev.off
 #' @importFrom graphics abline arrows axis barplot boxplot hist legend lines par plot points polygon segments text
 #' @importFrom stats dnorm qnorm rnorm lm
