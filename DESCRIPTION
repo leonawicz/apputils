@@ -9,7 +9,8 @@ Description: Common utility functions, settings and references used across multi
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr,
+Imports:
+    dplyr,
     shiny,
     shinydashboard,
     DT,
@@ -22,10 +23,13 @@ Imports: dplyr,
     shinytoastr,
     leaflet,
     rvtable
-RoxygenNote: 6.0.1
-Suggests: Cairo,
+Suggests:
+    Cairo,
     showtext,
     sysfonts,
     testthat,
     lintr,
     covr
+Remotes:
+    leonawicz/rvtable
+RoxygenNote: 6.0.1
