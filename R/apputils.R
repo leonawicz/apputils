@@ -1,5 +1,25 @@
 globalVariables(c(".", "Model", "RCP", "Year", "Var", "Val", "Decade", "Decadal_mean", "input"))
 
+#' The \code{apputils} package contains common utility functions, settings and references for development use across multiple Shiny apps.
+#' It has a \code{shinydashboard} focus. \code{apputils} is a member package in the satellite sector of the SNAPverse.
+#' It supports other satellites in the verse, including \code{maputils} and \code{snaputils}.
+#'
+#' Package functionality and areas of support covered by \code{apputils} include:
+#'
+#' \itemize{
+#'   \item Overrides of \code{shinydashboard::valueBox}, \code{shinydashbaord::infoBox} and \code{shiny::icon} that support the use of local thumbnails images.
+#'   \item Stat boxes: special type of value or info boxes for common statistics using a collection of icons provided by the package.
+#'   \item Adjusted CSS styles and integration with packages like \code{rintrojs} and \code{shinytoastr} for interactive tours and toast messages.
+#'   \item Functions for including app information widgets such as citations, contact info, frequently asked questions and more.
+#'   \item Encapsulation of working with data frames in server.R in specific contexts and use cases to simplify code.
+#'   \item Wrappers around specific use cases for Leaflet maps, data tables, and general plotting in apps.
+#'   \item Helper functions for dynmaic reports.
+#' }
+#'
+#' @docType package
+#' @name apputils
+NULL
+
 #' @importFrom magrittr %>%
 #' @importFrom grDevices dev.off
 #' @importFrom graphics abline arrows axis barplot boxplot hist legend lines par plot points polygon segments text
