@@ -13,16 +13,19 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "README-")
 # apputils
 
 [![Travis-CI Build Status](https://travis-ci.org/leonawicz/apputils.svg?branch=master)](https://travis-ci.org/leonawicz/rapputils)
-<!-- [![Coverage Status](https://img.shields.io/codecov/c/github/leonawicz/apputils/master.svg)](https://codecov.io/github/leonawicz/apputils?branch=master) -->
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/leonawicz/apputils?branch=master&svg=true)](https://ci.appveyor.com/project/leonawicz/apputils)
+[![Coverage Status](https://img.shields.io/codecov/c/github/leonawicz/apputils/master.svg)](https://codecov.io/github/leonawicz/apputils?branch=master)
 
-apputils is an R package containing common utilty functions, settings and references used across multiple Shiny apps.
+`apputils` is an R package containing common utilty functions, settings and references used across multiple Shiny apps.
+It is a satellite member of the SNAPverse collection of R packages.
 
 ## Installation and bug reporting
 
 Install the latest development version from github with
 
-```r
-devtools::install_github("leonawicz/apputils")
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("leonawicz/snaputils")
 ```
 
 Please file a minimal reproducible example of any clear bug at [github](https://github.com/leonawicz/apputils/issues).
