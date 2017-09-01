@@ -4,10 +4,27 @@
 \alias{app_showcase}
 \title{Genrate app showcase content}
 \usage{
-app_showcase(drop = NULL)
+app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
+  min_width = 300, max_width = 400, col_width = 4)
 }
 \arguments{
-\item{drop}{character vector of any apps to exclude from showcase.}
+\item{app_url}{character vector of app urls.}
+
+\item{img_url}{character vector of image urls, same length as \code{app_url}.}
+
+\item{title}{character, titles displayed on image links during mouseover.}
+
+\item{subtitle}{character, subtitles displayed on image link during mouseover.}
+
+\item{drop}{character vector of any apps to exclude from showcase. Useful for programmed app lists that may include self.}
+
+\item{height}{numeric, height in pixels.}
+
+\item{min_width}{numeric, minimum width in pixels.}
+
+\item{max_width}{numeric, maximum width in pixels.}
+
+\item{col_width}{integer, column width number for row, 1 through 12, defaults to 4.}
 }
 \value{
 a shiny fluidRow containing organized and stylized app image links for reference.
