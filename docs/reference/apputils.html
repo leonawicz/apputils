@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Genrate app showcase content — app_showcase â€¢ apputils</title>
+<title>The <code>apputils</code> package contains common utility functions, settings and references for development use across multiple Shiny apps.
+It has a <code>shinydashboard</code> focus. <code>apputils</code> is a member package in the satellite sector of the SNAPverse.
+It supports other satellites in the verse, including <code>maputils</code> and <code>snaputils</code>. — apputils â€¢ apputils</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,75 +88,36 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Genrate app showcase content</h1>
+    <h1>The <code>apputils</code> package contains common utility functions, settings and references for development use across multiple Shiny apps.
+It has a <code>shinydashboard</code> focus. <code>apputils</code> is a member package in the satellite sector of the SNAPverse.
+It supports other satellites in the verse, including <code>maputils</code> and <code>snaputils</code>.</h1>
     </div>
 
     
-    <p>Genrate app showcase content</p>
+    <p>Package functionality and areas of support covered by <code>apputils</code> include:</p>
     
 
-    <pre class="usage"><span class='fu'>app_showcase</span>(<span class='no'>app_url</span>, <span class='no'>img_url</span>, <span class='no'>title</span>, <span class='no'>subtitle</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>200</span>,
-  <span class='kw'>min_width</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>max_width</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>col_width</span> <span class='kw'>=</span> <span class='fl'>4</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>app_url</th>
-      <td><p>character vector of app urls.</p></td>
-    </tr>
-    <tr>
-      <th>img_url</th>
-      <td><p>character vector of image urls, same length as <code>app_url</code>.</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>character, titles displayed on image links during mouseover.</p></td>
-    </tr>
-    <tr>
-      <th>subtitle</th>
-      <td><p>character, subtitles displayed on image link during mouseover.</p></td>
-    </tr>
-    <tr>
-      <th>drop</th>
-      <td><p>character vector of any apps to exclude from showcase. Useful for programmed app lists that may include self.</p></td>
-    </tr>
-    <tr>
-      <th>height</th>
-      <td><p>numeric, height in pixels.</p></td>
-    </tr>
-    <tr>
-      <th>min_width</th>
-      <td><p>numeric, minimum width in pixels.</p></td>
-    </tr>
-    <tr>
-      <th>max_width</th>
-      <td><p>numeric, maximum width in pixels.</p></td>
-    </tr>
-    <tr>
-      <th>col_width</th>
-      <td><p>integer, column width number for row, 1 through 12, defaults to 4.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>a shiny fluidRow containing organized and stylized app image links for reference.</p>
+    <ul>
+<li><p>Overrides of <code><a href='http://www.rdocumentation.org/packages/shinydashboard/topics/valueBox'>shinydashboard::valueBox</a></code>, <code>shinydashbaord::infoBox</code> and <code><a href='http://www.rdocumentation.org/packages/shiny/topics/icon'>shiny::icon</a></code> that support the use of local thumbnails images.</p></li>
+<li><p>Stat boxes: special type of value or info boxes for common statistics using a collection of icons provided by the package.</p></li>
+<li><p>Adjusted CSS styles and integration with packages like <code>rintrojs</code> and <code>shinytoastr</code> for interactive tours and toast messages.</p></li>
+<li><p>Functions for including app information widgets such as citations, contact info, frequently asked questions and more.</p></li>
+<li><p>Encapsulation of working with data frames in server.R in specific contexts and use cases to simplify code.</p></li>
+<li><p>Wrappers around specific use cases for Leaflet maps, data tables, and general plotting in apps.</p></li>
+<li><p>Helper functions for dynmaic reports.</p></li>
+</ul>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>#not run
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-index">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -58,6 +58,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/apputils.html">Get Started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -66,7 +69,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/leonawicz/apputils">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -95,118 +103,38 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+            <h2 id="section-package" class="hasAnchor"><a href="#section-package" class="anchor"></a>Package</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="app_citation.html">app_citation</a></code> </p>
+            <p><code><a href="apputils.html">apputils</a></code> </p>
           </td>
-          <td><p>Generate a recommended app citation</p></td>
+          <td><p>The <code>apputils</code> package contains common utility functions, settings and references for development use across multiple Shiny apps.
+It has a <code>shinydashboard</code> focus. <code>apputils</code> is a member package in the satellite sector of the SNAPverse.
+It supports other satellites in the verse, including <code>maputils</code> and <code>snaputils</code>.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-using-apputils" class="hasAnchor"><a href="#section-using-apputils" class="anchor"></a>Using apputils</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="use_apputils.html">use_apputils</a></code> </p>
+          </td>
+          <td><p>Initialize apputils</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="app_overlay.html">app_overlay</a></code> </p>
+            <p><code><a href="update_toastr_css.html">update_toastr_css</a></code> </p>
           </td>
-          <td><p>Add HTML content to app launch overlay</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="app_showcase.html">app_showcase</a></code> </p>
-          </td>
-          <td><p>Genrate app showcase content</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="appintro.html">appintro</a></code> </p>
-          </td>
-          <td><p>App launch information</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="brushed_data.html">brushed_data</a></code> </p>
-          </td>
-          <td><p>Filter data frame based on plot brush</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="build_mapset.html">build_mapset</a></code> </p>
-          </td>
-          <td><p>Build leaflet map from among multiple available maps</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="clim_convert_round.html">clim_convert_round</a></code> </p>
-          </td>
-          <td><p>Convert units and round data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="colorFacet.html">colorFacet</a></code> </p>
-          </td>
-          <td><p>Coloring and faceting helper for ggplot</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="contactinfo.html">contactinfo</a></code> </p>
-          </td>
-          <td><p>Add contact information widget to app</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dashboard_footer.html">dashboard_footer</a></code> </p>
-          </td>
-          <td><p>Add footer to Shiny dashboard sidebar</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_data.html">dist_data</a></code> </p>
-          </td>
-          <td><p>Compile a specialized data frame based on the <code>rvtable</code> package</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="faq.html">faq</a></code> </p>
-          </td>
-          <td><p>Generate a Frequently Asked Questions (FAQ) widget</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_breaks.html">get_breaks</a></code> </p>
-          </td>
-          <td><p>Create breaks for ggplot</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_plottheme.html">get_plottheme</a></code> </p>
-          </td>
-          <td><p>Get ggplot theme</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="getPosition.html">getPosition</a></code> </p>
-          </td>
-          <td><p>Positioning helper for ggplot</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ggObserve.html">ggObserve</a></code> </p>
-          </td>
-          <td><p>Plot observers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="icon.html">icon</a></code> </p>
-          </td>
-          <td><p>Override shiny icon function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="infoBox.html">infoBox</a></code> </p>
-          </td>
-          <td><p>Override shinydashboard infoBox function</p></td>
+          <td><p>Update shinytoastr css</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -216,64 +144,44 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="interact.html">interact</a></code> </p>
+            <p><code><a href="app_overlay.html">app_overlay</a></code> </p>
           </td>
-          <td><p>Interaction helper for ggplot</p></td>
+          <td><p>Add HTML content to app launch overlay</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-override-functions" class="hasAnchor"><a href="#section-override-functions" class="anchor"></a>Override functions</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="valueBox.html">valueBox</a></code> </p>
+          </td>
+          <td><p>Override shinydashboard valueBox function</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="kilo_mega.html">kilo_mega</a></code> </p>
+            <p><code><a href="infoBox.html">infoBox</a></code> </p>
           </td>
-          <td><p>Kilo and Mega labels for rescaled data</p></td>
+          <td><p>Override shinydashboard infoBox function</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="makeIcons.html">makeIcons</a></code> </p>
+            <p><code><a href="icon.html">icon</a></code> </p>
           </td>
-          <td><p>Generate png thumbnail icons for various quantities</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mouseInfo.html">mouseInfo</a></code> </p>
-          </td>
-          <td><p>Mouseover info</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mouseLog.html">mouseLog</a></code> </p>
-          </td>
-          <td><p>Mouseover info browser feedback</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pasteByLength.html">pasteByLength</a></code> </p>
-          </td>
-          <td><p>Create sensible readable string from a vector</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pTextSize.html">pTextSize</a></code> </p>
-          </td>
-          <td><p>Size of text in overridden shiny dashboard value box function widget output</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="read_md_paragraphs.html">read_md_paragraphs</a></code> </p>
-          </td>
-          <td><p>Read paragraphs from file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="samplesize_factor.html">samplesize_factor</a></code> </p>
-          </td>
-          <td><p>Divide sample size by a factor based on the number of RCP-GCM combinations</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sbg_to_tables.html">sbg_to_tables</a></code> </p>
-          </td>
-          <td><p>Convert stat box groups output to list of data frames</p></td>
-        </tr><tr>
+          <td><p>Override shiny icon function</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-stat-boxes-and-related-functions" class="hasAnchor"><a href="#section-stat-boxes-and-related-functions" class="anchor"></a>Stat boxes and related functions</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="stat_boxes.html">stat_boxes</a></code> </p>
@@ -294,45 +202,15 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="tableRowColors.html">tableRowColors</a></code> </p>
+            <p><code><a href="makeIcons.html">makeIcons</a></code> </p>
           </td>
-          <td><p>Color table rows according to ggplot coloring by groups.</p></td>
+          <td><p>Generate png thumbnail icons for various quantities</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="tolpal.html">tolpal</a></code> </p>
+            <p><code><a href="pTextSize.html">pTextSize</a></code> </p>
           </td>
-          <td><p>Generate a vector of colors</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tour_changeClass.html">tour_changeClass</a></code> </p>
-          </td>
-          <td><p>Generate a JS callback string for rintrojs tour</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_mapset.html">update_mapset</a></code> </p>
-          </td>
-          <td><p>Update leaflet map in map set context</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_toastr_css.html">update_toastr_css</a></code> </p>
-          </td>
-          <td><p>Update shinytoastr css</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="use_apputils.html">use_apputils</a></code> </p>
-          </td>
-          <td><p>Initialize apputils</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="valueBox.html">valueBox</a></code> </p>
-          </td>
-          <td><p>Override shinydashboard valueBox function</p></td>
+          <td><p>Size of text in overridden shiny dashboard value box function widget output</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -346,6 +224,216 @@
           </td>
           <td><p>Generate CSS for a value box color palette.</p></td>
         </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-app-information" class="hasAnchor"><a href="#section-app-information" class="anchor"></a>App information</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="app_showcase.html">app_showcase</a></code> </p>
+          </td>
+          <td><p>Genrate app showcase content</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="app_citation.html">app_citation</a></code> </p>
+          </td>
+          <td><p>Generate a recommended app citation</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="contactinfo.html">contactinfo</a></code> </p>
+          </td>
+          <td><p>Add contact information widget to app</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="appintro.html">appintro</a></code> </p>
+          </td>
+          <td><p>App launch information</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="faq.html">faq</a></code> </p>
+          </td>
+          <td><p>Generate a Frequently Asked Questions (FAQ) widget</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="dashboard_footer.html">dashboard_footer</a></code> </p>
+          </td>
+          <td><p>Add footer to Shiny dashboard sidebar</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tour_changeClass.html">tour_changeClass</a></code> </p>
+          </td>
+          <td><p>Generate a JS callback string for rintrojs tour</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="read_md_paragraphs.html">read_md_paragraphs</a></code> </p>
+          </td>
+          <td><p>Read paragraphs from file</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-working-with-data-frames" class="hasAnchor"><a href="#section-working-with-data-frames" class="anchor"></a>Working with data frames</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="dist_data.html">dist_data</a></code> </p>
+          </td>
+          <td><p>Compile a specialized data frame based on the <code>rvtable</code> package</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="clim_convert_round.html">clim_convert_round</a></code> </p>
+          </td>
+          <td><p>Convert units and round data</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="brushed_data.html">brushed_data</a></code> </p>
+          </td>
+          <td><p>Filter data frame based on plot brush</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-leaflet" class="hasAnchor"><a href="#section-leaflet" class="anchor"></a>Leaflet</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="build_mapset.html">build_mapset</a></code> </p>
+          </td>
+          <td><p>Build leaflet map from among multiple available maps</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="update_mapset.html">update_mapset</a></code> </p>
+          </td>
+          <td><p>Update leaflet map in map set context</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-plots" class="hasAnchor"><a href="#section-plots" class="anchor"></a>Plots</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ggObserve.html">ggObserve</a></code> </p>
+          </td>
+          <td><p>Plot observers</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tolpal.html">tolpal</a></code> </p>
+          </td>
+          <td><p>Generate a vector of colors</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_plottheme.html">get_plottheme</a></code> </p>
+          </td>
+          <td><p>Get ggplot theme</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_breaks.html">get_breaks</a></code> </p>
+          </td>
+          <td><p>Create breaks for ggplot</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="samplesize_factor.html">samplesize_factor</a></code> </p>
+          </td>
+          <td><p>Divide sample size by a factor based on the number of RCP-GCM combinations</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="interact.html">interact</a></code> </p>
+          </td>
+          <td><p>Interaction helper for ggplot</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="getPosition.html">getPosition</a></code> </p>
+          </td>
+          <td><p>Positioning helper for ggplot</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="colorFacet.html">colorFacet</a></code> </p>
+          </td>
+          <td><p>Coloring and faceting helper for ggplot</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mouseInfo.html">mouseInfo</a></code> </p>
+          </td>
+          <td><p>Mouseover info</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mouseLog.html">mouseLog</a></code> </p>
+          </td>
+          <td><p>Mouseover info browser feedback</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="kilo_mega.html">kilo_mega</a></code> </p>
+          </td>
+          <td><p>Kilo and Mega labels for rescaled data</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-dynamic-reports" class="hasAnchor"><a href="#section-dynamic-reports" class="anchor"></a>Dynamic reports</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sbg_to_tables.html">sbg_to_tables</a></code> </p>
+          </td>
+          <td><p>Convert stat box groups output to list of data frames</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="pasteByLength.html">pasteByLength</a></code> </p>
+          </td>
+          <td><p>Create sensible readable string from a vector</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-dt-data-tables" class="hasAnchor"><a href="#section-dt-data-tables" class="anchor"></a>DT data tables</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tableRowColors.html">tableRowColors</a></code> </p>
+          </td>
+          <td><p>Color table rows according to ggplot coloring by groups.</p></td>
+        </tr>
       </tbody>
       </table>
     </div>
@@ -354,14 +442,23 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-package">Package</a></li>
+      <li><a href="#section-using-apputils">Using apputils</a></li>
+      <li><a href="#section-override-functions">Override functions</a></li>
+      <li><a href="#section-stat-boxes-and-related-functions">Stat boxes and related functions</a></li>
+      <li><a href="#section-app-information">App information</a></li>
+      <li><a href="#section-working-with-data-frames">Working with data frames</a></li>
+      <li><a href="#section-leaflet">Leaflet</a></li>
+      <li><a href="#section-plots">Plots</a></li>
+      <li><a href="#section-dynamic-reports">Dynamic reports</a></li>
+      <li><a href="#section-dt-data-tables">DT data tables</a></li>
     </ul>
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Matthew Leonawicz.</p>
+  <p>Developed by Matthew Leonawicz, Scenarios Network for Alaska and Arctic Planning.</p>
 </div>
 
 <div class="pkgdown">

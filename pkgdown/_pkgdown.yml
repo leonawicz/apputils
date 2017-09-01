@@ -4,6 +4,70 @@ template:
   params:
     bootswatch: sandstone
 
+reference:
+- title: Package
+  contents:
+  - apputils
+- title: Using apputils
+  contents:
+  - use_apputils
+  - update_toastr_css
+  - inputs_not_null
+  - app_overlay
+- title: Override functions
+  contents:
+  - valueBox
+  - infoBox
+  - icon
+- title: Stat boxes and related functions
+  contents:
+  - stat_boxes
+  - stat_boxes_group
+  - statIcon
+  - makeIcons
+  - pTextSize
+  - valueBoxColorsCSS
+  - valueBoxPalette
+- title: App information
+  contents:
+  - app_showcase
+  - app_citation
+  - contactinfo
+  - appintro
+  - faq
+  - dashboard_footer
+  - tour_changeClass
+  - read_md_paragraphs
+- title: Working with data frames
+  contents:
+  - dist_data
+  - clim_convert_round
+  - brushed_data
+- title: Leaflet
+  contents:
+  - build_mapset
+  - update_mapset
+- title: Plots
+  contents:
+  - ggObserve
+  - tolpal
+  - get_plottheme
+  - get_breaks
+  - samplesize_factor
+  - interact
+  - getPosition
+  - colorFacet
+  - mouseInfo
+  - mouseLog
+  - kilo_mega
+- title: Dynamic reports
+  contents:
+  - sbg_to_tables
+  - pasteByLength
+- title: DT data tables
+  contents:
+  - tableRowColors
+
 navbar:
   type: inverse
   right:
