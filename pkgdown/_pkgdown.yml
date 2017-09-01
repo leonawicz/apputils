@@ -71,5 +71,56 @@ reference:
 navbar:
   type: inverse
   right:
+    - text: "SNAPverse"
+      icon: fa-globe fa-lg
+      menu:
+        - text: "Home of the verse"
+          href: http://leonawicz.github.io/sv
+        - text: "--------"
+        - text: "Sector packages"
+        - text: "snapverse"
+          href: http://leonawicz.github.io/snapverse
+        - text: "snaplite"
+          href: http://leonawicz.github.io/snaplite
+        - text: "snapdata"
+          href: http://leonawicz.github.io/snapdata
+        - text: "--------"
+        - text: "Functions packages"
+        - text: "snapfuns"
+          href: http://leonawicz.github.io/snapfuns
+        - text: "snapprep"
+          href: http://leonawicz.github.io/snapprep
+        - text: "alfresco"
+          href: http://leonawicz.github.io/alfresco
+        - text: "--------"
+        - text: "Data packages"
+        - text: "snapclim"
+          href: http://leonawicz.github.io/snapclim
+        - text: "snapfire"
+          href: http://leonawicz.github.io/snapfire
+        - text: "snappoly"
+          href: http://leonawicz.github.io/snappoly
+        - text: "snapmaps"
+          href: http://leonawicz.github.io/snapmaps
+        - text: "snapdist"
+          href: http://leonawicz.github.io/snapdist
+        - text: "--------"
+        - text: "Apps packages"
+        - text: "snapapps"
+          href: http://leonawicz.github.io/snapapps
+        - text: "--------"
+        - text: "Satellite packages"
+        - text: "rvtable"
+          href: http://leonawicz.github.io/rvtable
+        - text: "apputils"
+          href: http://leonawicz.github.io/apputils
+        - text: "maputils"
+          href: http://leonawicz.github.io/maputils
+        - text: "snaputils"
+          href: http://leonawicz.github.io/snaputils
+        - text: "snapmeta"
+          href: http://leonawicz.github.io/snapmeta
+        - text: "snapsite"
+          href: http://leonawicz.github.io/snapsite
     - icon: fa-github fa-lg
       href: https://github.com/leonawicz/apputils

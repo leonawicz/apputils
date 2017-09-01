@@ -32,7 +32,7 @@ Install the latest development version from github with
 
 ``` r
 # install.packages('devtools')
-devtools::install_github("leonawicz/snaputils")
+devtools::install_github("leonawicz/apputils")
 ```
 
 Please file a minimal reproducible example of any clear bug at [github](https://github.com/leonawicz/apputils/issues).
