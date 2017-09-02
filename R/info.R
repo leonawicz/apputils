@@ -15,13 +15,14 @@
 }
 # nolint end
 
-.app_img_links <- function(app_url, img_url, title, subtitle, drop = NULL,
+.app_img_links <- function(app_url, img_url, title, subtitle, label = NULL, drop = NULL,
                            height = 200, min_width = 300, max_width = 400, col_width = 4, img_padding = NULL){
   apps <- basename(app_url)
   n <- length(apps)
   if(!is.null(drop) && !all(drop %in% apps))
     stop("Cannot drop apps that are not in the master list.")
   idx <- if(is.null(drop)) seq_along(apps) else seq_along(app_url)[-match(drop, apps)]
+
   if(is.null(img_padding)){
     img_padding <- vector("list", n)
   } else {
@@ -29,9 +30,15 @@
       stop("`img_padding` length must be one or length of `app_url`.")
     if(length(img_padding) == 1) img_padding <- rep(img_padding, n)
   }
+  if(is.null(label)){
+    label <- vector("list", n)
+  } else {
+    if(length(label ) != n) stop("`label` length must match length of `app_url`.")
+  }
+
   x <- purrr::map(
     idx, ~shiny::column(
-      col_width, .app_img_link(app_url[.x], img_url[.x], title[.x], subtitle[.x], height, img_padding[.x]),
+      col_width, label[.x], .app_img_link(app_url[.x], img_url[.x], title[.x], subtitle[.x], height, img_padding[.x]),
       style = paste0("min-width: ", min_width, "px; max-width: ", max_width, "px; padding:5px;")))
   shiny::fluidRow(x, style = "padding: 10px;")
 }
@@ -47,10 +54,15 @@
 #' or when you need padding around an image that includes no margin around it.
 #' For image padding, use a vector of length one or length equal to the length of \code{app_url}.
 #'
+#' If \code{label} is not \code{NULL}, it must be a vector with a label for every image link.
+#' To force empty labels among non-empty labels, use \code{""}. E.g., \code{label = c("A", "", "C")}.
+#' \code{label} can be styled by using html, e.g., \code{label = h4("Top Title")}.
+#'
 #' @param app_url character vector of app urls.
 #' @param img_url character vector of image urls, same length as \code{app_url}.
 #' @param title character, titles displayed on image links during mouseover.
 #' @param subtitle character, subtitles displayed on image link during mouseover.
+#' @param label character or \code{NULL}, optional fixed label place above an image panel. See details.
 #' @param drop character vector of any apps to exclude from showcase. Useful for programmed app lists that may include self.
 #' @param height numeric, height in pixels.
 #' @param min_width numeric, minimum width in pixels.
@@ -64,9 +76,9 @@
 #'
 #' @examples
 #' #not run
-app_showcase <- function(app_url, img_url, title, subtitle, drop = NULL, height = 200,
+app_showcase <- function(app_url, img_url, title, subtitle, label = NULL, drop = NULL, height = 200,
                          min_width = 300, max_width = 400, col_width = 4, img_padding = NULL){
-  .app_img_links(app_url, img_url, title, subtitle, drop, height,
+  .app_img_links(app_url, img_url, title, subtitle, label, drop, height,
                  min_width, max_width, col_width, img_padding)
 }
 

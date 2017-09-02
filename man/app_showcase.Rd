@@ -4,8 +4,9 @@
 \alias{app_showcase}
 \title{Generate app showcase content}
 \usage{
-app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
-  min_width = 300, max_width = 400, col_width = 4, img_padding = NULL)
+app_showcase(app_url, img_url, title, subtitle, label = NULL, drop = NULL,
+  height = 200, min_width = 300, max_width = 400, col_width = 4,
+  img_padding = NULL)
 }
 \arguments{
 \item{app_url}{character vector of app urls.}
@@ -15,6 +16,8 @@ app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
 \item{title}{character, titles displayed on image links during mouseover.}
 
 \item{subtitle}{character, subtitles displayed on image link during mouseover.}
+
+\item{label}{character or \code{NULL}, optional fixed label place above an image panel. See details.}
 
 \item{drop}{character vector of any apps to exclude from showcase. Useful for programmed app lists that may include self.}
 
@@ -42,6 +45,10 @@ The image padding argument is useful when multiple source images have different 
 and you need them to match each other better,
 or when you need padding around an image that includes no margin around it.
 For image padding, use a vector of length one or length equal to the length of \code{app_url}.
+
+If \code{label} is not \code{NULL}, it must be a vector with a label for every image link.
+To force empty labels among non-empty labels, use \code{""}. E.g., \code{label = c("A", "", "C")}.
+\code{label} can be styled by using html, e.g., \code{label = h4("Top Title")}.
 }
 \examples{
 #not run
