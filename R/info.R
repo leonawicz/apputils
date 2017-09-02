@@ -1,5 +1,5 @@
 # nolint start
-.app_img_link <- function(app_url, img_url, title, subtitle, height=200){
+.app_img_link <- function(app_url, img_url, title, subtitle, height = 200){
   shiny::HTML(paste0(
     '<div class="img_link_wrap">
     <img class="img_app" src="', img_url, '" width="100%" height="', height, '"/>
@@ -46,7 +46,7 @@
 #' #not run
 app_showcase <- function(app_url, img_url, title, subtitle, drop = NULL, height = 200,
                          min_width = 300, max_width = 400, col_width = 4){
-  .app_img_links(app_url, img_url, title, subtitle, height,
+  .app_img_links(app_url, img_url, title, subtitle, drop, height,
                  min_width, max_width, col_width)
 }
 
