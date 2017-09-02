@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.R
 \name{app_showcase}
 \alias{app_showcase}
-\title{Genrate app showcase content}
+\title{Generate app showcase content}
 \usage{
 app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
   min_width = 300, max_width = 400, col_width = 4, img_padding = NULL)
@@ -26,13 +26,22 @@ app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
 
 \item{col_width}{integer, column width number for row, 1 through 12, defaults to 4.}
 
-\item{img_padding}{optional image padding, e.g., \code{"10px"}. Defaults to \code{NULL}.}
+\item{img_padding}{optional image padding, e.q., \code{"10px"}. Defaults to \code{NULL}. See details.
+If length is one, is repeated for length of \code{app_url}.}
 }
 \value{
 a shiny fluidRow containing organized and stylized app image links for reference.
 }
 \description{
-Genrate app showcase content
+This function generates a showcase panel for Shiny apps.
+}
+\details{
+Despite being named for this \code{apputils} context, \code{app_showcase} can be applied to other types of content.
+
+The image padding argument is useful when multiple source images have different amounts of margin space embedded in them
+and you need them to match each other better,
+or when you need padding around an image that includes no margin around it.
+For image padding, use a vector of length one or length equal to the length of \code{app_url}.
 }
 \examples{
 #not run
