@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Genrate app showcase content — app_showcase â€¢ apputils</title>
+<title>Generate app showcase content — app_showcase â€¢ apputils</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -164,11 +164,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Genrate app showcase content</h1>
+    <h1>Generate app showcase content</h1>
     </div>
 
     
-    <p>Genrate app showcase content</p>
+    <p>This function generates a showcase panel for Shiny apps.</p>
     
 
     <pre class="usage"><span class='fu'>app_showcase</span>(<span class='no'>app_url</span>, <span class='no'>img_url</span>, <span class='no'>title</span>, <span class='no'>subtitle</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>200</span>,
@@ -215,13 +215,22 @@
     </tr>
     <tr>
       <th>img_padding</th>
-      <td><p>optional image padding, e.g., <code>"10px"</code>. Defaults to <code>NULL</code>.</p></td>
+      <td><p>optional image padding, e.q., <code>"10px"</code>. Defaults to <code>NULL</code>. See details.
+If length is one, is repeated for length of <code>app_url</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a shiny fluidRow containing organized and stylized app image links for reference.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Despite being named for this <code>apputils</code> context, <code>app_showcase</code> can be applied to other types of content.</p>
+<p>The image padding argument is useful when multiple source images have different amounts of margin space embedded in them
+and you need them to match each other better,
+or when you need padding around an image that includes no margin around it.
+For image padding, use a vector of length one or length equal to the length of <code>app_url</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -234,6 +243,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
