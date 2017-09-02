@@ -171,8 +171,9 @@
     <p>This function generates a showcase panel for Shiny apps.</p>
     
 
-    <pre class="usage"><span class='fu'>app_showcase</span>(<span class='no'>app_url</span>, <span class='no'>img_url</span>, <span class='no'>title</span>, <span class='no'>subtitle</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>200</span>,
-  <span class='kw'>min_width</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>max_width</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>col_width</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>img_padding</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>app_showcase</span>(<span class='no'>app_url</span>, <span class='no'>img_url</span>, <span class='no'>title</span>, <span class='no'>subtitle</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>min_width</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>max_width</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>col_width</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>img_padding</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -192,6 +193,10 @@
     <tr>
       <th>subtitle</th>
       <td><p>character, subtitles displayed on image link during mouseover.</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>character or <code>NULL</code>, optional fixed label place above an image panel. See details.</p></td>
     </tr>
     <tr>
       <th>drop</th>
@@ -231,6 +236,9 @@ If length is one, is repeated for length of <code>app_url</code>.</p></td>
 and you need them to match each other better,
 or when you need padding around an image that includes no margin around it.
 For image padding, use a vector of length one or length equal to the length of <code>app_url</code>.</p>
+<p>If <code>label</code> is not <code>NULL</code>, it must be a vector with a label for every image link.
+To force empty labels among non-empty labels, use <code>""</code>. E.g., <code>label = c("A", "", "C")</code>.
+<code>label</code> can be styled by using html, e.g., <code>label = h4("Top Title")</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
