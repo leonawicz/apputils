@@ -5,7 +5,7 @@
 \title{Genrate app showcase content}
 \usage{
 app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
-  min_width = 300, max_width = 400, col_width = 4)
+  min_width = 300, max_width = 400, col_width = 4, img_padding = NULL)
 }
 \arguments{
 \item{app_url}{character vector of app urls.}
@@ -25,6 +25,8 @@ app_showcase(app_url, img_url, title, subtitle, drop = NULL, height = 200,
 \item{max_width}{numeric, maximum width in pixels.}
 
 \item{col_width}{integer, column width number for row, 1 through 12, defaults to 4.}
+
+\item{img_padding}{optional image padding, e.g., \code{"10px"}. Defaults to \code{NULL}.}
 }
 \value{
 a shiny fluidRow containing organized and stylized app image links for reference.
