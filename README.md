@@ -31,7 +31,7 @@ Installation and bug reporting
 Install the latest development version from github with
 
 ``` r
-# install.packages('devtools')
+# install.packages("devtools")
 devtools::install_github("leonawicz/apputils")
 ```
 
