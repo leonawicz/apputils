@@ -4,6 +4,13 @@ template:
   params:
     bootswatch: sandstone
 
+authors:
+  Matthew Leonawicz:
+    href: http://leonawicz.github.io/
+  Scenarios Network for Alaska and Arctic Planning:
+    href: http://snap.uaf.edu/
+    html: <img src="snap_symbol.svg" height="24" />  Scenarios Network for Alaska and Arctic Planning
+
 reference:
 - title: Package
   contents:
@@ -75,7 +82,7 @@ navbar:
       icon: fa-globe fa-lg
       menu:
         - text: "Home of the verse"
-          href: http://leonawicz.github.io/sv
+          href: http://leonawicz.github.io/sv.html
         - text: "--------"
         - text: "Sector packages"
         - text: "snapverse"
@@ -84,6 +91,8 @@ navbar:
           href: http://leonawicz.github.io/snaplite
         - text: "snapdata"
           href: http://leonawicz.github.io/snapdata
+        - text: "snapwebs"
+          href: http://leonawicz.github.io/snapwebs
         - text: "--------"
         - text: "Functions packages"
         - text: "snapfuns"
@@ -105,9 +114,15 @@ navbar:
         - text: "snapdist"
           href: http://leonawicz.github.io/snapdist
         - text: "--------"
-        - text: "Apps packages"
+        - text: "Apps & docs packages"
         - text: "snapapps"
           href: http://leonawicz.github.io/snapapps
+        - text: "snapdash"
+          href: http://leonawicz.github.io/snapdash
+        - text: "snapflex"
+          href: http://leonawicz.github.io/snapflex
+        - text: "snapdocs"
+          href: http://leonawicz.github.io/snapdocs
         - text: "--------"
         - text: "Satellite packages"
         - text: "rvtable"
