@@ -26,7 +26,7 @@ is_md <- knitr::opts_knit$get("rmarkdown.pandoc.to") == "markdown_github-ascii_i
 ```
 
 ```{r md_doc1, echo = FALSE, results = "asis", eval = is_md}
-cat('<p style="text-align:center;"><img src="man/figures/sv_satellites_utils_app.png"></p><br>')
+cat('<p style="text-align:center;"><img src="man/figures/sv_satellites_utils_app.png" width=350></p><br>')
 ```
 
 ```{r html_doc1, echo = FALSE, results = "asis", eval = !is_md}
@@ -61,7 +61,7 @@ Please file a minimal reproducible example of any clear bug at [github](https://
 The complete set of satellite packages is shown below.
 
 ```{r md_doc2, echo = FALSE, results = "asis", eval = is_md}
-cat('<p style="text-align:center;"><img src="man/figures/sv_satellites_all.png"></p><br>')
+cat('<p style="text-align:center;"><img src="man/figures/sv_satellites_all.png" width=350></p><br>')
 ```
 
 ```{r html_doc2, echo = FALSE, results = "asis", eval = !is_md}

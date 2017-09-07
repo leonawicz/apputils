@@ -8,7 +8,7 @@ apputils
 `apputils` is an R package containing common utilty functions, settings and references for development use across multiple Shiny apps, It has a `shinydashboard` focus. `apputils` is a satellite member of the SNAPverse collection of R packages. It supports other satellites in the verse, including `maputils` and `snaputils`.
 
 <p style="text-align:center;">
-<img src="man/figures/sv_satellites_utils_app.png">
+<img src="man/figures/sv_satellites_utils_app.png" width=350>
 </p>
 <br>
 
@@ -31,7 +31,7 @@ Installation and bug reporting
 Install the latest development version from github with
 
 ``` r
-# install.packages("devtools")
+# install.packages('devtools')
 devtools::install_github("leonawicz/apputils")
 ```
 
@@ -43,7 +43,7 @@ Reference
 The complete set of satellite packages is shown below.
 
 <p style="text-align:center;">
-<img src="man/figures/sv_satellites_all.png">
+<img src="man/figures/sv_satellites_all.png" width=350>
 </p>
 <br>
 
