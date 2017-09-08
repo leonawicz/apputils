@@ -6,7 +6,7 @@
 \usage{
 app_showcase(app_url, img_url, title, subtitle, label = NULL, drop = NULL,
   height = 200, min_width = 300, max_width = 400, col_width = 4,
-  img_padding = NULL)
+  img_style = NULL, new_window = TRUE)
 }
 \arguments{
 \item{app_url}{character vector of app urls.}
@@ -29,8 +29,10 @@ app_showcase(app_url, img_url, title, subtitle, label = NULL, drop = NULL,
 
 \item{col_width}{integer, column width number for row, 1 through 12, defaults to 4.}
 
-\item{img_padding}{optional image padding, e.q., \code{"10px"}. Defaults to \code{NULL}. See details.
-If length is one, is repeated for length of \code{app_url}.}
+\item{img_style}{optional style for the image component of the widget. Useful for padding in particular, e.q., \code{style="padding:10px;"}.
+Defaults to \code{NULL}. See details. If length is one, is repeated for length of \code{app_url}.}
+
+\item{new_window}{logical, open the link in a new browser window. Defaults to \code{TRUE}.}
 }
 \value{
 a shiny fluidRow containing organized and stylized app image links for reference.

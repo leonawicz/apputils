@@ -1,10 +1,12 @@
 # nolint start
-.app_img_link <- function(app_url, img_url, title, subtitle, height = 200, img_padding = NULL){
-  p <- if(is.null(img_padding)) "" else paste0('style="padding:', img_padding, ';" ')
+.app_img_link <- function(app_url, img_url, title, subtitle, height = 200, img_style = NULL,
+                          new_window = TRUE){
+  p <- if(is.null(img_style)) "" else paste0('style="', img_style, '" ')
+  tblank <- if(new_window) 'target="_blank"' else ''
   shiny::HTML(paste0(
     '<div class="img_link_wrap">
     <img class="img_app" src="', img_url, '" ', p, 'width="100%" height="', height, '"/>
-    <a href="', app_url, '" style="color:white;" target="_blank"
+    <a href="', app_url, '" style="color:white;" ', tblank, '
     <div class="img_hover_layer">
     <div class="img_hover">
     <h3><p>', title, '</p></h3>
@@ -16,19 +18,20 @@
 # nolint end
 
 .app_img_links <- function(app_url, img_url, title, subtitle, label = NULL, drop = NULL,
-                           height = 200, min_width = 300, max_width = 400, col_width = 4, img_padding = NULL){
+                           height = 200, min_width = 300, max_width = 400, col_width = 4,
+                           img_style = NULL, new_window = TRUE){
   apps <- basename(app_url)
   n <- length(apps)
   if(!is.null(drop) && !all(drop %in% apps))
     stop("Cannot drop apps that are not in the master list.")
   idx <- if(is.null(drop)) seq_along(apps) else seq_along(app_url)[-match(drop, apps)]
 
-  if(is.null(img_padding)){
+  if(is.null(img_style)){
     img_padding <- vector("list", n)
   } else {
-    if(!length(img_padding) %in% c(1, n))
+    if(!length(img_style) %in% c(1, n))
       stop("`img_padding` length must be one or length of `app_url`.")
-    if(length(img_padding) == 1) img_padding <- rep(img_padding, n)
+    if(length(img_style) == 1) img_style <- rep(img_style, n)
   }
   if(is.null(label)){
     label <- vector("list", n)
@@ -38,7 +41,8 @@
 
   x <- purrr::map(
     idx, ~shiny::column(
-      col_width, label[.x], .app_img_link(app_url[.x], img_url[.x], title[.x], subtitle[.x], height, img_padding[.x]),
+      col_width, label[.x], .app_img_link(app_url[.x], img_url[.x], title[.x], subtitle[.x], height,
+                                          img_style[.x], new_window = new_window),
       style = paste0("min-width: ", min_width, "px; max-width: ", max_width, "px; padding:5px;")))
   shiny::fluidRow(x, style = "padding: 10px;")
 }
@@ -68,8 +72,9 @@
 #' @param min_width numeric, minimum width in pixels.
 #' @param max_width numeric, maximum width in pixels.
 #' @param col_width integer, column width number for row, 1 through 12, defaults to 4.
-#' @param img_padding optional image padding, e.q., \code{"10px"}. Defaults to \code{NULL}. See details.
-#' If length is one, is repeated for length of \code{app_url}.
+#' @param img_style optional style for the image component of the widget. Useful for padding in particular, e.q., \code{style="padding:10px;"}.
+#' Defaults to \code{NULL}. See details. If length is one, is repeated for length of \code{app_url}.
+#' @param new_window logical, open the link in a new browser window. Defaults to \code{TRUE}.
 #'
 #' @return a shiny fluidRow containing organized and stylized app image links for reference.
 #' @export
@@ -77,9 +82,9 @@
 #' @examples
 #' #not run
 app_showcase <- function(app_url, img_url, title, subtitle, label = NULL, drop = NULL, height = 200,
-                         min_width = 300, max_width = 400, col_width = 4, img_padding = NULL){
+                         min_width = 300, max_width = 400, col_width = 4, img_style = NULL, new_window = TRUE){
   .app_img_links(app_url, img_url, title, subtitle, label, drop, height,
-                 min_width, max_width, col_width, img_padding)
+                 min_width, max_width, col_width, img_style, new_window)
 }
 
 #' Generate a recommended app citation
