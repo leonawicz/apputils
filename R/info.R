@@ -27,7 +27,7 @@
   idx <- if(is.null(drop)) seq_along(apps) else seq_along(app_url)[-match(drop, apps)]
 
   if(is.null(img_style)){
-    img_padding <- vector("list", n)
+    img_style <- vector("list", n)
   } else {
     if(!length(img_style) %in% c(1, n))
       stop("`img_padding` length must be one or length of `app_url`.")
