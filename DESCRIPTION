@@ -1,5 +1,5 @@
 Package: apputils
-Version: 0.4.7
+Version: 0.4.8
 Title: Supporting Functions For Shiny Apps Development
 Description: Common utility functions, settings and references for development use across multiple Shiny apps.
 Authors@R: c(person("Matthew", "Leonawicz", email = "mfleonawicz@alaska.edu", role = c("aut", "cre")),
