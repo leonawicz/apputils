@@ -13,28 +13,3 @@
 # apputils 0.0.0.9000
 
 * Added a `NEWS.md` file to track changes to the package.
-
-contactinfo <- function(id = "leonawicz", snap, iarc, uaf){
-  logo <- c(uaf, iarc, snap)
-  href <- c("http://www.uaf.edu", "https://web.iarc.uaf.edu", "https://www.snap.uaf.edu")
-  
-  if(id == "leonawicz"){
-    links <- list(
-      GitHub.io = "https://leonawicz.github.io",
-      LinkedIn = "http://www.linkedin.com/in/leonawicz",
-      Twitter = "https://twitter.com/leonawicz",
-      Blog = "https://leonawicz.github.io/blog"
-    )
-    info <- apputils::contactinfo(
-      name = "Matthew Leonawicz",
-      role = "Statistician | R Developer",
-      photo = "https://www.gravatar.com/avatar/5ab20ebc3829054f8af7b1ea4a317269?s=128",
-      logo = logo, href = href, 
-      links = links, 
-      header = "Contact information",
-      footnote = "For questions about this application, please email mfleonawicz@alaska.edu", 
-      logo_height = 170, photo_width = 128, photo_height = 128
-    )
-  }
-  info
-}
