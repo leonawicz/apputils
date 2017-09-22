@@ -166,19 +166,19 @@ contactinfo <- function(name, role, photo, logo = NULL, href = NULL, links = NUL
   } else {
     x <- ""
   }
-  id <- paste0('<div style="clear: left;"><img src="', photo,
+  id <- paste0('<div style="clear: left;"><img src="', photo, # nolint start
                '" alt="" style="float: left; margin-right:5px; width:', photo_width,
                '; height:', photo_height, ';" /></div><p>', name, '<br/>', role, '<br/>')
   if(inherits(links, "list")){
     if(is.null(names(links))) stop("`links` must be a named list.")
     links <- purrr::map2(links, names(links),
-                         ~paste0('<a href="', .y, '" target="_blank">', .x, '</a>')) %>%
+                         ~paste0('<a href="', .y, '" target="_blank">', .x, '</a>')) %>% # nolint end
       unlist() %>% paste(collapse = " | ")
     id <- paste0(id, links)
   }
   if(!is.null(header)) header <- shiny::h2(header)
   if(!is.null(footnote)) footnote <- shiny::p(footnote)
-  shiny::tagList(shiny::HTML(x), header, shiny::HTML(paste0(id, '</p>')), footnote)
+  shiny::tagList(shiny::HTML(x), header, shiny::HTML(paste0(id, "</p>")), footnote)
 }
 
 # nolint start
