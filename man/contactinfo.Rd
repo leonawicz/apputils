@@ -2,18 +2,54 @@
 % Please edit documentation in R/info.R
 \name{contactinfo}
 \alias{contactinfo}
-\title{Add contact information widget to app}
+\title{Add contact information widget}
 \usage{
-contactinfo(logos = NULL)
+contactinfo(name, role, photo, logo = NULL, href = NULL, links = NULL,
+  header = "Contact information", footnote = NULL, logo_height = 170,
+  photo_width = 128, photo_height = 128)
 }
 \arguments{
-\item{logos}{named list. Currently accepted names must be \code{uaf}, \code{iarc} or \code{snap}. List elements are image urls for \code{src}.}
+\item{name}{author.}
+
+\item{role}{i.e., job title.}
+
+\item{photo}{author image url.}
+
+\item{logo}{vector of additional image urls, i.e., funders.}
+
+\item{href}{optional links to logos.}
+
+\item{links}{separate list of text author-related links. See details.}
+
+\item{header}{optional heading.}
+
+\item{footnote}{additional text.}
+
+\item{logo_height}{numeric, set a fixed height in pixels for any logos.}
+
+\item{photo_width}{numeric, author photo width in pixels.}
+
+\item{photo_height}{numeric, author photo height in pixels.}
 }
 \value{
 a shiny taglist.
 }
 \description{
-Add contact information widget to app
+Add a contact information section that includes author name, role, a thumbnail photo and optional logos and links.
+}
+\details{
+A name, role and photo are required. The recommended photo size is 128 x 128 pixels.
+For logos (multiple), width is full but height is forced constant.
+\code{logo} may be a vector. \code{href} may be an equal-length vector if logos are image links.
+
+\code{links} is a separate named list of author-related links.
+For example, \code{links = list("GitHub pages" = "https://leonawicz.github.io", Twitter = "https://twitter.com/leonawicz")} will appear
+as \code{Github pages | Twitter} in the output.
+
+\code{header = NULL} will drop the heading. \code{footnote} is optional arbitrary text that will appear at the bottom of the widget in a paragraph tag.
+Everything but logos remains tightly integrated on the left and is intended to be specific to the author.
+Logos are floated to the right and are commonly used for branding. The default photo and image heights help keep elements nicely aligned for typical
+sized web pages. The footnote should be short to keep the widget small, such as "For questions about this app, email...", rather than an author bio.
 }
 \examples{
 #not run

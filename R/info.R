@@ -113,42 +113,72 @@ app_citation <- function(author, year, title, publisher, url, heading="Recommend
   ))
 }
 
-#' Add contact information widget to app
+#' Add contact information widget
 #'
-#' @param logos named list. Currently accepted names must be \code{uaf}, \code{iarc} or \code{snap}. List elements are image urls for \code{src}.
+#' Add a contact information section that includes author name, role, a thumbnail photo and optional logos and links.
+#'
+#' A name, role and photo are required. The recommended photo size is 128 x 128 pixels.
+#' For logos (multiple), width is full but height is forced constant.
+#' \code{logo} may be a vector. \code{href} may be an equal-length vector if logos are image links.
+#'
+#' \code{links} is a separate named list of author-related links.
+#' For example, \code{links = list("GitHub pages" = "https://leonawicz.github.io", Twitter = "https://twitter.com/leonawicz")} will appear
+#' as \code{Github pages | Twitter} in the output.
+#'
+#' \code{header = NULL} will drop the heading. \code{footnote} is optional arbitrary text that will appear at the bottom of the widget in a paragraph tag.
+#' Everything but logos remains tightly integrated on the left and is intended to be specific to the author.
+#' Logos are floated to the right and are commonly used for branding. The default photo and image heights help keep elements nicely aligned for typical
+#' sized web pages. The footnote should be short to keep the widget small, such as "For questions about this app, email...", rather than an author bio.
+#'
+#' @param name author.
+#' @param role i.e., job title.
+#' @param photo author image url.
+#' @param logo vector of additional image urls, i.e., funders.
+#' @param href optional links to logos.
+#' @param links separate list of text author-related links. See details.
+#' @param header optional heading.
+#' @param footnote additional text.
+#' @param logo_height numeric, set a fixed height in pixels for any logos.
+#' @param photo_width numeric, author photo width in pixels.
+#' @param photo_height numeric, author photo height in pixels.
 #'
 #' @return a shiny taglist.
 #' @export
 #'
 #' @examples
 #' #not run
-contactinfo <- function(logos=NULL){
-  if(!is.null(logos) && all(names(logos) %in% c("uaf", "iarc", "snap"))){
-    close_tag <- '" style="float:right;height:170px;margin:5px;" target="_blank"></a>'
-    x0 <- if("uaf" %in% names(logos))
-      paste0('<a href="http://www.uaf.edu/"><img src="', logos$uaf, close_tag) else c()
-    if("iarc" %in% names(logos))
-      x0 <- c(x0, paste0('<a href="https://web.iarc.uaf.edu/"><img src="', logos$iarc, close_tag))
-    if("snap" %in% names(logos))
-      x0 <- c(x0, paste0('<a href="https://www.snap.uaf.edu/"><img src="', logos$snap, close_tag))
-  } else x0 <- ""
-  shiny::tagList(
-    shiny::HTML(x0),
-    shiny::h2("Contact information"),
-    shiny::HTML(
-      '<div style="clear: left;"><img src="https://www.gravatar.com/avatar/5ab20ebc3829054f8af7b1ea4a317269?s=128"
-       alt="" style="float: left; margin-right:5px" /></div>
-       <p>Matthew Leonawicz<br/>
-       Statistician | useR<br/>
-       <a href="https://leonawicz.github.io" target="_blank">Github.io</a> |
-       <a href="http://blog.snap.uaf.edu" target="_blank">Blog</a> |
-       <a href="https://twitter.com/leonawicz" target="_blank">Twitter</a> |
-       <a href="http://www.linkedin.com/in/leonawicz" target="_blank">Linkedin</a> <br/>
-       <a href="http://www.snap.uaf.edu/", target="_blank">Scenarios Network for Alaska and Arctic Planning</a>
-       </p>'
-    ),
-    shiny::p("For questions about this application, please email mfleonawicz@alaska.edu")
-  )
+contactinfo <- function(name, role, photo, logo = NULL, href = NULL, links = NULL,
+                        header = "Contact information", footnote = NULL,
+                        logo_height = 170, photo_width = 128, photo_height = 128){
+  if(!inherits(photo, "character") || length(photo) != 1)
+    stop("`photo` must be a path or url to a single image.")
+  if(inherits(logo, "character")){
+    if(inherits(href, "character") && length(href) != length(logo))
+      stop("`logo` and `href` must be equal length if `href` is not NULL.")
+    close_tag <- paste0('" style="float:right;height:', logo_height,
+                        'px;margin:5px;" target="_blank">')
+    if(!is.null(href)) close_tag <- paste0(close_tag, "</a>")
+    if(is.null(href))
+      x <- purrr::map2(logo, ~paste0('<img src="', .x, close_tag))
+    if(!is.null(href))
+      x <- purrr::map2(logo, href, ~paste0('<a href="', .y, '"><img src="', .x, close_tag))
+    x <- paste(unlist(x), collapse = "")
+  } else {
+    x <- ""
+  }
+  id <- paste0('<div style="clear: left;"><img src="', photo,
+               '" alt="" style="float: left; margin-right:5px; width:', photo_width,
+               '; height:', photo_height, ';" /></div><p>', name, '<br/>', role, '<br/>')
+  if(inherits(links, "list")){
+    if(is.null(names(links))) stop("`links` must be a named list.")
+    links <- purrr::map2(links, names(links),
+                         ~paste0('<a href="', .y, '" target="_blank">', .x, '</a>')) %>%
+      unlist() %>% paste(collapse = " | ")
+    id <- paste0(id, links)
+  }
+  if(!is.null(header)) header <- shiny::h2(header)
+  if(!is.null(footnote)) footnote <- shiny::p(footnote)
+  shiny::tagList(shiny::HTML(x), header, shiny::HTML(paste0(id, '</p>')), footnote)
 }
 
 # nolint start
