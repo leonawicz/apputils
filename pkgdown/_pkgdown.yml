@@ -1,4 +1,4 @@
-url: http://leonawicz.github.io/
+url: https://leonawicz.github.io/
 
 template:
   params:
@@ -7,7 +7,7 @@ template:
 
 authors:
   Matthew Leonawicz:
-    href: http://leonawicz.github.io/
+    href: https://leonawicz.github.io/
   Scenarios Network for Alaska and Arctic Planning:
     href: http://snap.uaf.edu/
     html: <img src="https://raw.githubusercontent.com/leonawicz/leonawicz.github.io/master/assets/img/snap_symbol.svg?sanitize=true" height="24" />  Scenarios Network for Alaska and Arctic Planning
@@ -83,60 +83,60 @@ navbar:
       icon: fa-globe fa-lg
       menu:
         - text: "Home of the verse"
-          href: http://leonawicz.github.io/sv.html
+          href: https://leonawicz.github.io/sv.html
         - text: "--------"
         - text: "Sector packages"
         - text: "snapverse"
-          href: http://leonawicz.github.io/snapverse
+          href: https://leonawicz.github.io/snapverse
         - text: "snaplite"
-          href: http://leonawicz.github.io/snaplite
+          href: https://leonawicz.github.io/snaplite
         - text: "snapdata"
-          href: http://leonawicz.github.io/snapdata
+          href: https://leonawicz.github.io/snapdata
         - text: "snapwebs"
-          href: http://leonawicz.github.io/snapwebs
+          href: https://leonawicz.github.io/snapwebs
         - text: "--------"
         - text: "Functions packages"
         - text: "snapfuns"
-          href: http://leonawicz.github.io/snapfuns
+          href: https://leonawicz.github.io/snapfuns
         - text: "snapprep"
-          href: http://leonawicz.github.io/snapprep
+          href: https://leonawicz.github.io/snapprep
         - text: "alfresco"
-          href: http://leonawicz.github.io/alfresco
+          href: https://leonawicz.github.io/alfresco
         - text: "--------"
         - text: "Data packages"
         - text: "snapclim"
-          href: http://leonawicz.github.io/snapclim
+          href: https://leonawicz.github.io/snapclim
         - text: "snapfire"
-          href: http://leonawicz.github.io/snapfire
+          href: https://leonawicz.github.io/snapfire
         - text: "snappoly"
-          href: http://leonawicz.github.io/snappoly
+          href: https://leonawicz.github.io/snappoly
         - text: "snapmaps"
-          href: http://leonawicz.github.io/snapgrid
+          href: https://leonawicz.github.io/snapgrid
         - text: "snapdist"
-          href: http://leonawicz.github.io/snapdist
+          href: https://leonawicz.github.io/snapdist
         - text: "--------"
         - text: "Apps & docs packages"
         - text: "snapapps"
-          href: http://leonawicz.github.io/snapapps
+          href: https://leonawicz.github.io/snapapps
         - text: "snapdash"
-          href: http://leonawicz.github.io/snapdash
+          href: https://leonawicz.github.io/snapdash
         - text: "snapflex"
-          href: http://leonawicz.github.io/snapflex
+          href: https://leonawicz.github.io/snapflex
         - text: "snapdocs"
-          href: http://leonawicz.github.io/snapdocs
+          href: https://leonawicz.github.io/snapdocs
         - text: "--------"
         - text: "Satellite packages"
         - text: "rvtable"
-          href: http://leonawicz.github.io/rvtable
+          href: https://leonawicz.github.io/rvtable
         - text: "apputils"
-          href: http://leonawicz.github.io/apputils
+          href: https://leonawicz.github.io/apputils
         - text: "maputils"
-          href: http://leonawicz.github.io/maputils
+          href: https://leonawicz.github.io/maputils
         - text: "snaputils"
-          href: http://leonawicz.github.io/snaputils
+          href: https://leonawicz.github.io/snaputils
         - text: "snapmeta"
-          href: http://leonawicz.github.io/snapmeta
+          href: https://leonawicz.github.io/snapmeta
         - text: "snapsite"
-          href: http://leonawicz.github.io/snapsite
+          href: https://leonawicz.github.io/snapsite
     - icon: fa-github fa-lg
       href: https://github.com/leonawicz/apputils
