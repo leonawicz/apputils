@@ -42,7 +42,7 @@
   x <- purrr::map(
     idx, ~shiny::column(
       col_width, label[.x], .app_img_link(app_url[.x], img_url[.x], title[.x], subtitle[.x], height,
-                                          img_style[.x], new_window = new_window),
+                                          img_style[[.x]], new_window = new_window),
       style = paste0("min-width: ", min_width, "px; max-width: ", max_width, "px; padding:5px;")))
   shiny::fluidRow(x, style = "padding: 10px;")
 }
