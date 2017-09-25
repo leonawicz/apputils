@@ -172,7 +172,7 @@ contactinfo <- function(name, role, photo, logo = NULL, href = NULL, links = NUL
   if(inherits(links, "list")){
     if(is.null(names(links))) stop("`links` must be a named list.")
     links <- purrr::map2(links, names(links),
-                         ~paste0('<a href="', .y, '" target="_blank">', .x, '</a>')) %>% # nolint end
+                         ~paste0('<a href="', .x, '" target="_blank">', .y, '</a>')) %>% # nolint end
       unlist() %>% paste(collapse = " | ")
     id <- paste0(id, links)
   }
