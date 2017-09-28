@@ -1,6 +1,11 @@
+# apputils 0.4.9 (Release date: 2017-09-28)
+
+* Generalized `faq`, adding a number of arguments to give more control over appearance and content. Migrated a new SNAP-specific version to `snaputils`.
+* BREAKING CHANGES: updated several argument names for various functions.
+
 # apputils 0.4.8 (Release date: 2017-09-22)
 
-* Generalized contact info, adding a number of arguments to give more control over appearance and content. Migrated  a new SNAP-specific version to `snaputils`.
+* Generalized `contactinfo`, adding a number of arguments to give more control over appearance and content. Migrated a new SNAP-specific version to `snaputils`.
 
 # apputils 0.4.7 (Release date: 2017-09-01)
 
