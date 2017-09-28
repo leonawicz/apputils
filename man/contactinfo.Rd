@@ -5,8 +5,8 @@
 \title{Add contact information widget}
 \usage{
 contactinfo(name, role, photo, logo = NULL, href = NULL, links = NULL,
-  header = "Contact information", footnote = NULL, logo_height = 170,
-  photo_width = 128, photo_height = 128)
+  heading = "Contact information", heading_size = "h2", footnote = NULL,
+  logo_height = 170, photo_width = 128, photo_height = 128)
 }
 \arguments{
 \item{name}{author.}
@@ -21,7 +21,9 @@ contactinfo(name, role, photo, logo = NULL, href = NULL, links = NULL,
 
 \item{links}{separate list of text author-related links. See details.}
 
-\item{header}{optional heading.}
+\item{heading}{optional heading.}
+
+\item{heading_size}{character, defaults to \code{"h2"}.}
 
 \item{footnote}{additional text.}
 
@@ -42,11 +44,14 @@ A name, role and photo are required. The recommended photo size is 128 x 128 pix
 For logos (multiple), width is full but height is forced constant.
 \code{logo} may be a vector. \code{href} may be an equal-length vector if logos are image links.
 
-\code{links} is a separate named list of author-related links.
+\code{links} is a separate named or unnamed list of author-related links.
 For example, \code{links = list("GitHub pages" = "https://leonawicz.github.io", Twitter = "https://twitter.com/leonawicz")} will appear
-as \code{Github pages | Twitter} in the output.
+as \code{Github pages | Twitter} in the output. If \code{links} is unnamed, each element must be a string  and will be wrapped in \code{shiny::HTML}.
+This is useful for something like small icon links with no text, e.g.:
 
-\code{header = NULL} will drop the heading. \code{footnote} is optional arbitrary text that will appear at the bottom of the widget in a paragraph tag.
+\code{links = list('<a href="https://leonawicz.github.io" target="_blank"><i class="fa fa-github fa-lg"></i></a>')}
+
+\code{heading = NULL} will drop the heading. \code{footnote} is optional arbitrary text that will appear at the bottom of the widget in a paragraph tag.
 Everything but logos remains tightly integrated on the left and is intended to be specific to the author.
 Logos are floated to the right and are commonly used for branding. The default photo and image heights help keep elements nicely aligned for typical
 sized web pages. The footnote should be short to keep the widget small, such as "For questions about this app, email...", rather than an author bio.
