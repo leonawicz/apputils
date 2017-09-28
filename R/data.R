@@ -239,3 +239,26 @@ brushed_data <- function(data, x, brush, type="annual"){
   }
   y
 }
+
+#' Color re-indexing
+#'
+#' Re-index colors for grouped data, as displayed in plots and other widgets, when groups may be missing.
+#'
+#' This is typically used when group levels are in a data set but user selection (mouse brush action) in an interactive plot may not result
+#' in a data subset that includes data from all levels of the grouping variable.
+#'
+#' @param x a data frame.
+#' @param clrby column name of the grouping variable to be used for coloring.
+#'
+#' @return a re-indexed vector of colors from \code{tolpal}.
+#' @export
+#'
+#' @examples
+#' # not run
+color_indexer <- function(x, clrby){
+  x <- split(x, x[[clrby]])
+  clrs <- as.list(tolpal(length(x)))
+  idx <- which(purrr::map_lgl(x, ~nrow(.x) > 0))
+  clrs <- clrs[idx]
+  clrs
+}
