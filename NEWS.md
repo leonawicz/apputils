@@ -4,6 +4,7 @@
 * BREAKING CHANGES: updated several argument names for various functions.
 * Unnamed list can now be passed to `links` in `contactinfo`. It will take strings and wrap them in `shiny::HTML`.
 * Added heading size argument to `contactinfo`.
+* Added `color_indexer` helper function.
 
 # apputils 0.4.8 (Release date: 2017-09-22)
 
