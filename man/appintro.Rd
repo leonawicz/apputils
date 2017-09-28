@@ -4,9 +4,9 @@
 \alias{appintro}
 \title{App launch information}
 \usage{
-appintro(title, message, logo = NULL, logo.position = "title",
-  type = "toast", toast.type = "info", heading.size = "h2",
-  toast.args = list(timeOut = 10000, extendedTimeOut = 10000, position =
+appintro(title, message, logo = NULL, logo_position = "title",
+  type = "toast", toast_type = "info", heading_size = "h2",
+  toast_args = list(timeOut = 10000, extendedTimeOut = 10000, position =
   "top-center", closeButton = TRUE, preventDuplicates = TRUE))
 }
 \arguments{
@@ -16,17 +16,17 @@ appintro(title, message, logo = NULL, logo.position = "title",
 
 \item{logo}{the \code{src} character string for an image.}
 
-\item{logo.position}{character, \code{"title"} or \code{"message"}.
+\item{logo_position}{character, \code{"title"} or \code{"message"}.
 The logo is comes after and is floated to the right of either the title or the message body.}
 
 \item{type}{whether to return a \code{"toast"} message using \code{shinytoastr} (default) or plain \code{"html"} as a character string.}
 
-\item{toast.type}{if \code{type="toast"}, the toast background color is set by specifying one of \code{"info"} (default),
+\item{toast_type}{if \code{type = "toast"}, the toast background color is set by specifying one of \code{"info"} (default),
 \code{"success"}, \code{"warning"} or \code{"error"}.}
 
-\item{heading.size}{character, wrap the title in html heading tags, defaults to \code{"h2"}.}
+\item{heading_size}{character, wrap the title in html heading tags, defaults to \code{"h2"}.}
 
-\item{toast.args}{a list of additional arguments (after \code{title} and \code{message}) to pass to \code{shinytoastr::toast_*}.}
+\item{toast_args}{a list of additional arguments (after \code{title} and \code{message}) to pass to \code{shinytoastr::toast_*}.}
 }
 \value{
 a \code{shiny::toastr::toast_*} object by default. Alternatively, a character string of html.
@@ -35,8 +35,8 @@ a \code{shiny::toastr::toast_*} object by default. Alternatively, a character st
 Show information about an app during launch such as a 'welcome/what to do' toast message.
 }
 \details{
-The list \code{toast.args} has the following defaults: \code{timeOut=10000}, \code{extendedTimeOut=timeOut}, \code{position="top-center"},
-\code{closeButton=TRUE} and \code{preventDuplicates=TRUE}.
+The list \code{toast_args} has the following defaults: \code{timeOut = 10000}, \code{extendedTimeOut = timeOut}, \code{position = "top-center"},
+\code{closeButton = TRUE} and \code{preventDuplicates=TRUE}.
 If another list is provided, but does not include some of these five arguments, they will
 be retained as defaults. Note that this function depends heavily on associated custom CSS. For example, if your message body is
 very large, it will not fit in the toast box unless additional css overrides are included in your app for size and position.

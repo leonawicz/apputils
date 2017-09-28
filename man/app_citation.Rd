@@ -5,7 +5,7 @@
 \title{Generate a recommended app citation}
 \usage{
 app_citation(author, year, title, publisher, url,
-  heading = "Recommended citation", heading.size = "h3")
+  heading = "Recommended citation", heading_size = "h3")
 }
 \arguments{
 \item{author}{character string, appears as is.}
@@ -20,7 +20,7 @@ app_citation(author, year, title, publisher, url,
 
 \item{heading}{the heading of the citation section, defaults to \code{"Recommended citation"}.}
 
-\item{heading.size}{character, the heading tag, defaults to \code{"h3"}.}
+\item{heading_size}{character, the heading tag, defaults to \code{"h3"}.}
 }
 \value{
 a character string wrapped in \code{shiny::HTML}.

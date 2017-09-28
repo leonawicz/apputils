@@ -4,17 +4,17 @@
 \alias{faq}
 \title{Generate a Frequently Asked Questions (FAQ) widget}
 \usage{
-faq(id, format = "bscollapse", bscollapse.args = list(id = "faq", open =
-  NULL, multiple = FALSE), showcase.args = list(drop = NULL))
+faq(faqlist, id, format = "bscollapse", bscollapse_args = list(id = "faq",
+  open = NULL, multiple = FALSE))
 }
 \arguments{
+\item{faqlist}{a prepared list of FAQs. See details.}
+
 \item{id}{character, the id for the \code{shinyBS::bsCollapse} element.}
 
 \item{format}{character, \code{"bscollapse"} (default) or alternatively, \code{"list"}.}
 
-\item{bscollapse.args}{a list of arguments passed to bsCollapse. Defaults to \code{list(id="faq", open=NULL, multiple=FALSE)}.}
-
-\item{showcase.args}{a list of arguments passed to \code{app_showcase}.}
+\item{bscollapse_args}{a list of arguments passed to bsCollapse. Defaults to \code{list(id = "faq", open = NULL, multiple = FALSE)}.}
 }
 \value{
 a \code{shinyBS::bsCollapse} object or a list.
@@ -23,27 +23,20 @@ a \code{shinyBS::bsCollapse} object or a list.
 Generate a widget that displays FAQs in an information/about section of an app.
 }
 \details{
-\code{faq} is a simple function containing a dictionary of common FAQ entries.
-It returns a Bootstrap Collapse menu FAQ format by default. Changing to \code{format="list"}
-alternatively returns a list of question and answer pairs, each being a length-2 sublist.
-In this case, each question is a character string and each answer is either a simple HTML paragraph
-or a taglist of multiple HTML components if the answer contains more complex content (e.g., images and links).
+\code{faq} creates an FAQ widget from a named list.
+It returns a Bootstrap Collapse menu FAQ format by default. Changing to \code{format = "list"}
+simply passes through the original \code{faqlist}.
 
-A key difference with the \code{open} argument that can be passed in a list to \code{bscollapse.args}
-is that it must simply match a single \emph{dictionary entry} \code{id}, not a collapse panel question title or id (e.g., \code{open="apps"}).
+Generally, an FAQ list is a named list that is prepared in advance and passed to \code{faqlist}.
+The names of the list elements are used for indexing the list with \code{id}.
+It is designed this way in the context of reusable FAQ list dictionaries, where each use does not require all entries.
+Each list element in \code{faqlist} is a length-2 list.
+The first element is the question: a character string. The second element
+is the answer: any text or HTML content, e.g., multiple tags wrapped in a tag list.
 
-The current FAQ dictionary IDs and the questions they refer to include:
-\describe{
-  \item{distributions}{Why use probability distributions?}
-  \item{gcm}{What is a GCM?}
-  \item{rcp}{What is an RCP?}
-  \item{fmz}{What are fire management zones?}
-  \item{apps}{How did you make this app? Are other apps available?}
-  \item{alfresco_simulations}{What do "simulations" refer to in the data selection area?}
-  \item{factsheet_about}{What are fact sheets?}
-  \item{factsheet_availability}{Why are fact sheets not always available?}
-  \item{climdist_variables}{What do the available distributions represent?}
-}
+A key difference with the \code{open} argument that can be passed in a list to \code{bscollapse_args}
+is that it must simply match a single \emph{dictionary entry} \code{id} (e.g., \code{open = "apps"}),
+not a collapse panel question title or id.
 }
 \examples{
 #not run
