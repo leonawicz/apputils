@@ -51,6 +51,7 @@ reference:
   - dist_data
   - clim_convert_round
   - brushed_data
+  - color_indexer
 - title: Leaflet
   contents:
   - build_mapset
