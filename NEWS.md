@@ -5,6 +5,7 @@
 * Unnamed list can now be passed to `links` in `contactinfo`. It will take strings and wrap them in `shiny::HTML`.
 * Added heading size argument to `contactinfo`.
 * Added `color_indexer` helper function.
+* `footnote` in `contactinfo` can be a vector. This is use for some contexts where space permits more than one line for footnotes.
 
 # apputils 0.4.8 (Release date: 2017-09-22)
 
