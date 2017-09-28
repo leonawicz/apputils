@@ -2,6 +2,8 @@ Package: apputils
 Version: 0.4.9
 Title: Supporting Functions For Shiny Apps Development
 Description: Common utility functions, settings and references for development use across multiple Shiny apps.
+Author: Matthew Leonawicz [aut, cre]
+Maintainer: Matthew Leonawicz <mfleonawicz@alaska.edu>
 Authors@R: c(person("Matthew", "Leonawicz", email = "mfleonawicz@alaska.edu", role = c("aut", "cre")),
     person("Scenarios Network for Alaska and Arctic Planning", role = c("cph", "fnd"))
     )
