@@ -2,6 +2,8 @@
 
 * Generalized `faq`, adding a number of arguments to give more control over appearance and content. Migrated a new SNAP-specific version to `snaputils`.
 * BREAKING CHANGES: updated several argument names for various functions.
+* Unnamed list can now be passed to `links` in `contactinfo`. It will take strings and wrap them in `shiny::HTML`.
+* Added heading size argument to `contactinfo`.
 
 # apputils 0.4.8 (Release date: 2017-09-22)
 
