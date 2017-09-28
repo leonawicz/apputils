@@ -195,12 +195,16 @@
     <p>Generate a widget that displays FAQs in an information/about section of an app.</p>
     
 
-    <pre class="usage"><span class='fu'>faq</span>(<span class='no'>id</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"bscollapse"</span>, <span class='kw'>bscollapse.args</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"faq"</span>, <span class='kw'>open</span> <span class='kw'>=</span>
-  <span class='kw'>NULL</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>), <span class='kw'>showcase.args</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>))</pre>
+    <pre class="usage"><span class='fu'>faq</span>(<span class='no'>faqlist</span>, <span class='no'>id</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"bscollapse"</span>, <span class='kw'>bscollapse_args</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"faq"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>faqlist</th>
+      <td><p>a prepared list of FAQs. See details.</p></td>
+    </tr>
     <tr>
       <th>id</th>
       <td><p>character, the id for the <code><a href='http://www.rdocumentation.org/packages/shinyBS/topics/bsCollapse'>shinyBS::bsCollapse</a></code> element.</p></td>
@@ -210,12 +214,8 @@
       <td><p>character, <code>"bscollapse"</code> (default) or alternatively, <code>"list"</code>.</p></td>
     </tr>
     <tr>
-      <th>bscollapse.args</th>
-      <td><p>a list of arguments passed to bsCollapse. Defaults to <code>list(id="faq", open=NULL, multiple=FALSE)</code>.</p></td>
-    </tr>
-    <tr>
-      <th>showcase.args</th>
-      <td><p>a list of arguments passed to <code>app_showcase</code>.</p></td>
+      <th>bscollapse_args</th>
+      <td><p>a list of arguments passed to bsCollapse. Defaults to <code>list(id = "faq", open = NULL, multiple = FALSE)</code>.</p></td>
     </tr>
     </table>
     
@@ -225,24 +225,18 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>faq</code> is a simple function containing a dictionary of common FAQ entries.
-It returns a Bootstrap Collapse menu FAQ format by default. Changing to <code>format="list"</code>
-alternatively returns a list of question and answer pairs, each being a length-2 sublist.
-In this case, each question is a character string and each answer is either a simple HTML paragraph
-or a taglist of multiple HTML components if the answer contains more complex content (e.g., images and links).</p>
-<p>A key difference with the <code>open</code> argument that can be passed in a list to <code>bscollapse.args</code>
-is that it must simply match a single <em>dictionary entry</em> <code>id</code>, not a collapse panel question title or id (e.g., <code>open="apps"</code>).</p>
-<p>The current FAQ dictionary IDs and the questions they refer to include:</p><dl class='dl-horizontal'>
-  <dt>distributions</dt><dd><p>Why use probability distributions?</p></dd>
-  <dt>gcm</dt><dd><p>What is a GCM?</p></dd>
-  <dt>rcp</dt><dd><p>What is an RCP?</p></dd>
-  <dt>fmz</dt><dd><p>What are fire management zones?</p></dd>
-  <dt>apps</dt><dd><p>How did you make this app? Are other apps available?</p></dd>
-  <dt>alfresco_simulations</dt><dd><p>What do "simulations" refer to in the data selection area?</p></dd>
-  <dt>factsheet_about</dt><dd><p>What are fact sheets?</p></dd>
-  <dt>factsheet_availability</dt><dd><p>Why are fact sheets not always available?</p></dd>
-  <dt>climdist_variables</dt><dd><p>What do the available distributions represent?</p></dd>
-</dl>
+    <p><code>faq</code> creates an FAQ widget from a named list.
+It returns a Bootstrap Collapse menu FAQ format by default. Changing to <code>format = "list"</code>
+simply passes through the original <code>faqlist</code>.</p>
+<p>Generally, an FAQ list is a named list that is prepared in advance and passed to <code>faqlist</code>.
+The names of the list elements are used for indexing the list with <code>id</code>.
+It is designed this way in the context of reusable FAQ list dictionaries, where each use does not require all entries.
+Each list element in <code>faqlist</code> is a length-2 list.
+The first element is the question: a character string. The second element
+is the answer: any text or HTML content, e.g., multiple tags wrapped in a tag list.</p>
+<p>A key difference with the <code>open</code> argument that can be passed in a list to <code>bscollapse_args</code>
+is that it must simply match a single <em>dictionary entry</em> <code>id</code> (e.g., <code>open = "apps"</code>),
+not a collapse panel question title or id.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

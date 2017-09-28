@@ -195,9 +195,9 @@
     <p>Show information about an app during launch such as a 'welcome/what to do' toast message.</p>
     
 
-    <pre class="usage"><span class='fu'>appintro</span>(<span class='no'>title</span>, <span class='no'>message</span>, <span class='kw'>logo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>logo.position</span> <span class='kw'>=</span> <span class='st'>"title"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"toast"</span>, <span class='kw'>toast.type</span> <span class='kw'>=</span> <span class='st'>"info"</span>, <span class='kw'>heading.size</span> <span class='kw'>=</span> <span class='st'>"h2"</span>,
-  <span class='kw'>toast.args</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>timeOut</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>extendedTimeOut</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>position</span> <span class='kw'>=</span>
+    <pre class="usage"><span class='fu'>appintro</span>(<span class='no'>title</span>, <span class='no'>message</span>, <span class='kw'>logo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>logo_position</span> <span class='kw'>=</span> <span class='st'>"title"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"toast"</span>, <span class='kw'>toast_type</span> <span class='kw'>=</span> <span class='st'>"info"</span>, <span class='kw'>heading_size</span> <span class='kw'>=</span> <span class='st'>"h2"</span>,
+  <span class='kw'>toast_args</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>timeOut</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>extendedTimeOut</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>position</span> <span class='kw'>=</span>
   <span class='st'>"top-center"</span>, <span class='kw'>closeButton</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>preventDuplicates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -216,7 +216,7 @@
       <td><p>the <code>src</code> character string for an image.</p></td>
     </tr>
     <tr>
-      <th>logo.position</th>
+      <th>logo_position</th>
       <td><p>character, <code>"title"</code> or <code>"message"</code>.
 The logo is comes after and is floated to the right of either the title or the message body.</p></td>
     </tr>
@@ -225,16 +225,16 @@ The logo is comes after and is floated to the right of either the title or the m
       <td><p>whether to return a <code>"toast"</code> message using <code>shinytoastr</code> (default) or plain <code>"html"</code> as a character string.</p></td>
     </tr>
     <tr>
-      <th>toast.type</th>
-      <td><p>if <code>type="toast"</code>, the toast background color is set by specifying one of <code>"info"</code> (default),
+      <th>toast_type</th>
+      <td><p>if <code>type = "toast"</code>, the toast background color is set by specifying one of <code>"info"</code> (default),
 <code>"success"</code>, <code>"warning"</code> or <code>"error"</code>.</p></td>
     </tr>
     <tr>
-      <th>heading.size</th>
+      <th>heading_size</th>
       <td><p>character, wrap the title in html heading tags, defaults to <code>"h2"</code>.</p></td>
     </tr>
     <tr>
-      <th>toast.args</th>
+      <th>toast_args</th>
       <td><p>a list of additional arguments (after <code>title</code> and <code>message</code>) to pass to <code>shinytoastr::toast_*</code>.</p></td>
     </tr>
     </table>
@@ -245,8 +245,8 @@ The logo is comes after and is floated to the right of either the title or the m
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The list <code>toast.args</code> has the following defaults: <code>timeOut=10000</code>, <code>extendedTimeOut=timeOut</code>, <code>position="top-center"</code>,
-<code>closeButton=TRUE</code> and <code>preventDuplicates=TRUE</code>.
+    <p>The list <code>toast_args</code> has the following defaults: <code>timeOut = 10000</code>, <code>extendedTimeOut = timeOut</code>, <code>position = "top-center"</code>,
+<code>closeButton = TRUE</code> and <code>preventDuplicates=TRUE</code>.
 If another list is provided, but does not include some of these five arguments, they will
 be retained as defaults. Note that this function depends heavily on associated custom CSS. For example, if your message body is
 very large, it will not fit in the toast box unless additional css overrides are included in your app for size and position.

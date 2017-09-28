@@ -196,8 +196,8 @@
     
 
     <pre class="usage"><span class='fu'>contactinfo</span>(<span class='no'>name</span>, <span class='no'>role</span>, <span class='no'>photo</span>, <span class='kw'>logo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>href</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Contact information"</span>, <span class='kw'>footnote</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>logo_height</span> <span class='kw'>=</span> <span class='fl'>170</span>,
-  <span class='kw'>photo_width</span> <span class='kw'>=</span> <span class='fl'>128</span>, <span class='kw'>photo_height</span> <span class='kw'>=</span> <span class='fl'>128</span>)</pre>
+  <span class='kw'>heading</span> <span class='kw'>=</span> <span class='st'>"Contact information"</span>, <span class='kw'>heading_size</span> <span class='kw'>=</span> <span class='st'>"h2"</span>, <span class='kw'>footnote</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>logo_height</span> <span class='kw'>=</span> <span class='fl'>170</span>, <span class='kw'>photo_width</span> <span class='kw'>=</span> <span class='fl'>128</span>, <span class='kw'>photo_height</span> <span class='kw'>=</span> <span class='fl'>128</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -227,8 +227,12 @@
       <td><p>separate list of text author-related links. See details.</p></td>
     </tr>
     <tr>
-      <th>header</th>
+      <th>heading</th>
       <td><p>optional heading.</p></td>
+    </tr>
+    <tr>
+      <th>heading_size</th>
+      <td><p>character, defaults to <code>"h2"</code>.</p></td>
     </tr>
     <tr>
       <th>footnote</th>
@@ -257,10 +261,12 @@
     <p>A name, role and photo are required. The recommended photo size is 128 x 128 pixels.
 For logos (multiple), width is full but height is forced constant.
 <code>logo</code> may be a vector. <code>href</code> may be an equal-length vector if logos are image links.
-    <code>links</code> is a separate named list of author-related links.
+    <code>links</code> is a separate named or unnamed list of author-related links.
 For example, <code>links = list("GitHub pages" = "https://leonawicz.github.io", Twitter = "https://twitter.com/leonawicz")</code> will appear
-as <code>Github pages | Twitter</code> in the output.
-    <code>header = NULL</code> will drop the heading. <code>footnote</code> is optional arbitrary text that will appear at the bottom of the widget in a paragraph tag.
+as <code>Github pages | Twitter</code> in the output. If <code>links</code> is unnamed, each element must be a string  and will be wrapped in <code><a href='http://www.rdocumentation.org/packages/shiny/topics/HTML'>shiny::HTML</a></code>.
+This is useful for something like small icon links with no text, e.g.:
+    <code>links = list('&lt;a href="https://leonawicz.github.io" target="_blank"&gt;&lt;i class="fa fa-github fa-lg"&gt;&lt;/i&gt;&lt;/a&gt;')</code>
+    <code>heading = NULL</code> will drop the heading. <code>footnote</code> is optional arbitrary text that will appear at the bottom of the widget in a paragraph tag.
 Everything but logos remains tightly integrated on the left and is intended to be specific to the author.
 Logos are floated to the right and are commonly used for branding. The default photo and image heights help keep elements nicely aligned for typical
 sized web pages. The footnote should be short to keep the widget small, such as "For questions about this app, email...", rather than an author bio.</p>
