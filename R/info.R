@@ -184,7 +184,8 @@ contactinfo <- function(name, role, photo, logo = NULL, href = NULL, links = NUL
     }
     id <- paste0(id, links)
   }
-  if(!is.null(heading)) heading <- paste0("<", heading_size, ">", heading, "</", heading_size, ">")
+  if(!is.null(heading))
+    heading <- shiny::HTML(paste0("<", heading_size, ">", heading, "</", heading_size, ">"))
   if(!is.null(footnote)) footnote <- shiny::p(footnote)
   shiny::tagList(shiny::HTML(x), heading, shiny::HTML(paste0(id, "</p>")), footnote)
 }
@@ -232,12 +233,12 @@ appintro <- function(title, message, logo = NULL, logo_position = "title", type 
     }
   }
   if(type == "html") return(paste0(title, message, collapse = "\n"))
-  if(!toast.type %in% c("info", "success", "warning", "error"))
+  if(!toast_type %in% c("info", "success", "warning", "error"))
     stop("Invalid toast type. Must be info, success, warning or error.")
   make_toast <- paste0("toastr_", toast_type)
   if(is.null(toast_args$timeOut)) toast_args$timeOut <- 10000
   if(is.null(toast_args$extendedTimeOut)) toast_args$extendedTimeOut <- toast_args$timeOut
-  if(is.null(toast_args$position)) toast.args$position <- "top-center"
+  if(is.null(toast_args$position)) toast_args$position <- "top-center"
   if(is.null(toast_args$closeButton)) toast_args$closeButton <- TRUE
   if(is.null(toast_args$preventDuplicates)) toast_args$preventDuplicates <- TRUE
   do.call(make_toast, c(message = message, title = title, toast_args))
