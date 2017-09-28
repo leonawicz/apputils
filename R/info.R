@@ -133,6 +133,7 @@ app_citation <- function(author, year, title, publisher, url,
 #' Everything but logos remains tightly integrated on the left and is intended to be specific to the author.
 #' Logos are floated to the right and are commonly used for branding. The default photo and image heights help keep elements nicely aligned for typical
 #' sized web pages. The footnote should be short to keep the widget small, such as "For questions about this app, email...", rather than an author bio.
+#' If \code{footnote} is a vector, note that each element will become a separate paragraph tag and will stack vertically with vertical white space as well.
 #'
 #' @param name author.
 #' @param role i.e., job title.
@@ -186,7 +187,8 @@ contactinfo <- function(name, role, photo, logo = NULL, href = NULL, links = NUL
   }
   if(!is.null(heading))
     heading <- shiny::HTML(paste0("<", heading_size, ">", heading, "</", heading_size, ">"))
-  if(!is.null(footnote)) footnote <- shiny::p(footnote)
+  if(!is.null(footnote))
+    footnote <- shiny::HTML(paste(purrr::map_chr(footnote, ~as.character(shiny::p(.x))), collapse = ""))
   shiny::tagList(shiny::HTML(x), heading, shiny::HTML(paste0(id, "</p>")), footnote)
 }
 

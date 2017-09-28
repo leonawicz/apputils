@@ -55,6 +55,7 @@ This is useful for something like small icon links with no text, e.g.:
 Everything but logos remains tightly integrated on the left and is intended to be specific to the author.
 Logos are floated to the right and are commonly used for branding. The default photo and image heights help keep elements nicely aligned for typical
 sized web pages. The footnote should be short to keep the widget small, such as "For questions about this app, email...", rather than an author bio.
+If \code{footnote} is a vector, note that each element will become a separate paragraph tag and will stack vertically with vertical white space as well.
 }
 \examples{
 #not run
