@@ -19,6 +19,6 @@ Package functionality and areas of support covered by \code{apputils} include:
   \item Functions for including app information widgets such as citations, contact info, frequently asked questions and more.
   \item Encapsulation of working with data frames in server.R in specific contexts and use cases to simplify code.
   \item Wrappers around specific use cases for Leaflet maps, data tables, and general plotting in apps.
-  \item Helper functions for dynmaic reports.
+  \item Helper functions for dynamic reports.
 }
 }
