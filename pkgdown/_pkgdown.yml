@@ -99,6 +99,8 @@ navbar:
         - text: "Functions packages"
         - text: "snapfuns"
           href: https://leonawicz.github.io/snapfuns
+        - text: "snaplocs"
+          href: https://leonawicz.github.io/snaplocs
         - text: "snapprep"
           href: https://leonawicz.github.io/snapprep
         - text: "alfresco"
