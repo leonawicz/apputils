@@ -174,7 +174,7 @@ contactinfo <- function(name, role, photo, logo = NULL, href = NULL, links = NUL
   }
   id <- paste0('<div style="clear: left;"><img src="', photo, # nolint start
                '" alt="" style="float: left; margin-right:5px; width:', photo_width,
-               '; height:', photo_height, ';" /></div><p>', name, '<br/>', role, '<br/>')
+               '; height:', photo_height, ';" /></div><h4>', name, '</h4><h4>', role, '</h4>')
   if(inherits(links, "list")){
     if(is.null(names(links))){
       links <- paste(links, collapse = "")
