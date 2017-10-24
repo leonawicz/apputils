@@ -4,7 +4,7 @@
   background-color: #ffffff;
 }
 
-/* associated with valueBox (shinydashboard) and icon (shiny) apputils override functions */
+/* associated with valueBox and infoBox (shinydashboard) and icon (shiny) apputils override functions */
 .img-local {
 }
 
@@ -16,6 +16,14 @@
   z-index: 0;
   font-size: 70px;
   color: rgba(0, 0, 0, 0.15);
+}
+
+.info-box-icon > img {
+  position: center;
+  padding-bottom: 10px;
+}
+.info-box-text {
+  text-transform: none;
 }
 
 .bg-4477AA { background-color: #4477AA !important; color: #FFFFFF !important; }
