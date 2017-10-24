@@ -3,6 +3,8 @@
 * Added `exApp` for running Shiny app package examples.
 * Ported custom icons demo app to `apputils`.
 * Included all current custom icons in example app, adding the newer linear model themed icons.
+* Added package css for `infoBox` override.
+* Added introduction vignette content for stat boxes with package icons.
 
 # apputils 0.4.9 (Release date: 2017-09-28)
 
