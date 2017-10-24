@@ -169,3 +169,37 @@ app_overlay <- function(text, logo=NULL, loading.logo=NULL, text.loading='<h1>Lo
   shiny::HTML(paste0(x, '</div></div>'))
 }
 # nolint end
+
+#' Run app examples
+#'
+#' Launch an apputils Shiny app example in your browser.
+#'
+#' The \code{source} defaults to \code{"local"} for package apps. If set to \code{"remote"},
+#' \code{snapp} will launch the app in your browser using the canonical url rather than the package app.
+#' Options for \code{local_mode} are \code{"normal"} (default) or \code{"showcase"}
+#' for tandem reactive code highlighting, and metadata if applicable. \code{local_mode} applies to \code{source = "local"} package apps.
+#'
+#' Available IDs include \code{"icons"}. This app displays all the available statistics and data analysis themed icons
+#' available in apputils in both light and dark color styles.
+#'
+#' @param id character, the name of the application. See details.
+#' @param source character, source of app. See details.
+#' @param local_mode character, display mode.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{exApp("icons")}
+exApp <- function(id, source = "local", local_mode = "normal") {
+  if(!local_mode %in% c("normal", "showcase"))
+    stop("`local_mode` must be 'normal' or 'showcase'.")
+  x <- list.files(system.file("shiny", package = "apputils"))
+  if(!id %in% x) stop("Invalid app `id`. See `exApp` documentation for available apps.")
+  url <- file.path("https://uasnap.shinyapps.io", id)
+  if(source == "remote"){
+    utils::browseURL(url)
+    cat(paste(id, "launched remotely.\n"))
+    return(invisible())
+  }
+  shiny::runApp(system.file("shiny", id, package = "apputils"), display.mode = local_mode)
+}

@@ -22,6 +22,7 @@ reference:
   - update_toastr_css
   - inputs_not_null
   - app_overlay
+  - exApp
 - title: Override functions
   contents:
   - valueBox
