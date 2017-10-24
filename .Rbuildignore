@@ -16,3 +16,4 @@
 ^pkgdown$
 ^clone_notes\.md$
 ^appveyor\.yml$
+^vignettes/*\.png$

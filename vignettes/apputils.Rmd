@@ -6,3 +6,49 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE, error = FALSE, tidy = TRUE
+)
+```
+
+`apputils` is an R package containing common utility functions, settings and references for development use across multiple Shiny apps,
+It has a `shinydashboard` focus. `apputils` is a satellite member of the SNAPverse collection of R packages.
+It supports other satellites in the verse, including `maputils` and `snaputils`.
+
+## Custom image icons for value boxes
+
+The quickest way to see all available custom icons in `apputils` is to launch the `icons` demo app.
+
+```{r pkg, echo=FALSE}
+library(apputils)
+```
+
+```{r icons, eval=FALSE}
+library(apputils)
+exApp("icons")
+```
+
+Use `exApp("icons", local_mode = "showcase")` to run the app in Shiny showcase mode for additional information.
+
+When leveraging these icons in your own apps, the `statIcon` helper function makes accessing the png resource files in `apputils` easier.
+
+```{r icons2}
+statIcon("mean")
+statIcon("mean", "black")
+```
+
+Generating a value box is as easy as the following. Note the key difference is in how `icon` is called. In addition to `valueBox` and `infoBox` from the `shinydashboard` package being overridden by `apputils`, so is `icon` from the `shiny` package. With `apputils::icon`, the `name` argument can be a list with a `src` entry, e.g., `name = list(src = statIcon("mean"))`. This is combined with passing `lib = "local"`. As mentioned, info boxes are also available with custom image file icons.
+
+```{r icons3, eval=FALSE}
+valueBox(100, "Mean", icon(list(src = statIcon("mean")), lib = "local"))
+infoBox(100, "Mean", icon(list(src = statIcon("mean")), lib = "local"))
+```
+
+<p style="text-align:center;"><img src="statbox.png"></p>
+
+With loss of some degree of control over content, there are wrapper functions around `valueBox` and `infoBox` for more specific use cases.
+See the help documentation for `stat_boxes` and `stat_boxes_group`.
+
+There are a number of other features in `apputils`. Additional sections will be added to this vignette later.
