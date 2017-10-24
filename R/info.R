@@ -288,7 +288,7 @@ faq <- function(faqlist, id, format = "bscollapse",
     return(
       do.call(shinyBS::bsCollapse,
               as.list(
-                c(bscollapse.args,
+                c(bscollapse_args,
                   purrr::map(faqlist, ~shinyBS::bsCollapsePanel(.x[[1]], .x[[2]], style = "info"))
                 )
               )
