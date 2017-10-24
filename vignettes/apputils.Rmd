@@ -42,8 +42,9 @@ statIcon("mean", "black")
 Generating a value box is as easy as the following. Note the key difference is in how `icon` is called. In addition to `valueBox` and `infoBox` from the `shinydashboard` package being overridden by `apputils`, so is `icon` from the `shiny` package. With `apputils::icon`, the `name` argument can be a list with a `src` entry, e.g., `name = list(src = statIcon("mean"))`. This is combined with passing `lib = "local"`. As mentioned, info boxes are also available with custom image file icons.
 
 ```{r icons3, eval=FALSE}
-valueBox(100, "Mean", icon(list(src = statIcon("mean")), lib = "local"))
-infoBox(100, "Mean", icon(list(src = statIcon("mean")), lib = "local"))
+ic <- icon(list(src = statIcon("mean"), width="80px"), lib = "local")
+valueBox(100, "Mean", icon = ic)
+infoBox("Mean", 100, icon = ic)
 ```
 
 <p style="text-align:center;"><img src="statbox.png"></p>
