@@ -1,3 +1,9 @@
+# apputils 0.5.0 (Release date: 2017-10-24)
+
+* Added `exApp` for running Shiny app package examples.
+* Ported custom icons demo app to `apputils`.
+* Included all current custom icons in example app, adding the newer linear model themed icons.
+
 # apputils 0.4.9 (Release date: 2017-09-28)
 
 * Generalized `faq`, adding a number of arguments to give more control over appearance and content. Migrated a new SNAP-specific version to `snaputils`.
