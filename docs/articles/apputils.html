@@ -173,11 +173,38 @@
     
     
 <div class="contents">
-
+<p><code>apputils</code> is an R package containing common utility functions, settings and references for development use across multiple Shiny apps, It has a <code>shinydashboard</code> focus. <code>apputils</code> is a satellite member of the SNAPverse collection of R packages. It supports other satellites in the verse, including <code>maputils</code> and <code>snaputils</code>.</p>
+<div id="custom-image-icons-for-value-boxes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#custom-image-icons-for-value-boxes" class="anchor"></a>Custom image icons for value boxes</h2>
+<p>The quickest way to see all available custom icons in <code>apputils</code> is to launch the <code>icons</code> demo app.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apputils)
+<span class="kw"><a href="../reference/exApp.html">exApp</a></span>(<span class="st">"icons"</span>)</code></pre></div>
+<p>Use <code><a href="../reference/exApp.html">exApp("icons", local_mode = "showcase")</a></code> to run the app in Shiny showcase mode for additional information.</p>
+<p>When leveraging these icons in your own apps, the <code>statIcon</code> helper function makes accessing the png resource files in <code>apputils</code> easier.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/statIcon.html">statIcon</a></span>(<span class="st">"mean"</span>)
+<span class="co">#&gt; [1] "resources/images/stat_icon_normal_mean_white.png"</span>
+<span class="kw"><a href="../reference/statIcon.html">statIcon</a></span>(<span class="st">"mean"</span>, <span class="st">"black"</span>)
+<span class="co">#&gt; [1] "resources/images/stat_icon_normal_mean_black.png"</span></code></pre></div>
+<p>Generating a value box is as easy as the following. Note the key difference is in how <code>icon</code> is called. In addition to <code>valueBox</code> and <code>infoBox</code> from the <code>shinydashboard</code> package being overridden by <code>apputils</code>, so is <code>icon</code> from the <code>shiny</code> package. With <code><a href="http://www.rdocumentation.org/packages/apputils/topics/icon">apputils::icon</a></code>, the <code>name</code> argument can be a list with a <code>src</code> entry, e.g., <code>name = list(src = statIcon("mean"))</code>. This is combined with passing <code>lib = "local"</code>. As mentioned, info boxes are also available with custom image file icons.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/valueBox.html">valueBox</a></span>(<span class="dv">100</span>, <span class="st">"Mean"</span>, <span class="kw"><a href="../reference/icon.html">icon</a></span>(<span class="kw">list</span>(<span class="dt">src =</span> <span class="kw"><a href="../reference/statIcon.html">statIcon</a></span>(<span class="st">"mean"</span>)), <span class="dt">lib =</span> <span class="st">"local"</span>))
+<span class="kw"><a href="../reference/infoBox.html">infoBox</a></span>(<span class="dv">100</span>, <span class="st">"Mean"</span>, <span class="kw"><a href="../reference/icon.html">icon</a></span>(<span class="kw">list</span>(<span class="dt">src =</span> <span class="kw"><a href="../reference/statIcon.html">statIcon</a></span>(<span class="st">"mean"</span>)), <span class="dt">lib =</span> <span class="st">"local"</span>))</code></pre></div>
+<p style="text-align:center;">
+<img src="statbox.png"></p>
+<p>With loss of some degree of control over content, there are wrapper functions around <code>valueBox</code> and <code>infoBox</code> for more specific use cases. See the help documentation for <code>stat_boxes</code> and <code>stat_boxes_group</code>.</p>
+<p>There are a number of other features in <code>apputils</code>. Additional sections will be added to this vignette later.</p>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#custom-image-icons-for-value-boxes">Custom image icons for value boxes</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

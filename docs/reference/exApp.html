@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • apputils</title>
+<title>Run app examples � exApp • apputils</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -189,76 +189,60 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>Run app examples</h1>
     </div>
 
-    <div class="contents">
-    <div id="apputils-0-5-0-release-date-2017-10-24" class="section level1">
-<h1 class="hasAnchor">
-<a href="#apputils-0-5-0-release-date-2017-10-24" class="anchor"></a>apputils 0.5.0 (Release date: 2017-10-24)</h1>
-<ul>
-<li>Added <code>exApp</code> for running Shiny app package examples.</li>
-<li>Ported custom icons demo app to <code>apputils</code>.</li>
-<li>Included all current custom icons in example app, adding the newer linear model themed icons.</li>
-</ul>
-</div>
-    <div id="apputils-0-4-9-release-date-2017-09-28" class="section level1">
-<h1 class="hasAnchor">
-<a href="#apputils-0-4-9-release-date-2017-09-28" class="anchor"></a>apputils 0.4.9 (Release date: 2017-09-28)</h1>
-<ul>
-<li>Generalized <code>faq</code>, adding a number of arguments to give more control over appearance and content. Migrated a new SNAP-specific version to <code>snaputils</code>.</li>
-<li>BREAKING CHANGES: updated several argument names for various functions.</li>
-<li>Unnamed list can now be passed to <code>links</code> in <code>contactinfo</code>. It will take strings and wrap them in <code><a href="http://www.rdocumentation.org/packages/shiny/topics/HTML">shiny::HTML</a></code>.</li>
-<li>Added heading size argument to <code>contactinfo</code>.</li>
-<li>Added <code>color_indexer</code> helper function.</li>
-<li>
-<code>footnote</code> in <code>contactinfo</code> can be a vector. This is use for some contexts where space permits more than one line for footnotes.</li>
-</ul>
-</div>
-    <div id="apputils-0-4-8-release-date-2017-09-22" class="section level1">
-<h1 class="hasAnchor">
-<a href="#apputils-0-4-8-release-date-2017-09-22" class="anchor"></a>apputils 0.4.8 (Release date: 2017-09-22)</h1>
-<ul>
-<li>Generalized <code>contactinfo</code>, adding a number of arguments to give more control over appearance and content. Migrated a new SNAP-specific version to <code>snaputils</code>.</li>
-</ul>
-</div>
-    <div id="apputils-0-4-7-release-date-2017-09-01" class="section level1">
-<h1 class="hasAnchor">
-<a href="#apputils-0-4-7-release-date-2017-09-01" class="anchor"></a>apputils 0.4.7 (Release date: 2017-09-01)</h1>
-<ul>
-<li>Updated collection of functions. Some are still SNAP-specific and in the process of being migrated to <code>snaputils</code>.</li>
-<li>Other functions may migrate to <code>maputils</code>.</li>
-<li>Added documentation, web pages using <code>pkgdown</code>.</li>
-<li>Package development now more fully integrated and streamlined with SNAPverse practices and themes.</li>
-<li>Initial scaffolding in place for vignettes and other materials.</li>
-</ul>
-</div>
-    <div id="apputils-0-0-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#apputils-0-0-0-9000" class="anchor"></a>apputils 0.0.0.9000</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-    </div>
+    
+    <p>Launch an apputils Shiny app example in your browser.</p>
+    
+
+    <pre class="usage"><span class='fu'>exApp</span>(<span class='no'>id</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"local"</span>, <span class='kw'>local_mode</span> <span class='kw'>=</span> <span class='st'>"normal"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>id</th>
+      <td><p>character, the name of the application. See details.</p></td>
+    </tr>
+    <tr>
+      <th>source</th>
+      <td><p>character, source of app. See details.</p></td>
+    </tr>
+    <tr>
+      <th>local_mode</th>
+      <td><p>character, display mode.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code>source</code> defaults to <code>"local"</code> for package apps. If set to <code>"remote"</code>,
+<code>snapp</code> will launch the app in your browser using the canonical url rather than the package app.
+Options for <code>local_mode</code> are <code>"normal"</code> (default) or <code>"showcase"</code>
+for tandem reactive code highlighting, and metadata if applicable. <code>local_mode</code> applies to <code>source = "local"</code> package apps.</p>
+<p>Available IDs include <code>"icons"</code>. This app displays all the available statistics and data analysis themed icons
+available in apputils in both light and dark color styles.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>exApp</span>(<span class='st'>"icons"</span>)
+<span class='co'># }</span></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#apputils-0-5-0-release-date-2017-10-24">0.5.0</a></li>
-        <li><a href="#apputils-0-4-9-release-date-2017-09-28">0.4.9</a></li>
-        <li><a href="#apputils-0-4-8-release-date-2017-09-22">0.4.8</a></li>
-        <li><a href="#apputils-0-4-7-release-date-2017-09-01">0.4.7</a></li>
-        <li><a href="#apputils-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
+  </div>
 </div>
 
       <footer>
