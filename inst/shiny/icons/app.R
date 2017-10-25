@@ -169,6 +169,4 @@ server <- function(input, output) {
   output$lm2 <- renderPrint({ summary(lm1) })
 }
 
-# Run the application
 shinyApp(ui = ui, server = server)
-
