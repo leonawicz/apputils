@@ -4,16 +4,16 @@
 \alias{brushed_data}
 \title{Filter data frame based on plot brush}
 \usage{
-brushed_data(data, x, brush, type = "annual")
+brushed_data(data, variable, x, brush)
 }
 \arguments{
 \item{data}{data frame.}
 
+\item{variable, }{character, name of x-axis variable in \code{data}. May be numeric or categorical.}
+
 \item{x}{x coordinates. See details.}
 
 \item{brush}{brushed coordinates. See details.}
-
-\item{type}{character, \code{"annual"} or \code{"decadal"}.}
 }
 \value{
 a data frame.
@@ -22,10 +22,8 @@ a data frame.
 This function filters data frame rows to a subset corresponding to observations included in the brushed region of a plot.
 }
 \details{
-This implementation is for brushing restricted to the x-axis and to two types of data frames.
-The annual type handles continuous x-axis data and expects a data frame with a\code{Year} column that is x-variable.
-The decadal type handles categorical x-axis data and expects a \code{Decade} column that is the x-variable.
-\code{x} and \code{brush} are commonly reactive values in \code{server.R}, storing the observed click and brush coordinates in \code{input},
+This implementation is for brushing restricted to the x-axis.
+#' \code{x} and \code{brush} are commonly reactive values in \code{server.R}, storing the observed click and brush coordinates in \code{input},
 rather than the \code{input} objects directly.
 }
 \examples{
