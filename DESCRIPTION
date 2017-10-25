@@ -1,10 +1,11 @@
 Package: apputils
-Version: 0.5.0
+Version: 0.5.1
 Title: Supporting Functions For Shiny Apps Development
 Description: Common utility functions, settings and references for development use across multiple Shiny apps.
 Authors@R: c(person("Matthew", "Leonawicz", email = "mfleonawicz@alaska.edu", role = c("aut", "cre")),
     person("Scenarios Network for Alaska and Arctic Planning", role = c("cph", "fnd"))
     )
+Depends: R (>= 3.4.1)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -23,8 +24,7 @@ Imports:
     shinyBS,
     rintrojs,
     shinytoastr,
-    leaflet,
-    rvtable
+    leaflet
 Suggests:
     Cairo,
     showtext,
@@ -34,7 +34,5 @@ Suggests:
     covr,
     knitr,
     rmarkdown
-Remotes:
-    leonawicz/rvtable
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
