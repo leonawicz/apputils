@@ -13,7 +13,7 @@ update_toastr_css(container = NULL, toast = NULL, rgba = NULL,
 
 \item{toast}{list of style arguments for the toast. See details and example.}
 
-\item{rgba}{numeric, vector of four css rgba property values for background color, e.g., \code{c(0,0,0,0.5)}. See details.}
+\item{rgba}{numeric, vector of four css rgba property values for background color, e.g., \code{c(0, 0, 0, 0.5)}. See details.}
 
 \item{hover.rgba}{numeric, vector of four css rgba property values for background color on mouse hover. See details.}
 
@@ -47,7 +47,7 @@ especially useful when adding a background image, use css rgba instead of opacit
 }
 \examples{
 update_toastr_css(
-  list('overflow-y'='auto', width='70\%', height='700px'),
-  list(top='100px', margin='0 auto', left='115px')
+  list('overflow-y' = 'auto', width = '70\%', height = '700px'),
+  list(top = '100px', margin = '0 auto', left = '115px')
 )
 }
