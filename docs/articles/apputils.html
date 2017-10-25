@@ -173,11 +173,25 @@
     
     
 <div class="contents">
-<p><code>apputils</code> is an R package containing common utility functions, settings and references for development use across multiple Shiny apps, It has a <code>shinydashboard</code> focus. <code>apputils</code> is a satellite member of the SNAPverse collection of R packages. It supports other satellites in the verse, including <code>maputils</code> and <code>snaputils</code>.</p>
+<p><code>apputils</code> is an R package containing common utility functions, settings and references for development use across multiple Shiny apps. It is a satellite member of the SNAPverse collection of R packages. It supports other satellites in the verse, including <code>maputils</code> and <code>snaputils</code>.</p>
+<div id="package-context" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-context" class="anchor"></a>Package context</h2>
+<p><code>apputils</code> has a <code>shinydashboard</code> focus. This is to say that <code>apputils</code> assumes a dashboard layout for your app. While most widgets in <code>apputils</code> will work fine with any app layout and you do not actually have to use a dashboard layout, a few widgets are specific to <code>shinydashboard</code>.</p>
+<p>For example, some utilities such as value boxes and info boxes are only available in <code>shinydashboard</code>. Their override functions in <code>apputils</code> will not work if your app does not explicitly use a dashboard layout. However, <code>apputils</code> allows you to force their availability even when not using <code>shinydashboard</code> for your app. See below.</p>
+</div>
+<div id="using-apputils" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-apputils" class="anchor"></a>Using apputils</h2>
+<p>The first and most important step is to call <code>use_apputils</code> in the UI code of your app. This adds the required package CSS. It also adds the resource path that is used by functions like <code>statIcon</code> (see below). Optionally, if you plan on also using <code>rintrojs</code> or <code>shinytoastr</code> in your app, you can set these to <code>TRUE</code> in the call to <code>use_apputils</code> so that you do not have to separately invoke <code>intorjsUI</code> or <code>useToastr</code>.</p>
+<p>Regarding availability of value and info boxes for non-dashboard Shiny app layouts, all that is missing is some CSS. For example, if you use <code><a href="http://www.rdocumentation.org/packages/apputils/topics/valueBox">apputils::valueBox</a></code> in an app that has a simple <code>fluidPage</code> layout, you can see that the functionality is there but the widget does not display properly. An easy way around this issue is to add the AdminLTE CSS from <code>shinydashboard</code>. This can be done as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/use_apputils.html">use_apputils</a></span>(<span class="dt">force_AdminLTE =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>This will add the <code>AdminLTE.css</code> styles to your app prior to adding the <code>apputils</code> styles. Note that this is not all the styling from <code>shinydshboard</code>, nor does it attach the <code>shinydashboard</code> package if it is not already attached in your R session. It merely adds this one CSS file containing the relevant styles for value and info boxes. This also means that even if you are not using a dashboard layout, you are still including all <code>shinydashboard</code> styles in <code>AdminLTE.css</code>; it’s is not strictly CSS pertaining to these two specific widgets. Nevertheless, this is a convenient way to access some styles that are usually only available with a dashboard layout.</p>
+</div>
 <div id="custom-image-icons-for-value-boxes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-image-icons-for-value-boxes" class="anchor"></a>Custom image icons for value boxes</h2>
-<p>The quickest way to see all available custom icons in <code>apputils</code> is to launch the <code>icons</code> demo app.</p>
+<p>Here it becomes more clear why it is that <code>apputils</code> overrides <code>valueBox</code> and <code>infoBox</code> from <code>shinydashboard</code>. The <code>apputils</code> versions support the use of custom icons based on image thumbnails, which opens up limitless possibilities for users to display any icon they want. You are no longer restricted to the generally milquetoast selection of the usual online icon libraries. The quickest way to see all available custom icons currently in <code>apputils</code> is to launch the <code>icons</code> demo app. Since this is R/Shiny, they all have an analytics theme.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apputils)
 <span class="kw"><a href="../reference/exApp.html">exApp</a></span>(<span class="st">"icons"</span>)</code></pre></div>
 <p>Use <code><a href="../reference/exApp.html">exApp("icons", local_mode = "showcase")</a></code> to run the app in Shiny showcase mode for additional information.</p>
@@ -186,13 +200,12 @@
 <span class="co">#&gt; [1] "resources/images/stat_icon_normal_mean_white.png"</span>
 <span class="kw"><a href="../reference/statIcon.html">statIcon</a></span>(<span class="st">"mean"</span>, <span class="st">"black"</span>)
 <span class="co">#&gt; [1] "resources/images/stat_icon_normal_mean_black.png"</span></code></pre></div>
-<p>Generating a value box is as easy as the following. Note the key difference is in how <code>icon</code> is called. In addition to <code>valueBox</code> and <code>infoBox</code> from the <code>shinydashboard</code> package being overridden by <code>apputils</code>, so is <code>icon</code> from the <code>shiny</code> package. With <code><a href="http://www.rdocumentation.org/packages/apputils/topics/icon">apputils::icon</a></code>, the <code>name</code> argument can be a list with a <code>src</code> entry, e.g., <code>name = list(src = statIcon("mean"))</code>. This is combined with passing <code>lib = "local"</code>. As mentioned, info boxes are also available with custom image file icons.</p>
+<p>Generating a value box is as easy as the following. Note the key difference is in how <code>icon</code> is called. In addition to <code>valueBox</code> and <code>infoBox</code> from the <code>shinydashboard</code> package being overridden by <code>apputils</code>, so is <code>icon</code> from the <code>shiny</code> package. With <code><a href="http://www.rdocumentation.org/packages/apputils/topics/icon">apputils::icon</a></code>, the <code>name</code> argument can be a list with a <code>src</code> entry, e.g., <code>name = list(src = statIcon("mean"))</code>. This is combined with passing <code>lib = "local"</code>. As mentioned, info boxes are also available with custom image file icons. Here is a quick comparison.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ic &lt;-<span class="st"> </span><span class="kw"><a href="../reference/icon.html">icon</a></span>(<span class="kw">list</span>(<span class="dt">src =</span> <span class="kw"><a href="../reference/statIcon.html">statIcon</a></span>(<span class="st">"mean"</span>), <span class="dt">width =</span> <span class="st">"80px"</span>), <span class="dt">lib =</span> <span class="st">"local"</span>)
 <span class="kw"><a href="../reference/valueBox.html">valueBox</a></span>(<span class="dv">100</span>, <span class="st">"Mean"</span>, <span class="dt">icon =</span> ic)
 <span class="kw"><a href="../reference/infoBox.html">infoBox</a></span>(<span class="st">"Mean"</span>, <span class="dv">100</span>, <span class="dt">icon =</span> ic)</code></pre></div>
 <p style="text-align:center;">
 <img src="statbox.png"></p>
-<p>With loss of some degree of control over content, there are wrapper functions around <code>valueBox</code> and <code>infoBox</code> for more specific use cases. See the help documentation for <code>stat_boxes</code> and <code>stat_boxes_group</code>.</p>
 <p>There are a number of other features in <code>apputils</code>. Additional sections will be added to this vignette later.</p>
 </div>
 </div>
@@ -203,7 +216,9 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#custom-image-icons-for-value-boxes">Custom image icons for value boxes</a></li>
+<li><a href="#package-context">Package context</a></li>
+      <li><a href="#using-apputils">Using apputils</a></li>
+      <li><a href="#custom-image-icons-for-value-boxes">Custom image icons for value boxes</a></li>
       </ul>
 </div>
       </div>
