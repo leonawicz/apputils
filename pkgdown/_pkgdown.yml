@@ -28,10 +28,8 @@ reference:
   - valueBox
   - infoBox
   - icon
-- title: Stat boxes and related functions
+- title: Stat box related functions
   contents:
-  - stat_boxes
-  - stat_boxes_group
   - statIcon
   - makeIcons
   - pTextSize
@@ -49,8 +47,6 @@ reference:
   - read_md_paragraphs
 - title: Working with data frames
   contents:
-  - dist_data
-  - clim_convert_round
   - brushed_data
   - color_indexer
 - title: Leaflet
@@ -63,7 +59,6 @@ reference:
   - tolpal
   - get_plottheme
   - get_breaks
-  - samplesize_factor
   - interact
   - getPosition
   - colorFacet
