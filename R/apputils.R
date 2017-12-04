@@ -1,6 +1,6 @@
 globalVariables(c(".data"))
 
-#' The \code{apputils} package contains common utility functions, settings and references for development use across multiple Shiny apps.
+#' apputils: The \code{apputils} package contains common utility functions, settings and references for development use across multiple Shiny apps.
 #'
 #' \code{apputils} has a \code{shinydashboard} focus. \code{apputils} is a member package in the satellite sector of the SNAPverse.
 #' It supports other satellites in the verse, including \code{maputils} and \code{snaputils}.
