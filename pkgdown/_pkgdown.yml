@@ -49,10 +49,6 @@ reference:
   contents:
   - brushed_data
   - color_indexer
-- title: Leaflet
-  contents:
-  - build_mapset
-  - update_mapset
 - title: Plots
   contents:
   - ggObserve
