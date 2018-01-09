@@ -89,8 +89,8 @@ navbar:
           href: https://leonawicz.github.io/snapwebs
         - text: "--------"
         - text: "Functions packages"
-        - text: "snapfuns"
-          href: https://leonawicz.github.io/snapfuns
+        - text: "snapstat"
+          href: https://leonawicz.github.io/snapstat
         - text: "snaplocs"
           href: https://leonawicz.github.io/snaplocs
         - text: "snapprep"
