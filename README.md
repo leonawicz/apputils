@@ -5,7 +5,7 @@ apputils
 
 [![Travis-CI Build Status](https://travis-ci.org/leonawicz/apputils.svg?branch=master)](https://travis-ci.org/leonawicz/rapputils) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/leonawicz/apputils?branch=master&svg=true)](https://ci.appveyor.com/project/leonawicz/apputils) [![Coverage Status](https://img.shields.io/codecov/c/github/leonawicz/apputils/master.svg)](https://codecov.io/github/leonawicz/apputils?branch=master)
 
-`apputils` is an R package containing common utilty functions, settings and references for development use across multiple Shiny apps. It has a `shinydashboard` focus. `apputils` is a satellite member of the SNAPverse collection of R packages. It supports other satellites in the verse, including [`maputils`](https://leonawicz.github.io/maputils/) and [`snaputils`](https://leonawicz.github.io/snaputils/).
+`apputils` is an R package containing common utilty functions, settings and references for development use across multiple Shiny apps. It has a `shinydashboard` focus. `apputils` is a satellite member of the [SNAPverse](https://leonawicz.github.io/snapverse/) collection of R packages. It supports other satellites in the verse, including [`maputils`](https://leonawicz.github.io/maputils/) and [`snaputils`](https://leonawicz.github.io/snaputils/).
 
 <p style="text-align:center;">
 <img src="man/figures/sv_satellites_utils_app.png" width=350>
@@ -45,4 +45,7 @@ The complete set of satellite packages is shown below.
 </p>
 <br>
 
-[Package reference and function documentation](https://leonawicz.github.io/apputils/)
+Reference
+---------
+
+[Complete package reference and function documentation](https://leonawicz.github.io/apputils/)
