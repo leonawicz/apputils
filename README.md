@@ -45,7 +45,4 @@ The complete set of satellite packages is shown below.
 </p>
 <br>
 
-Reference
----------
-
 [Complete package reference and function documentation](https://leonawicz.github.io/apputils/)
