@@ -5,7 +5,7 @@ Description: Common utility functions, settings and references for development u
 Authors@R: c(person("Matthew", "Leonawicz", email = "mfleonawicz@alaska.edu", role = c("aut", "cre")),
     person("Scenarios Network for Alaska and Arctic Planning", role = c("cph", "fnd"))
     )
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -17,6 +17,10 @@ knitr::opts_chunk$set(
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/leonawicz/apputils?branch=master&svg=true)](https://ci.appveyor.com/project/leonawicz/apputils)
 [![Coverage Status](https://img.shields.io/codecov/c/github/leonawicz/apputils/master.svg)](https://codecov.io/github/leonawicz/apputils?branch=master)
 
+## SNAPverse R package ecosystem development frozen.
+
+*Development of the SNAPverse R package ecosystem has been frozen indefinitely. This project was never directly funded. I began it out of personal interest, but no longer work for SNAP. It will remain archived here for historical reference.*
+
 `apputils` is an R package containing common utilty functions, settings and references for development use across multiple Shiny apps. It has a `shinydashboard` focus. `apputils` is a satellite member of the [SNAPverse](https://leonawicz.github.io/snapverse/) collection of R packages. It supports other satellites in the verse, including [`maputils`](https://leonawicz.github.io/maputils/) and [`snaputils`](https://leonawicz.github.io/snaputils/).
 
 
