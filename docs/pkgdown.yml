@@ -1,6 +1,9 @@
+pandoc: 1.19.2.1
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  apputils: apputils.html
 urls:
   reference: https://leonawicz.github.io//reference
   article: https://leonawicz.github.io//articles
-articles:
-  apputils: apputils.html
 

@@ -4,8 +4,8 @@
 \alias{dashboard_footer}
 \title{Add footer to Shiny dashboard sidebar}
 \usage{
-dashboard_footer(href, src, label = "", width = "100\%", height = "160px",
-  italic = TRUE, bold = TRUE,
+dashboard_footer(href, src, label = "", width = "100\%",
+  height = "160px", italic = TRUE, bold = TRUE,
   style = "text-align:center; align: center; padding: 0px; margin: 0px;")
 }
 \arguments{

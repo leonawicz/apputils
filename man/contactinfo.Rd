@@ -4,9 +4,10 @@
 \alias{contactinfo}
 \title{Add contact information widget}
 \usage{
-contactinfo(name, role, photo, logo = NULL, href = NULL, links = NULL,
-  heading = "Contact information", heading_size = "h2", footnote = NULL,
-  logo_height = 170, photo_width = 128, photo_height = 128)
+contactinfo(name, role, photo, logo = NULL, href = NULL,
+  links = NULL, heading = "Contact information", heading_size = "h2",
+  footnote = NULL, logo_height = 170, photo_width = 128,
+  photo_height = 128)
 }
 \arguments{
 \item{name}{author.}

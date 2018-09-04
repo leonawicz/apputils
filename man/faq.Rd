@@ -4,8 +4,8 @@
 \alias{faq}
 \title{Generate a Frequently Asked Questions (FAQ) widget}
 \usage{
-faq(faqlist, id, format = "bscollapse", bscollapse_args = list(id = "faq",
-  open = NULL, multiple = FALSE))
+faq(faqlist, id, format = "bscollapse", bscollapse_args = list(id =
+  "faq", open = NULL, multiple = FALSE))
 }
 \arguments{
 \item{faqlist}{a prepared list of FAQs. See details.}

@@ -4,9 +4,9 @@
 \alias{app_showcase}
 \title{Generate app showcase content}
 \usage{
-app_showcase(app_url, img_url, title, subtitle, label = NULL, drop = NULL,
-  height = 200, min_width = 300, max_width = 400, col_width = 4,
-  img_style = NULL, new_window = TRUE)
+app_showcase(app_url, img_url, title, subtitle, label = NULL,
+  drop = NULL, height = 200, min_width = 300, max_width = 400,
+  col_width = 4, img_style = NULL, new_window = TRUE)
 }
 \arguments{
 \item{app_url}{character vector of app urls.}

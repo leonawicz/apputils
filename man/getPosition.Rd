@@ -4,7 +4,8 @@
 \alias{getPosition}
 \title{Positioning helper for ggplot}
 \usage{
-getPosition(jitter, cby, w = 0.2, h = 0, wd = 0.75, dodgeable = FALSE)
+getPosition(jitter, cby, w = 0.2, h = 0, wd = 0.75,
+  dodgeable = FALSE)
 }
 \arguments{
 \item{jitter}{logical.}
